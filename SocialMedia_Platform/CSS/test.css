@@ -1,0 +1,26 @@
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+fieldset{
+    background-color: aquamarine;
+    border-radius: 15px;
+    padding: 50px 0;
+    margin: 10 30px;
+    border: 1px none gold;
+    transition: 1s ease;
+}
+fieldset:hover{transform: translateY(-10px);}
+legend{
+    padding: 0;
+
+  
+}
+img{
+    border-radius: 50%;
+    object-fit: cover;
+    filter: saturate(150%) hue-rotate(180deg) ;
+}
