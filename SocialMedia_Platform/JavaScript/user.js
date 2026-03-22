@@ -42,7 +42,7 @@ class user{
 
 
 const u1 = new user("Ali","ali@gmail.com","123");
-console.log(user.getUserByID(3));
+console.log(user.getUserByID(1));
 
 // const u2 = new user("Ahmed","gmail",'222')
 
