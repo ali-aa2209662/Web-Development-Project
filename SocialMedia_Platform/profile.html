@@ -1,24 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SocialApp</title>
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="icon" type="image/png" href="media/favicon.png">
 </head>
 <body>
-
-<nav class="navbar">
-    <h2>SocialApp</h2>
-    <div>
-        <a href="index.html">Feed</a>
-        <a href="profile.html">Profile</a>
+  <header>
+    <h1>SocialApp</h1>
+    <nav aria-label="Main Navigation">
+      <ul>
+        <li><a href="home.html">Main</a></li>
+        <li><a href="feed.html">Posts</a></li>
+        <li><a href="profile.html" class="active" aria-current="page">Profile</a></li>
         <button onclick="logout()">Logout</button>
-    </div>
-</nav>
+      </ul>
+    </nav>
+  </header>
 
-<main class="profile-container">
-    <section class="profile-info">
+  <main>
+    <section>
+      <h2>Profile Image</h2>
+      <div>
+        <article>
+          <img src="media/Avatar-01.svg" alt="Abdulaziz Alabarah" />
+          <h3>Abdulaziz Alabarah</h3>
+          <p>Founder &amp; Chief of the corporation</p>
+        </article>
+      </div>
+    </section>
+     <section class="profile-info">
         <h2 id="username"></h2>
         <p id="bio"></p>
         <p>Followers: <span id="followersCount"></span></p>
@@ -32,8 +45,12 @@
         <h3>User Posts</h3>
         <div id="postsContainer"></div>
     </section>
-</main>
+  </main>
 
-<script src="JavaScript/profile.js"></script>
+  <footer>
+   
+  </footer>
+      <script src="JavaScript/login.js"></script>
+
 </body>
 </html>

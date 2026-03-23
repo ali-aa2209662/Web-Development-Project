@@ -3,7 +3,7 @@ const data = {
     {
       id: 1,
       username: "Aziz_Abarah",
-      password: "password123",
+      password: "123Aa123",
       bio: "Just a regular guy who loves coding and coffee.",
       followers: [1000000000],
       following: [2]
@@ -11,7 +11,7 @@ const data = {
     {
       id: 2,
       username: "Ali_Almarri",
-      password: "password123",
+      password: "123",
       bio: "Software engineer and coffee enthusiast.",
       followers: [1000],
       following: [1]
@@ -19,7 +19,7 @@ const data = {
     {
       id: 3,
       username: "Ahmed_Seboui",
-      password: "password123",
+      password: "123",
       bio: "hardware engineer and coffee enthusiast.",
       followers: [5000],
       following: [1]
@@ -27,7 +27,7 @@ const data = {
     {
       id: 4,
       username: "Abdullah_Sultan",
-      password: "password123",
+      password: "123",
       bio: "programmer engineer and coffee hater.",
       followers: [10],
       following: [1]
@@ -76,11 +76,11 @@ export function saveData(thisData){
 export function getData(){
     return JSON.parse(localStorage.getItem("WebData"));
 }
-// saveData(data);
+saveData(data);
 if (getData()==null) {
     saveData(data);
 }
 
 
 // TESTING...
-// console.log(getData());
+console.log(getData());

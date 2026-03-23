@@ -1,11 +1,25 @@
 // Load data from localStorage
-let users = JSON.parse(localStorage.getItem("users")) || [];
-let posts = JSON.parse(localStorage.getItem("posts")) || [];
+const users = JSON.parse(localStorage.getItem("users")) || [];
+const posts = JSON.parse(localStorage.getItem("posts")) || [];
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-let profileUserId = localStorage.getItem("profileUserId") || currentUser;
+let profileUserId = Number(localStorage.getItem("profileUserId")) || currentUser;
+
+// Redirect if not logged in
+if (!currentUser) {
+    window.location.href = "login.html";
+}
 
 // Get profile user
 let profileUser = users.find(user => user.id == profileUserId);
+
+if (!profileUser) {
+    alert("User not found");
+    window.location.href = "index.html";
+}
+
+// Ensure arrays exist
+profileUser.followers = profileUser.followers || [];
+profileUser.following = profileUser.following || [];
 
 // Display profile info
 document.getElementById("username").textContent = profileUser.username;
@@ -13,11 +27,10 @@ document.getElementById("bio").textContent = profileUser.bio;
 document.getElementById("followersCount").textContent = profileUser.followers.length;
 document.getElementById("followingCount").textContent = profileUser.following.length;
 
-// Display posts count
+// Display posts
 let userPosts = posts.filter(post => post.userId == profileUserId);
 document.getElementById("postsCount").textContent = userPosts.length;
 
-// Show posts
 let postsContainer = document.getElementById("postsContainer");
 postsContainer.innerHTML = "";
 
@@ -40,6 +53,8 @@ if (currentUser == profileUserId) {
     followBtn.style.display = "none";
 } else {
     let currentUserData = users.find(u => u.id == currentUser);
+
+    currentUserData.following = currentUserData.following || [];
 
     if (currentUserData.following.includes(profileUserId)) {
         followBtn.textContent = "Unfollow";
