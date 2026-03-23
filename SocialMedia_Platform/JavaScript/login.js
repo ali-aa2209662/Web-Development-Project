@@ -1,7 +1,7 @@
 const loginForm = document.querySelector('#LoginForm');
 const togglePasswordButton = document.querySelector('#TogglePassword');
 const PasswordInput = document.querySelector('#Password');
-const errorMessage = document.querySelector("error-message")
+const errorMessage = document.querySelector("#error-message")
 
 togglePasswordButton.addEventListener('click',function(){
     const isHidden = PasswordInput.type==='password'

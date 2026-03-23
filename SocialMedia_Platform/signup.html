@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="Signup-card">
+ 
+        <div class="logo-wrapper">
+            <img src="assets/Logo1.png" alt="App Logo" height="200px" width="200px">
+        </div>
+ 
+        <h1>Create account</h1>
+        <p class="tagline">Join and connect with people around you</p>
+ 
+        <form action="" method="POST" id="signup-form" >
+ 
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first-name">First name</label>
+                    <input
+                        type="text"
+                        id="first-name"
+                        name="first_name"
+                        placeholder="Mohammad"
+                        required
+                    >
+                    <span class="field-error" id="first-name-error">Required</span>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last name</label>
+                    <input
+                        type="text"
+                        id="last-name"
+                        name="last_name"
+                        placeholder="Surname"
+                        required
+                    >
+                    <span class="field-error" id="last-name-error">Required</span>
+                </div>
+            </div>
+ 
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="@mohammad"
+                    autocomplete="username"
+                    required
+                >
+                <span class="field-error" id="username-error">Username is required</span>
+            </div>
+ 
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Moe@example.com"
+                    autocomplete="email"
+                    required
+                >
+                <span class="field-error" id="email-error">Enter a valid email</span>
+            </div>
+ 
+            <div class="form-group">
+                <label for="dob">Date of birth</label>
+                <input
+                    type="date"
+                    id="dob"
+                    name="dob"
+                    required
+                >
+                <span class="field-error" id="dob-error">You must be at least 16 years old</span>
+            </div>
+ 
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^'$,;:]).{8,}"
+                        required
+                    >
+                    <button type="button" class="toggle-password" id="toggle-password" aria-label="Show password">Show</button>
+                </div>
+                <div class="password-strength">
+                    <div class="password-strength-bar" id="strength-bar"></div>
+                </div>
+                <span class="strength-label" id="strength-label"></span>
+                <span class="field-error" id="password-error" style="display:none;">Password must be at least 8 characters</span>
+            </div>
+ 
+            <div class="form-group">
+                <label for="confirm-password">Confirm password</label>
+                <div class="password-wrapper">
+                    <input
+                        type="password"
+                        id="confirm-password"
+                        name="confirm_password"
+                        placeholder="Repeat your password"
+                        autocomplete="new-password"
+                        required
+                    >
+                    <button type="button" class="toggle-password" id="toggle-confirm" aria-label="Show password">Show</button>
+                </div>
+                <span class="field-error" id="confirm-error" style="display:none;">Passwords do not match</span>
+            </div>
+ 
+            <div class="terms">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms" style="font-weight: 400; margin: 0;">
+                    I agree to the Terms of Service and Privacy Policy
+                </label>
+            </div>
+ 
+            <button type="submit" class="btn-signup">Create Account</button>
+ 
+            <div class="divider">already have an account?</div>
+ 
+            <button type="button" class="btn-login" onclick="window.location.href='login.html'">
+                Log In
+            </button>
+ 
+        </form>
+    </div>
+</body>
+</html>
