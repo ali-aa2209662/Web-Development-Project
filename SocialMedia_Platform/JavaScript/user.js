@@ -1,13 +1,13 @@
 import { saveData, getData } from "./storage.js"; //importing functions from storage.js
 
-class user{
+export class User{
     
-    userid = null;
-    username = "";
-    email = "";
-    password = "";
+    userid;
+    username;
+    email;
+    password;
     profilePicture = "";
-    posts = [];
+    // posts = [];
     followed = [];
     date = null;
     
@@ -21,15 +21,15 @@ class user{
     }
 
     addUser(){
-        console.log(getData());
+        // console.log(getData());
         const data = getData();
-        data["users"].push(this)
-        saveData(data)
-        console.log(getData());
+        data["users"].push(this);
+        saveData(data);
+        // console.log(getData());
     }
 
     generateID(){ //checks how many users are in data and assign an id
-        return getData()["users"].length + 1;
+        return `u${(getData()["users"].length + 1)}`;
     }
 
     static getUserByID(id){ // returns user from 'id' (if 'id' is not found it returns null)
@@ -40,9 +40,9 @@ class user{
 }
 
 
-
-const u1 = new user("Ali","ali@gmail.com","123");
-console.log(user.getUserByID(1));
+// TESTING...
+// const u1 = new user("Ali","ali@gmail.com","123");
+// console.log(user.getUserByID(1));
 
 // const u2 = new user("Ahmed","gmail",'222')
 

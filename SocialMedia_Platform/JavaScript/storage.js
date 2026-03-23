@@ -17,4 +17,6 @@ if (getData()==null) {
     saveData(data);
 }
 
-console.log(getData());
+
+// TESTING...
+// console.log(getData());
