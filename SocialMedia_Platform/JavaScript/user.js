@@ -7,7 +7,6 @@ export class User{
     email;
     password;
     profilePicture = "";
-    posts = [];
     followed = [];
     date = null;
     
@@ -32,13 +31,22 @@ export class User{
         return `u${(getData()["users"].length + 1)}`;
     }
 
-    static getUserByID(id){ // returns user from 'id' (if 'id' is not found it returns null)
-        const u = getData()["users"].filter(u => id==u.userid)[0];
-        return (u === undefined)?null:u;
-    }
+    static fromData(data) {
+        const user = Object.create(User.prototype);
+        return Object.assign(user, data);
+        }
 
 }
 
+
+export function getUsers(){
+    return getData()["users"].map(User.fromData);
+}
+
+export function getUserByID(id){ // returns user from 'id' (if 'id' is not found it returns null)
+    const u = getUsers().find(u => id==u.userid);
+    return (u === undefined)?null:u;
+}
 
 // TESTING...
 // const u1 = new user("Ali","ali@gmail.com","123");
