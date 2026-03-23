@@ -7,7 +7,7 @@ export class User{
     email;
     password;
     profilePicture = "";
-    // posts = [];
+    posts = [];
     followed = [];
     date = null;
     
