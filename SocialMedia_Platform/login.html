@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    <div class="Logo Card">
+    <div>
+        <img src="assets/Logo1.png" alt="App Logo" style="width: 200px; height: 200px;"> 
+    </div>
+
+    <h1>Login</h1>
+    <p class="welcome-message">Welcome back! Please enter your credentials to access your account.</p>
+
+    <div class="error-message" id="error-message">Incorrect Username or Password. Please Try again.</div>
+    <form action="" id="LoginForm">
+
+        <div class="form-group">
+        <label for="Username">Username</label>
+        <input type="text" name="Username" id="Username" placeholder="Username" required>
+        </div>
+
+        <div class="form-group">
+        <label for="Password">Password</label>
+        <div class="Password-wrapper">
+        <input type="password" name="Password" id="Password" placeholder="Password" required  pattern="(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?!.['$,;:]).{8,}">
+        <button type="button" id="TogglePassword" aria-label="Show Password">Show</button>
+        </div>
+        </div>
+        <input type="submit" value="Login"> 
+
+        <div class="divider">or</div>
+        <button type="button" id="SignupButton" onclick="window.location.href='signup.html'">Create Account</button>
+    </form>
+
+    </div>
+    
+    <script src="JavaScript/login.js"></script>
+</body>
+
+</html>
