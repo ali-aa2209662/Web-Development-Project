@@ -1,5 +1,5 @@
 import { saveData, getData } from "./storage.js"; //importing functions from storage.js
-// import { User } from "./user.js";
+import { User } from "./user.js";
 
 class Interaction{
     content = "";
@@ -7,7 +7,7 @@ class Interaction{
     likes = [];
     date;
     
-    constructor(author, content){
+    constructor(author, content){       
 
         if (new.target === Interaction) {
             throw new Error("Cannot instantiate abstract class Interaction directly.");
@@ -21,6 +21,8 @@ class Interaction{
     get likeNum(){
         return this.likes.length;
     }
+
+
 
     ToggleLike(){ 
         const data = getData();
@@ -82,6 +84,11 @@ class Comment extends Interaction {
         return `c${(post.comments.length + 1)}`;
     }
 
+    static fromData(data) {
+        const comment = Object.create(Comment.prototype);
+        return Object.assign(comment, data);
+        }
+
 }
 
 class Post extends Interaction{
@@ -106,20 +113,24 @@ class Post extends Interaction{
         saveData(data);
     }
     
+    static fromData(data) {
+        const post = Object.create(Post.prototype);
+        return Object.assign(post, data);
+        }
+
     
 
 }
 
 
+export function getPosts(){
+        return getData()["posts"].map(Post.fromData);
+}
+
+
+
 // TESTING...
-// const u1 = new User("Ali","a@gmail.com","123")
-// const p1 = new Post(u1,"Hello, I am Ali.")
-// const c1 = new Comment(u1,p1,"Hi me :)!") 
-// console.log(getData());
-// // console.log(c1.postID)
+const u1 = new User("Ali","a@gmail.com","123")
+const p1 = new Post(u1,"Hello, I am Ali.")
+const c1 = new Comment(u1,p1,"Hi me :)!") 
 
-// p1.ToggleLike()
-// console.log(getData()["posts"].find(p => p.id === c1.postID));
-
-// p1.ToggleLike()
-// console.log(getData()["posts"].find(p => p.id === c1.postID));
