@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>SocialApp</h2>
+    <div>
+        <a href="index.html">Feed</a>
+        <a href="profile.html">Profile</a>
+        <button onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<main class="profile-container">
+    <section class="profile-info">
+        <h2 id="username"></h2>
+        <p id="bio"></p>
+        <p>Followers: <span id="followersCount"></span></p>
+        <p>Following: <span id="followingCount"></span></p>
+        <p>Posts: <span id="postsCount"></span></p>
+        <button id="followBtn"></button>
+        <button id="editBtn">Edit Profile</button>
+    </section>
+
+    <section class="user-posts">
+        <h3>User Posts</h3>
+        <div id="postsContainer"></div>
+    </section>
+</main>
+
+<script src="JavaScript/profile.js"></script>
+</body>
+</html>
