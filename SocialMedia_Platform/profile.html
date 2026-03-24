@@ -5,37 +5,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SocialApp</title>
   <link rel="stylesheet" href="styles/global.css">
-  <link rel="icon" type="image/png" href="media/favicon.png">
+  <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+/* Header */
+header {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav button {
+    padding: 5px 10px;
+}
+
+/* Main layout */
+main {
+    width: 80%;
+    margin: 20px auto;
+}
+
+/* Profile section */
+section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+/* Profile top */
+article {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+article img {
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    justify-items: center;
+}
+
+/* Profile info */
+.profile-info {
+    line-height: 1.8;
+}
+
+.profile-info button {
+    margin-right: 10px;
+    padding: 8px 12px;
+}
+
+/* Posts */
+.user-posts .post {
+    background: #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+</style>
+
 </head>
 <body>
+
   <header>
     <h1>SocialApp</h1>
     <nav aria-label="Main Navigation">
       <ul>
         <li><a href="home.html">Main</a></li>
         <li><a href="feed.html">Posts</a></li>
-        <li><a href="profile.html" class="active" aria-current="page">Profile</a></li>
-        <button onclick="logout()">Logout</button>
+        <li><a href="profile.html" class="active">Profile</a></li>
+        <li><a href="edit_profile.html">Edit Profile</a></li>
+        <li><button id="logoutBtn">Logout</button></li>
       </ul>
     </nav>
   </header>
 
   <main>
+
     <section>
-      <h2>Profile Image</h2>
-      <div>
-        <article>
-          <img src="media/Avatar-01.svg" alt="Abdulaziz Alabarah" />
-          <h3>Abdulaziz Alabarah</h3>
-          <p>Founder &amp; Chief of the corporation</p>
-        </article>
-      </div>
+      <h2>Profile</h2>
+      <article>
+        <img src="assets/Avatar-01.svg" alt="Profile Avatar" height="200" width="200" />
+        <h3 id="profileName"></h3>
+        <p id="profileBio"></p>
+      </article>
+      <label>Profile Image URL:</label>
+        <input type="text" id="editImage">  
     </section>
-     <section class="profile-info">
+
+    <section class="profile-info">
         <h2 id="username"></h2>
-        <p id="bio"></p>
         <p>Followers: <span id="followersCount"></span></p>
-        <p>Following: <span id="followingCount"></span></p>
+        <p>Following: <span id="followingCount"></span></p> <br>
+        <p>Bio: <span id="bio"></span></p> <br> <br>
         <p>Posts: <span id="postsCount"></span></p>
         <button id="followBtn"></button>
         <button id="editBtn">Edit Profile</button>
@@ -45,12 +130,16 @@
         <h3>User Posts</h3>
         <div id="postsContainer"></div>
     </section>
+
   </main>
 
-  <footer>
-   
-  </footer>
-      <script src="JavaScript/login.js"></script>
+  <footer> <p>&copy; 2026 SocialApp. All rights reserved.</p> </footer>
+
+<!-- <script src="JavaScript/auth.js"></script>
+<script src="JavaScript/user.js"></script>
+<script src="JavaScript/post.js"></script>
+<script src="JavaScript/profile.js"></script>
+<script src="JavaScript/edit_profile.js"></script> --> 
 
 </body>
 </html>

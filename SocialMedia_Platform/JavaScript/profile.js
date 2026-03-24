@@ -1,20 +1,25 @@
+// Check if user is logged in
+function checkLogin() {
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) {
+        window.location.href = "login.html";
+    }
+}
+
+checkLogin();
+
 // Load data from localStorage
 const users = JSON.parse(localStorage.getItem("users")) || [];
 const posts = JSON.parse(localStorage.getItem("posts")) || [];
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 let profileUserId = Number(localStorage.getItem("profileUserId")) || currentUser;
 
-// Redirect if not logged in
-if (!currentUser) {
-    window.location.href = "login.html";
-}
-
 // Get profile user
 let profileUser = users.find(user => user.id == profileUserId);
 
 if (!profileUser) {
     alert("User not found");
-    window.location.href = "index.html";
+    window.location.href = "home.html";
 }
 
 // Ensure arrays exist
@@ -23,7 +28,7 @@ profileUser.following = profileUser.following || [];
 
 // Display profile info
 document.getElementById("username").textContent = profileUser.username;
-document.getElementById("bio").textContent = profileUser.bio;
+document.getElementById("bioText").textContent = profileUser.bio;
 document.getElementById("followersCount").textContent = profileUser.followers.length;
 document.getElementById("followingCount").textContent = profileUser.following.length;
 
@@ -53,7 +58,6 @@ if (currentUser == profileUserId) {
     followBtn.style.display = "none";
 } else {
     let currentUserData = users.find(u => u.id == currentUser);
-
     currentUserData.following = currentUserData.following || [];
 
     if (currentUserData.following.includes(profileUserId)) {
@@ -62,7 +66,7 @@ if (currentUser == profileUserId) {
         followBtn.textContent = "Follow";
     }
 
-    followBtn.onclick = () => {
+    followBtn.addEventListener("click", function () {
         if (currentUserData.following.includes(profileUserId)) {
             // Unfollow
             currentUserData.following = currentUserData.following.filter(id => id != profileUserId);
@@ -77,20 +81,23 @@ if (currentUser == profileUserId) {
 
         localStorage.setItem("users", JSON.stringify(users));
         location.reload();
-    };
+    });
 }
 
 // Edit profile button
-document.getElementById("editBtn").onclick = () => {
+document.getElementById("editBtn").addEventListener("click", function () {
     if (currentUser == profileUserId) {
         window.location.href = "edit-profile.html";
     } else {
         alert("You can only edit your own profile");
     }
-};
+});
 
 // Logout
 function logout() {
     localStorage.removeItem("currentUser");
     window.location.href = "login.html";
 }
+
+// Logout button event
+document.getElementById("logoutBtn").addEventListener("click", logout);
