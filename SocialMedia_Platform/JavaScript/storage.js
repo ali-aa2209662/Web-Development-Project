@@ -1,7 +1,7 @@
 const data = {
   users: [],
   posts: [],
-  currentUser: null
+  currentUser: {}
 }
 
 export function saveData(thisData){
@@ -12,7 +12,7 @@ export function saveData(thisData){
 export function getData(){
     return JSON.parse(localStorage.getItem("WebData"));
 }
-// saveData(data);
+saveData(data);
 if (getData()==null) {
     saveData(data);
 }

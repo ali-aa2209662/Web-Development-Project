@@ -1,5 +1,5 @@
 import { saveData, getData } from "./storage.js"; //importing functions from storage.js
-import { User } from "./user.js";
+import { getUserByID, User } from "./user.js";
 
 class Interaction{
     content = "";
@@ -7,13 +7,13 @@ class Interaction{
     likes = [];
     date;
     
-    constructor(author, content){       
+    constructor(authorID, content){       
 
         if (new.target === Interaction) {
             throw new Error("Cannot instantiate abstract class Interaction directly.");
         }   
-
-        this.authorID = author.userid;
+        
+        this.authorID = authorID;
         this.content = content;
         this.date = new Date(); 
     }
@@ -21,8 +21,6 @@ class Interaction{
     get likeNum(){
         return this.likes.length;
     }
-
-
 
     ToggleLike(){ 
         const data = getData();
@@ -64,9 +62,9 @@ class Comment extends Interaction {
     postID;
     id;
 
-    constructor(author, post, content){
-        super(author, content);
-        this.postID = post.id;
+    constructor(authorID, postID, content){
+        super(authorID, content);
+        this.postID = postID;
         this.id = this.generateID();
         this.addComment();
     }
@@ -101,8 +99,8 @@ class Post extends Interaction{
         return `p${(getData()["posts"].length + 1)}`;
     }
     
-    constructor(author, content){
-        super(author, content);
+    constructor(authorID, content){
+        super(authorID, content);
         this.id = this.generateID();
         this.addPost();
     }
@@ -122,15 +120,19 @@ class Post extends Interaction{
 
 }
 
-
 export function getPosts(){
         return getData()["posts"].map(Post.fromData);
 }
 
 
 
+
 // TESTING...
 const u1 = new User("Ali","a@gmail.com","123")
-const p1 = new Post(u1,"Hello, I am Ali.")
-const c1 = new Comment(u1,p1,"Hi me :)!") 
+const p1 = new Post(u1.userid,"Hello, I am Ali.")
+const c1 = new Comment(u1.userid,p1.id,"Hi me :)!") 
 
+console.log(getUserByID("u1"));
+console.log(getPosts())
+
+console.log(getData());

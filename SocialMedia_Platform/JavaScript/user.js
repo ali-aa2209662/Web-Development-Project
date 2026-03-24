@@ -44,7 +44,7 @@ export function getUsers(){
 }
 
 export function getUserByID(id){ // returns user from 'id' (if 'id' is not found it returns null)
-    const u = getUsers().find(u => id==u.userid);
+    const u = getUsers().find(u => u.userid === id);
     return (u === undefined)?null:u;
 }
 
