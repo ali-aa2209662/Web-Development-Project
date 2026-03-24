@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="brand">
+            <a href="home.html" class="brand-link">
+                <img src="assets/logo1.png" width="80" alt="SocialMedia Logo" class="logo-icon">
+                <h1 class="site-name">SocialMedia Name</h1>
+            </a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="home.html" class="active">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- The Main -->
+    <main class="feed-container">
+        <!-- Create posts -->
+        <section class="create-post">
+            <h2>Create a New Post</h2>
+            <div id="createPostForm">
+                <textarea id="postContent" rows="3" placeholder="What's on your mind?"></textarea>
+                <button id="submitPostBtn">Post</button>
+                <p id="createPostMessage"></p>
+            </div>
+        </section>
+
+        <h2>New Posts</h2>
+        <div class="posts-container" id="postsContainer">
+            <!-- Example post template (will be replaced by JavaScript when runs it.. -->
+            <section class="post">
+                <div class="post-header">
+                    <img src="assets/PFP_Blank.jpg" width="25" alt="User avatar" class="post-avatar">
+                    <div class="post-meta">
+                        <span class="post-author">Abdullah Hamed</span>
+                        <span class="post-date">Just now</span>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>This is an example post with a picture. Your feed will show real posts from users you follow.</p>
+
+                </div>
+                <div class="post-actions">
+                    <button class="like-btn">❤️ 0</button>
+                    <button class="comment-btn">💬 Comment</button>
+                </div>
+                <div class="comments-section">
+                    <div class="comment">
+                        <span class="comment-author">Jane Doe</span>
+                        <p class="comment-text">Great post!</p>
+                    </div>
+                </div>
+            </section>
+            <!-- More posts will be addedd here.. -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="#" target="_blank">Twitter</a>
+            <a href="#" target="_blank">Instagram</a>
+            <a href="#" target="_blank">TikTok</a>
+        </div>
+        <p>&copy; 2026 SocialMedia Name. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="JavaScript/home.js"></script>
+</body>
+
+</html>
