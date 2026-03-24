@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+</head>
+<body>
+     <header>
+    <h1>Edit Profile</h1>
+    <nav aria-label="Main Navigation">
+      <ul>
+        <li><a href="home.html">Main</a></li>
+        <li><a href="feed.html">Posts</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="edit_profile.html" class="active">Edit Profile</a></li>
+        <li><button id="logoutBtn">Logout</button></li>
+      </ul>
+    </nav>
+  </header>
+
+
+    <form id="editProfileForm">
+        <label>Username:</label>
+        <input type="text" id="editUsername"><br><br>
+
+        <label>Email:</label>
+        <input type="email" id="editEmail"><br><br>
+
+        <label>Bio:</label>
+        <textarea id="editBio"></textarea><br><br>
+
+        <label>Password:</label>
+        <input type="password" id="editPassword"><br><br>
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <button id="cancelBtn">Cancel</button>
+
+    <script src="JavaScript/auth.js"></script>
+    <script src="JavaScript/edit-profile.js"></script>
+
+    <footer> <p>&copy; 2026 SocialApp. All rights reserved.</p> </footer>
+</body>
+
+</html>
