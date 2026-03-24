@@ -1,5 +1,4 @@
 import { saveData, getData } from "./storage.js"; //importing functions from storage.js
-import { getUserByID, User } from "./user.js";
 
 class Interaction{
     content = "";
@@ -113,7 +112,9 @@ class Post extends Interaction{
     
     static fromData(data) {
         const post = Object.create(Post.prototype);
-        return Object.assign(post, data);
+        const assigned = Object.assign(post, data);
+        assigned.comments = (data.comments ?? []).map(Comment.fromData);
+        return assigned;
         }
 
     
@@ -128,15 +129,19 @@ export function createPost(authorID, content){
     new Post(authorID, content)
 }
 
+export function createComment(authorID, postID, content){
+    new Comment(authorID, postID, content);
+}
+
 
 
 
 // TESTING...
-const u1 = new User("Ali","a@gmail.com","123")
-const p1 = new Post(u1.userid,"Hello, I am Ali.")
-const c1 = new Comment(u1.userid,p1.id,"Hi me :)!") 
-
-console.log(getUserByID("u1"));
-console.log(getPosts())
-
-console.log(getData());
+// const u1 = new User("Ali","a@gmail.com","123")
+// const p1 = new Post(u1.userid,"Hello, I am Ali.")
+// const c1 = new Comment(u1.userid,p1.id,"Hi me :)!") 
+//
+// console.log(getUserByID("u1"));
+// console.log(getPosts())
+//
+// console.log(getData());
