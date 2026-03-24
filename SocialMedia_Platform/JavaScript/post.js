@@ -9,7 +9,7 @@ class Interaction{
     
     constructor(authorID, content){       
 
-        if (new.target === Interaction) {
+        if (new.target === Interaction) { //
             throw new Error("Cannot instantiate abstract class Interaction directly.");
         }   
         
@@ -121,7 +121,11 @@ class Post extends Interaction{
 }
 
 export function getPosts(){
-        return getData()["posts"].map(Post.fromData);
+    return getData()["posts"].map(Post.fromData);
+}
+
+export function createPost(authorID, content){
+    new Post(authorID, content)
 }
 
 

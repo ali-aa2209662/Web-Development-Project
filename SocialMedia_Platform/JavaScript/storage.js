@@ -1,7 +1,15 @@
 const data = {
   users: [],
   posts: [],
-  currentUser: {}
+  currentUser: {
+    "userid": "u1",
+    "username": "Ali",
+    "email": "a@gmail.com",
+    "password": "123",
+    "profilePicture": "",
+    "followed": [],
+    "date": "2026-03-24T11:34:57.120Z"
+}
 }
 
 export function saveData(thisData){

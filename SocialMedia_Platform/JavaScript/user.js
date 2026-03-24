@@ -48,6 +48,10 @@ export function getUserByID(id){ // returns user from 'id' (if 'id' is not found
     return (u === undefined)?null:u;
 }
 
+export function getCurrentUser(){
+    return getData()['currentUser'];
+}
+
 // TESTING...
 // const u1 = new user("Ali","ali@gmail.com","123");
 // console.log(user.getUserByID(1));
