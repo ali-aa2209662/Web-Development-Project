@@ -19,10 +19,8 @@ legend{
 
   
 }
-img{
-    border-radius: 50%;
-    object-fit: cover;
-    filter: saturate(150%) hue-rotate(180deg) ;
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 /* LOGIN PAGE */
 
@@ -123,3 +121,26 @@ h1{
             cursor: pointer;
             transition: background-color 0.2s, color 0.2s;
         }
+
+.Password-wrapper{
+    position: relative;
+    width: 250px;
+
+}
+.Password-wrapper input{
+    
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    box-sizing: border-box;
+
+}
+.Password-wrapper .TogglePassword{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}

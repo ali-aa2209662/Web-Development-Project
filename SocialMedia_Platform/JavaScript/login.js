@@ -5,12 +5,15 @@ const errorMessage = document.querySelector("#error-message") || null;
 
 // Toggle password visibility
 togglePasswordButton.forEach(button => {
-    const passwordInput = button.previousElementSibling; // find the input right before the button
+    const passwordInput = button.previousElementSibling;
+    const icon = button.querySelector('i');
 
-    button.addEventListener('click', function() {
+    button.addEventListener('click', () => {
         const isHidden = passwordInput.type === 'password';
         passwordInput.type = isHidden ? 'text' : 'password';
-        button.textContent = isHidden ? 'Hide' : 'Show';
+
+        icon.classList.toggle("fa-eye");
+        icon.classList.toggle("fa-eye-slash");
     });
 });
 
