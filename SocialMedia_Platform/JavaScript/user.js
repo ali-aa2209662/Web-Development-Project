@@ -59,7 +59,26 @@ export function getCurrentUser(){
     return getUserByID(getData()['currentUser']) || null;
 }
 
+export function saveUser(user){
+    const data = getData();
+    const index = data["users"].findIndex(u => u.userid === user.userid);
+    if (index !== -1) {
+        data["users"][index] = user;
+        saveData(data);
+    }
+}
 
+export function logout(){
+    const data = getData();
+    data.currentUser = null;
+    saveData(data);
+    window.location.href = "login.html";
+}
+
+// TESTING...
+// console.log(getUsers());
+// console.log(getUserByID("u1"));
+// console.log(getCurrentUser());
 
 
 // TESTING...
