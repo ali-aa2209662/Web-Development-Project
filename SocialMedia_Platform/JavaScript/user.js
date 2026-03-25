@@ -15,7 +15,9 @@ export class User{
         this.username = username;
         this.email = email;
         this.password = password;
-        this.date = new Date();   
+        tempdate = new Date()
+        this.date = tempdate.splice(10,1);
+        console.log(this.date)   
         this.addUser();
     }
 
@@ -38,6 +40,9 @@ export class User{
 
 }
 
+export function createUser(username, email, password){
+    new User(username, email, password)
+}
 
 export function getUsers(){
     return getData()["users"].map(User.fromData);

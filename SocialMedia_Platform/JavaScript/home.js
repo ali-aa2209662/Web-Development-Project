@@ -86,7 +86,7 @@ function displayPosts() {
 
 
 function formatPost(post) {
-    const author = getUserByID(post.authorID) || { username: "Unknown" };
+    const author = getUserByID(post.authorID);
 
     return ` <section class="post" data-id="${post.id}">
                 <div class="post-header">
@@ -115,10 +115,11 @@ function formatPost(post) {
 }
 
 function formatComments(comments) {
-
+    
     return comments.map(c => {
+        const author = getUserByID(c.authorID);
         return `<div class="comment">
-                        <span class="comment-author">${c.authorID}</span>
+                        <span class="comment-author">${author.username}</span>
                         <p class="comment-text">${c.content}</p>
                         <div class="post-actions">
                               <button class="like-btn" data-id="${c.id}" data-postID="${c.postID}">❤️ ${c.likeNum}</button>
