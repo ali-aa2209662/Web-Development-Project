@@ -6,8 +6,9 @@ export class User{
     username;
     email;
     password;
-    profilePicture = "";
-    followed = [];
+    profilePicture = "assets/PFP_Blank.jpg";
+    followers = [];
+    following = [];
     date = null;
     
     constructor(username,email,password){ // creates an instance of user and saves it to data
@@ -15,9 +16,8 @@ export class User{
         this.username = username;
         this.email = email;
         this.password = password;
-        tempdate = new Date()
-        this.date = tempdate.splice(10,1);
-        console.log(this.date)   
+        const tempdate = new Date()
+        this.date = tempdate.toString().slice(4,15).split(" ").join("/") + " " + tempdate.toString().slice(16,21);
         this.addUser();
     }
 
@@ -38,6 +38,8 @@ export class User{
         return Object.assign(user, data);
         }
 
+    
+
 }
 
 export function createUser(username, email, password){
@@ -54,11 +56,11 @@ export function getUserByID(id){ // returns user from 'id' (if 'id' is not found
 }
 
 export function getCurrentUser(){
-    return getData()['currentUser'];
+    return getUserByID(getData()['currentUser']) || null;
 }
 
 // TESTING...
-// const u1 = new user("Ali","ali@gmail.com","123");
+const u1 = new User("Ali","ali@gmail.com","123");
 // console.log(user.getUserByID(1));
 
 // const u2 = new user("Ahmed","gmail",'222')

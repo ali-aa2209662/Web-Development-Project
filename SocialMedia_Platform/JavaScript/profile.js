@@ -1,3 +1,10 @@
+import {getUsers, getCurrentUser} from "./user.js";
+import {getPosts} from "./post.js"
+
+
+
+
+
 // Check if user is logged in
 function checkLogin() {
     const currentUser = localStorage.getItem("currentUser");
@@ -8,10 +15,10 @@ function checkLogin() {
 
 checkLogin();
 
-// Load data from localStorage
-const users = JSON.parse(localStorage.getItem("users")) || [];
-const posts = JSON.parse(localStorage.getItem("posts")) || [];
-let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+// Load data using functions
+const users = getUsers();
+const posts = getPosts();
+let currentUser = getCurrentUser();
 let profileUserId = Number(localStorage.getItem("profileUserId")) || currentUser;
 
 // Get profile user
