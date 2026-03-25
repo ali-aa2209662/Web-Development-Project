@@ -55,17 +55,39 @@ export function getUserByID(id){ // returns user from 'id' (if 'id' is not found
     return (u === undefined)?null:u;
 }
 
+export function saveUser(updateUser){
+    const data = getData();
+    const user = data["users"].find(u => u.userid === updateUser.userid);
+    if (user !== undefined) {// if user is found then save data
+        user = updateUser;
+        saveData(data);
+    }
+}
+
 export function getCurrentUser(){
     return getUserByID(getData()['currentUser']) || null;
 }
 
-export function saveUser(user){
+export function savePFP(PFP_Base64){
+    getUserByID(getCurrentUser()).profilePicture = PFP_Base64;
+}
+
+export function setProfileUser(userid){
     const data = getData();
-    const index = data["users"].findIndex(u => u.userid === user.userid);
-    if (index !== -1) {
-        data["users"][index] = user;
-        saveData(data);
-    }
+    data["profileUser"] = userid;
+    saveData(data);
+
+}
+
+export function getProfileUser(){
+    return getData()["profileUser"]
+}
+
+export function goToProfile(userid){
+    const data = getData();
+    data.profileUser = userid;
+    saveData(data);
+    window.location.href = "profile.html";
 }
 
 export function logout(){
@@ -74,6 +96,8 @@ export function logout(){
     saveData(data);
     window.location.href = "login.html";
 }
+
+
 
 // TESTING...
 // console.log(getUsers());

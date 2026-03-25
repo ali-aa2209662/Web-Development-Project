@@ -41,6 +41,7 @@ class post{
 
 class user{
     name = "";
+    picture = "";
     posts = [];
 
     constructor(name){
@@ -57,16 +58,47 @@ class user{
 
 }
 
-// const u1 = new user("Ali","a@gmail.com","123");
+const u1 = new user("Ali","a@gmail.com","123");
 // const p1 = new post(u1,"Hello, I am Ali.");
 // p1.ToggleLike()
 // console.log(data["posts"]);
 // p1.ToggleLike()
 // console.log(data["posts"]);
 
-console.log("p1"+"c1")
+
+const form = document.getElementById("uploadForm");
+const imageInput = document.getElementById("imageInput");
+const img = document.getElementById("profileImage");
+
+let picture = "";
+
+// Load saved image on page load
+window.addEventListener("DOMContentLoaded", () => {
+    const savedPicture = localStorage.getItem("profilePic");
+    if (savedPicture) {
+        img.src = savedPicture;
+    }
+});
 
 
+// Handle form submit
+form.addEventListener("submit", function (e) {
+    e.preventDefault(); // stop page reload
 
+    const file = imageInput.files[0];
+    if (!file) return;
 
+    const reader = new FileReader();
 
+    reader.onload = function () {
+        picture = reader.result;
+
+        // Save to localStorage
+        localStorage.setItem("profilePic", picture);
+
+        // Display image
+        img.src = picture;
+    };
+
+    reader.readAsDataURL(file);
+});

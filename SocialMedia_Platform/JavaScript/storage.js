@@ -1,5 +1,5 @@
 const data = {
-  users: [{
+    users: [{
     "userid": "u1",
     "username": "Ali",
     "email": "a@gmail.com",
@@ -7,9 +7,10 @@ const data = {
     "profilePicture": "",
     "followed": [],
     "date": "Mar/25/2026 14:54"
-}],
-  posts: [],
-  currentUser: "u1"
+    }],
+    posts: [],
+    currentUser: "u1",
+    profileUser: null
 }
 
 export function saveData(thisData){
@@ -21,17 +22,6 @@ export function getData(){
     return JSON.parse(localStorage.getItem("WebData"));
 }
 
-export function saveImage(file){
-    app.post("/upload", (req, res) => {
-        const file = req.files.image;
-
-        const path = "assets/profile-pictures/" + file.name;
-
-        file.mv(path); // save file
-
-        res.json({ path: path });
-    });
-}
 
 saveData(data);
 
