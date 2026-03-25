@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SocialApp</title>
-  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="styles/global.css">
   <style>
 body {
     font-family: Arial, sans-serif;
@@ -92,7 +92,7 @@ article img {
 
   <header>
     <h1>SocialApp</h1>
-    <nav aria-label="Main Navigation">
+    <nav id="navBar">
       <ul>
         <li><a href="home.html">Main</a></li>
         <li><a href="profile.html" class="active">Profile</a></li>
@@ -113,6 +113,8 @@ article img {
       </article>
       <label>Profile Image URL:</label>
         <input type="text" id="editImage">  
+        <button id="editBtn" href="edit_profile.html">Edit Profile</button>
+
     </section>
 
     <section class="profile-info">
@@ -122,7 +124,6 @@ article img {
         <p>Bio: <span id="bio"></span></p> <br> <br>
         <p>Posts: <span id="postsCount"></span></p>
         <button id="followBtn"></button>
-        <button id="editBtn">Edit Profile</button>
     </section>
 
     <section class="user-posts">
@@ -133,6 +134,9 @@ article img {
   </main>
 
   <footer> <p>&copy; 2026 SocialApp. All rights reserved.</p> </footer>
+
+
+<script type="module" src="JavaScript/profile.js"></script>
 
 <!-- <script src="JavaScript/auth.js"></script>
 <script src="JavaScript/user.js"></script>

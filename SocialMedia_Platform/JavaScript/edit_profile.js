@@ -1,38 +1,82 @@
-// Check login
+import { getCurrentUser, saveUser } from "./user.js";
+import { checkLogin, logout } from "./auth.js";
+
+// ── Auth guard ──────────────────────────────────────────────
 checkLogin();
 
-// Load users
-let users = JSON.parse(localStorage.getItem("users")) || [];
-let currentUserId = JSON.parse(localStorage.getItem("currentUser"));
-
-// Find current user
-let currentUser = users.find(user => user.id == currentUserId);
-
-// Fill form with existing data
-document.getElementById("editUsername").value = currentUser.username;
-document.getElementById("editEmail").value = currentUser.email;
-document.getElementById("editBio").value = currentUser.bio;
-document.getElementById("editPassword").value = currentUser.password;
-
-// Handle form submit
-document.getElementById("editProfileForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    currentUser.username = document.getElementById("editUsername").value;
-    currentUser.email = document.getElementById("editEmail").value;
-    currentUser.bio = document.getElementById("editBio").value;
-    currentUser.password = document.getElementById("editPassword").value;
-
-    // Save back to localStorage
-    localStorage.setItem("users", JSON.stringify(users));
-
-    alert("Profile updated successfully!");
-
-    // Go back to profile
-    window.location.href = "profile.html";
+// ── Run after DOM is ready ──────────────────────────────────
+addEventListener("DOMContentLoaded", () => {
+    fillForm();
+    initSaveForm();
+    initCancelButton();
+    initLogoutButton();
+    initEditProfileButton();
+    initEditPictureButton();
 });
 
-// Cancel button
-document.getElementById("cancelBtn").addEventListener("click", function() {
-    window.location.href = "profile.html";
-});
+// ── Pre-fill form with current user data ────────────────────
+function fillForm() {
+    const currentUser = getCurrentUser();
+    if (!currentUser) return;
+
+    document.getElementById("editUsername").value = currentUser.username  || "";
+    document.getElementById("editEmail").value    = currentUser.email     || "";
+    document.getElementById("editBio").value      = currentUser.bio       || "";
+    document.getElementById("editPassword").value = currentUser.password  || "";
+}
+
+// ── Save changes ─────────────────────────────────────────────
+function initSaveForm() {
+    document.getElementById("editProfileForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const currentUser = getCurrentUser();
+        if (!currentUser) return;
+
+        currentUser.username = document.getElementById("editUsername").value.trim();
+        currentUser.email    = document.getElementById("editEmail").value.trim();
+        currentUser.bio      = document.getElementById("editBio").value.trim();
+        currentUser.password = document.getElementById("editPassword").value;
+
+        saveUser(currentUser);   // persist via user.js — no direct localStorage here
+
+        alert("Profile updated successfully!");
+        window.location.href = "profile.html";
+    });
+}
+
+// ── Cancel button ────────────────────────────────────────────
+function initCancelButton() {
+    document.getElementById("cancelBtn").addEventListener("click", () => {
+        window.location.href = "profile.html";
+    });
+}
+
+function editProfileInfobtn() { 
+    const currentUser = getCurrentUser();
+    if (!currentUser) return;
+
+    const newUsername = document.getElementById("editUsername").value.trim();
+    const newBio      = document.getElementById("editBio").value.trim();
+
+    if (newUsername) currentUser.username = newUsername;
+    if (newBio)      currentUser.bio = newBio;
+
+    saveUser(currentUser);
+    displayProfileInfo();
+}
+
+function editProfilePicturebtn() {
+    const currentUser = getCurrentUser();
+    if (!currentUser) return;
+
+    const imageUrl = document.getElementById("editImage").value.trim();
+    if (!imageUrl) {
+        alert("Please enter a valid image URL.");
+        return;
+    }
+
+    currentUser.profilePicture = imageUrl;
+    saveUser(currentUser);
+    document.getElementById("profilePicture").src = imageUrl;
+}

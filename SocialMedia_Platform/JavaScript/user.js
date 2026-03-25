@@ -59,6 +59,8 @@ export function getCurrentUser(){
     return getUserByID(getData()['currentUser']) || null;
 }
 
+
+
 // TESTING...
 const u1 = new User("Ali","ali@gmail.com","123");
 // console.log(user.getUserByID(1));
