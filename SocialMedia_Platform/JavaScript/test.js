@@ -65,3 +65,8 @@ class user{
 // console.log(data["posts"]);
 
 console.log("p1"+"c1")
+
+
+
+
+
