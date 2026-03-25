@@ -1,40 +1,41 @@
-// Check if user is logged in
-function checkLogin() {
-    const currentUser = localStorage.getItem("currentUser");
-    if (!currentUser) {
-        window.location.href = "login.html";
-    }
-}
+import { getUserByID, getCurrentUser, saveUser } from "./user.js";
+import { getPosts } from "./post.js";
+import { checkLogin, logout } from "./auth.js";
+import { getData } from "./storage.js";
 
+// ── Auth guard ──────────────────────────────────────────────
 checkLogin();
 
-// Load data from localStorage
-const users = JSON.parse(localStorage.getItem("users")) || [];
-const posts = JSON.parse(localStorage.getItem("posts")) || [];
-let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-let profileUserId = Number(localStorage.getItem("profileUserId")) || currentUser;
+// ── Run after DOM is ready ──────────────────────────────────
+addEventListener("DOMContentLoaded", () => {
+    displayProfileInfo();
+    displayProfilePosts();
+    initFollowButton();
+    initEditButton();
+    initLogoutButton();
+});
 
-// Get profile user
-let profileUser = users.find(user => user.id == profileUserId);
+// ── Display profile info ────────────────────────────────────
+function displayProfileInfo() {
+    const profileUser = getProfileUser();
+    if (!profileUser) return;
 
-if (!profileUser) {
-    alert("User not found");
-    window.location.href = "home.html";
+    document.getElementById("username").textContent       = profileUser.username;
+    document.getElementById("bio").textContent            = profileUser.bio || "";
+    document.getElementById("followersCount").textContent = (profileUser.followed?.length ?? 0);
+    document.getElementById("followingCount").textContent = (profileUser.following?.length ?? 0);
 }
 
-// Ensure arrays exist
-profileUser.followers = profileUser.followers || [];
-profileUser.following = profileUser.following || [];
+// ── Display profile posts ───────────────────────────────────
+function displayProfilePosts() {
+    const profileUser    = getProfileUser();
+    if (!profileUser) return;
 
-// Display profile info
-document.getElementById("username").textContent = profileUser.username;
-document.getElementById("bioText").textContent = profileUser.bio;
-document.getElementById("followersCount").textContent = profileUser.followers.length;
-document.getElementById("followingCount").textContent = profileUser.following.length;
+    const postsContainer = document.getElementById("postsContainer");
+    const allPosts       = getPosts();
+    const userPosts      = allPosts.filter(p => p.authorID === profileUser.userid);
 
-// Display posts
-let userPosts = posts.filter(post => post.userId == profileUserId);
-document.getElementById("postsCount").textContent = userPosts.length;
+    document.getElementById("postsCount").textContent = userPosts.length;
 
     postsContainer.innerHTML = userPosts.map(post => `
         <div class="post">
@@ -116,9 +117,3 @@ function getProfileUser() {
     }
     return user;
 }
-
-
-
-
-
-// TESTING...   
