@@ -21,13 +21,17 @@ export function saveData(thisData){
 
 
 export function getData(){
-    return JSON.parse(localStorage.getItem("WebData"));
+    const raw = localStorage.getItem("WebData");
+    if (raw == null) return null;
+    try {
+        return JSON.parse(raw);
+    } catch (e) {
+        return null;
+    }
 }
 
-
-saveData(data);
-
-if (getData()==null) {
+// Initialize only once
+if (getData() == null) {
     saveData(data);
 }
 
