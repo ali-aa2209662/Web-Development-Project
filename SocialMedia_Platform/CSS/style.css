@@ -56,8 +56,7 @@ body{
     align-items: center;
     margin-bottom: 1rem;
 }
-img{
-    
+.logo-wrapper img{
     width: 100px;
     height: 100px;
 }
@@ -202,15 +201,7 @@ header h1 {
     cursor: pointer;
     text-align: left;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    position: fixed;   
-    top: 0;            
-    left: 0;
     padding: 5px 20px;
-    display: flex;
-    align-items: left;
-    justify-content: left;
-    
-    justify-content: center;
 
 }
 
@@ -220,11 +211,13 @@ header h1 {
     gap: 0.75rem;
     font-size: 1.9rem;
 }
-
+/* edit it from Abdullah */
 header .logo-icon {
     width: 96px;
     height: 96px;
     object-fit: contain;
+    background: transparent;
+    display: block;
 }
 
 nav ul {
