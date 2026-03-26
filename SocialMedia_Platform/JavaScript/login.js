@@ -57,19 +57,20 @@ const signupForm = document.querySelector("#signup-form");
 
 signupForm.addEventListener("submit", (e) => {
     e.preventDefault();
-
+    console.log("AHHHHHHHHHHHHHHHH")
     const username = document.querySelector("#username").value;
     const email = document.querySelector("#email").value;
     const newpassword = document.querySelector("#Password").value;
     const cnfrmpassword = document.querySelector("#Confirm-password").value;
     // check if the password is correct
+
     if (newpassword===cnfrmpassword) {
         const password = newpassword;
+
         signup(username, email, password);
 
         alert("New Account Created!")
         
-
         window.location.href = "login.html";
     }
     
