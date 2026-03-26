@@ -15,9 +15,15 @@ addEventListener("DOMContentLoaded", () => {
 });
 
 addEventListener("click", (e) => {
-    if (e.target.classList.contains("like-btn")) {
-        const id = e.target.getAttribute("data-id");
-        const postID = e.target.getAttribute("data-postID");
+    let likeBtn = null;
+    if (e.target.classList && e.target.classList.contains("like-btn")) {
+        likeBtn = e.target;
+    } else if (e.target.parentElement && e.target.parentElement.classList && e.target.parentElement.classList.contains("like-btn")) {
+        likeBtn = e.target.parentElement;
+    }
+    if (likeBtn !== null) {
+        const id = likeBtn.getAttribute("data-id");
+        const postID = likeBtn.getAttribute("data-postID");
         if (!id) return;
         handleLike(id, postID);
         displayPosts();
@@ -25,8 +31,15 @@ addEventListener("click", (e) => {
 });
 
 addEventListener("click", (e) => {
-    if (e.target.classList.contains("comment-btn")) {
-        const postID = e.target.getAttribute("data-id");
+    let commentBtn = null;
+    if (e.target.classList && e.target.classList.contains("comment-btn")) {
+        commentBtn = e.target;
+    } else if (e.target.parentElement && e.target.parentElement.classList && e.target.parentElement.classList.contains("comment-btn")) {
+        commentBtn = e.target.parentElement;
+    }
+
+    if (commentBtn !== null) {
+        const postID = commentBtn.getAttribute("data-id");
         if (!postID) return;
         const commentForm = document.querySelector(`.comment-form[data-id="${postID}"]`);
         if (commentForm) commentForm.style.display = "block";
@@ -68,10 +81,14 @@ function handleLike(id, postID) {
     }
 
 }
-
+//edit it from Abdullah:
 function createNewPost(content) {
     const currentUser = getCurrentUser();
-    if (currentUser == null) return;
+    if (currentUser == null) {
+        const msg = document.getElementById("createPostMessage");
+        if (msg) msg.textContent = "Please login first.";
+        return;
+    }
     createPost(currentUser.userid, content);
      displayPosts();
 }
@@ -80,6 +97,10 @@ function createNewPost(content) {
 function displayPosts() {
     const postsContainer = document.getElementById("postsContainer");
     const posts = getPosts();
+    if (!posts || posts.length === 0) {
+        postsContainer.innerHTML = "<p>No posts yet. Create the first post.</p>";
+        return;
+    }
     postsContainer.innerHTML = posts.map(formatPost).join("");
 
 }
