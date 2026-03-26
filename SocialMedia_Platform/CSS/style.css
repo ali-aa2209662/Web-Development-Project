@@ -1,7 +1,7 @@
-:root{
+:root {
     --primary-color: rgb(26, 136, 90);
     --secondary-color: rgb(100, 255, 190);
-    
+
     --bg-color: rgb(250, 250, 250);
     --border-color: rgb(152, 255, 219);
 
@@ -11,7 +11,7 @@
     --text-muted: #7f8c8d;
 
     --font-family: 'Segoe UI', Tahoma, 'Geneva', Verdana, sans-serif;
-    
+
 
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -20,14 +20,18 @@
 }
 
 
-*{
+* {
     font-family: 'Segoe UI', Tahoma, 'Geneva', Verdana, sans-serif;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    color: var(--text-color);
+    transition: var(--transition);
+    border-color: var(--border-color);
 }
 
 fieldset{
+    
     background-color: aquamarine;
     border-radius: 15px;
     padding: 50px 0;
@@ -35,31 +39,39 @@ fieldset{
     border: 1px none gold;
     transition: 1s ease;
 }
-fieldset:hover{transform: translateY(-10px);}
-legend{
+
+fieldset:hover {
+    transform: translateY(-10px);
+}
+
+legend {
     padding: 0;
 
-  
+
 }
 body{
+    
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 /* LOGIN PAGE */
 
 .logo-wrapper{
+    
     /* background-color: tomato; */
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 1rem;
 }
-img{
+.logo-wrapper img{
     
-    width: 100px;
+    width: 140px;
     height: 100px;
 }
 
 .Login-Card{
+    background-color: var(--bg-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,40 +84,45 @@ img{
 
 }
 
-h1{
-    
+h1 {
+
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 0.25rem;
 }
-.welcome-message{
+
+.welcome-message {
     font-size: 0.9rem;
     color: #666;
     margin-bottom: 1.5rem;
 }
-.form-group{
+
+.form-group {
     margin-bottom: 1rem;
     width: 100%;
     max-width: 400px;
 }
-.form-group label{
+
+.form-group label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
-}   
-.form-group input{
+}
+
+.form-group input {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
 }
-#login-button{
-    
+
+#login-button {
+
     width: 100%;
     max-width: 400px;
     padding: 0.75rem;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 4px;
@@ -114,29 +131,29 @@ h1{
 }
 
 .divider {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            margin: 1rem 0;
-            color: #aaa;
-            font-size: 0.8rem;
-        }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1rem 0;
+    color: #aaa;
+    font-size: 0.8rem;
+}
 
 .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background-color: #e5e5e5;
-        }
-        
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: #e5e5e5;
+}
+
 #SignupButton {
             width: 100%;
             padding: 0.7rem;
             background-color: transparent;
-            color: #4f7ef8;
-            border: 1.5px solid #4f7ef8;
+            color: var(--primary-color);
+            border: 1.5px solid var(--primary-color);
             border-radius: 8px;
             font-size: 0.95rem;
             font-weight: 600;
@@ -144,19 +161,21 @@ h1{
             transition: background-color 0.2s, color 0.2s;
         }
 
-.Password-wrapper{
+.Password-wrapper {
     position: relative;
     width: 250px;
 
 }
-.Password-wrapper input{
-    
+
+.Password-wrapper input {
+
     width: 100%;
     padding: 10px 40px 10px 10px;
     box-sizing: border-box;
 
 }
-.Password-wrapper .TogglePassword{
+
+.Password-wrapper .TogglePassword {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -168,3 +187,661 @@ h1{
 }
 
 
+
+
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+/* Header */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 30px 0;
+}
+
+header h1 {
+    margin: 0;
+    color: white;
+    cursor: pointer;
+    text-align: left;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    padding: 5px 20px;
+
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.6rem;
+}
+
+/* edit it from Abdullah */
+header .logo-icon {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    background: transparent;
+    display: block;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+
+    align-items: center;
+    justify-content: space-around;
+    color: var(--primary-color);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav button {
+    padding: 5px 10px;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 4px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+/* Main layout */
+main {
+    width: 80%;
+    margin: 20px auto;
+}
+
+/* Profile section */
+section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+main input {
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    width: 100%;
+    max-width: 400px;
+
+}
+
+/* Profile top */
+article {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+article img {
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    justify-items: center;
+}
+
+/* Profile info */
+.profile-info {
+    line-height: 1.8;
+}
+
+.profile-info button {
+    margin-right: 10px;
+    padding: 8px 12px;
+}
+
+#imageInput {
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    width: 200px;
+}
+
+/* Posts */
+.user-posts .post {
+    background: #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+main button {
+    padding: 10px 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: var(--border-color) solid 1px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#followBtn {
+    content: 'Follow';
+}
+
+#imageuploadStatus {
+    margin-top: 10px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    justify-content: bottom;
+    padding: 30px 0;
+    background-color: var(--primary-color);
+    color: white;
+    margin-top: 20px;
+}
+
+
+/* CSS for signup page */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.Signup-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: var(--shadow-md);
+}
+ 
+.logo-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+}
+ 
+.logo-wrapper img {
+    width: 140px;
+    height: 100px;
+    object-fit: contain;
+}
+ 
+h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+ 
+.tagline {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 1.75rem;
+}
+ 
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+ 
+.form-group {
+    margin-bottom: 1rem;
+}
+ 
+label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.375rem;
+}
+
+
+
+ 
+input.error {
+    border-color: #e74c3c;
+}
+ 
+.field-error {
+    display: none;
+    font-size: 0.75rem;
+    color: #e74c3c;
+    margin-top: 0.3rem;
+}
+ 
+.password-wrapper {
+    position: relative;
+}
+ 
+.password-wrapper input {
+    padding-right: 2.75rem;
+}
+ 
+.TogglePassword {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    padding: 0;
+}
+ 
+
+ 
+
+ 
+.strength-label {
+    font-size: 0.73rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+    display: block;
+}
+ 
+.terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+}
+ 
+.terms input[type="checkbox"] {
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: auto;
+}
+ 
+.terms label {
+    font-weight: 400;
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+ 
+ 
+.btn-signup {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-bottom: 0.75rem;
+}
+ 
+.btn-signup:hover {
+    background-color: var(--secondary-color);
+}
+ 
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1rem 0;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+ 
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: #e5e5e5;
+}
+ 
+.btn-login {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1.5px solid var(--primary-color)    ;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+ 
+.btn-login:hover {
+    background-color: var(--primary-color-light);
+}
+body {
+    font-family: sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --------------------------------------------------
+   The CSS of the home.html page (( starts )) here. */
+
+
+body {
+    background: var(--bg-color);
+    font-family: var(--font-family);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Header – Flexbox */
+.navbar {
+    background: var(--primary-color);
+    padding: 1rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 40px;
+}
+
+.site-name {
+    color: white;
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--secondary-color);
+}
+
+/* Main container */
+.feed-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Create post form */
+.create-post {
+    background: white;
+    padding: 1.2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.create-post h2 {
+    margin-top: 0;
+    font-size: 1.3rem;
+}
+
+#createPostForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#postContent {
+    padding: 0.7rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+#submitPostBtn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+/* Feed heading */
+.feed-container>h2 {
+    margin: 1rem 0;
+}
+
+/* Posts container */
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* Individual post */
+.post {
+    background: white;
+    border-radius: 12px;
+    padding: 1.2rem;
+    border: 1px solid var(--border-color);
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.post-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-author {
+    font-weight: bold;
+}
+
+.post-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.post-content p {
+    margin: 0 0 0.5rem 0;
+}
+
+.post-actions {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.like-btn,
+.comment-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.like-btn.liked {
+    color: #e74c3c;
+}
+
+/* Comments */
+.comments-section {
+    margin-top: 0.8rem;
+}
+
+.comment {
+    background: #f9f9f9;
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.comment-author {
+    font-size: 0.98rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 0.15rem;
+}
+
+.comment-text {
+    font-size: 0.75rem;
+}
+
+.add-comment {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 0.4rem;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+}
+
+.comment-submit {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+footer p {
+    color: white;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.social-links a {
+    color: black;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    color: black;
+}
+
+/* Responsive: medium screens */
+@media (min-width: 768px) {
+    .navbar {
+        flex-wrap: nowrap;
+    }
+
+    .feed-container {
+        padding: 0 2rem;
+    }
+
+    .post-avatar {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* Responsive: large screens */
+@media (min-width: 1024px) {
+    .feed-container {
+        max-width: 1000px;
+    }
+}
+
+/* The CSS of the home.html page (( ends )) here.
+   ----------------------------------------------- */

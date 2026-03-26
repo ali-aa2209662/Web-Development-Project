@@ -3,7 +3,7 @@ const data = {
     "userid": "u1",
     "username": "Ali",
     "email": "a@gmail.com",
-    "password": "Aa123123",
+    "password": "123Aa123",
     "profilePicture": "",
     "bio": "",
     "followers": [],
@@ -21,11 +21,17 @@ export function saveData(thisData){
 
 
 export function getData(){
-    return JSON.parse(localStorage.getItem("WebData"));
+    const raw = localStorage.getItem("WebData");
+    if (raw == null) return null;
+    try {
+        return JSON.parse(raw);
+    } catch (e) {
+        return null;
+    }
 }
 
 
-// saveData(data);
+saveData(data);
 
 if (getData()==null) {
     saveData(data);

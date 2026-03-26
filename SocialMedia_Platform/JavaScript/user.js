@@ -23,8 +23,8 @@ export class User{
     }
 
     addUser(){
-        // console.log(getData());
         const data = getData();
+        if (data == null) return;
         data["users"].push(this);
         saveData(data);
         // console.log(getData());
@@ -46,9 +46,11 @@ export class User{
 export function createUser(username, email, password){
     new User(username, email, password)
 }
-
+//Edit it from Abdullah:
 export function getUsers(){
-    return getData()["users"].map(User.fromData);
+    const data = getData();
+    if (data == null || !Array.isArray(data.users)) return [];
+    return data.users.map(User.fromData);
 }
 
 export function getUserByID(id){ // returns user from 'id' (if 'id' is not found it returns null)
@@ -58,13 +60,14 @@ export function getUserByID(id){ // returns user from 'id' (if 'id' is not found
 
 export function saveUser(updateUser){
     const data = getData();
+    if (data == null) return;
     const user = data["users"].find(u => u.userid === updateUser.userid);
     if (user !== undefined) {// if user is found then save data
-        user = updateUser;
+        Object.assign(user, updateUser);
         saveData(data);
     }
 }
-
+//Edit it from Abdullah:
 export function getCurrentUser(){
     return getData()['currentUser'];
 }
@@ -80,17 +83,21 @@ export function setCurrentUser(userid){
 
 export function setProfileUser(userid){
     const data = getData();
+    if (data == null) return;
     data["profileUser"] = userid;
     saveData(data);
 
 }
-
+//edit it from Abdullah:
 export function getProfileUser(){
-    return getData()["profileUser"];
+    const data = getData();
+    if (data == null) return null;
+    return data.profileUser;
 }
 
 export function goToProfile(userid){
     const data = getData();
+    if (data == null) return;
     data.profileUser = userid;
     saveData(data);
     window.location.href = "profile.html";
@@ -109,7 +116,6 @@ export function edit_profile(username,email,password,PFP_Base64,bio){
     console.log(user);
     saveData(data);
 }
-
 
 
 

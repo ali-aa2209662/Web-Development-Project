@@ -3,101 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SocialApp</title>
+  <title>ASTRA</title>
   <link rel="stylesheet" href="CSS/style.css">
   <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f4f4f4;
-}
 
-/* Header */
-header {
-    background-color: #333;
-    color: white;
-    padding: 15px;
-}
-
-header h1 {
-    margin: 0;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    justify-content: space-around;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-}
-
-nav button {
-    padding: 5px 10px;
-}
-
-/* Main layout */
-main {
-    width: 80%;
-    margin: 20px auto;
-}
-
-/* Profile section */
-section {
-    background: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-}
-
-/* Profile top */
-article {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-article img {
-    border-radius: 50%;
-    border: 2px solid #ccc;
-    justify-items: center;
-}
-
-/* Profile info */
-.profile-info {
-    line-height: 1.8;
-}
-
-.profile-info button {
-    margin-right: 10px;
-    padding: 8px 12px;
-}
-
-/* Posts */
-.user-posts .post {
-    background: #eee;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
 </style>
 
 </head>
 <body>
 
-  <header>
-    <h1>SocialApp</h1>
-    <nav id="navBar">
-      <ul id="navList" class="nav-list">
-        <li><a href="home.html">Main</a></li>
+  <header class="navbar">
+    <div class="brand">
+      <a href="home.html" class="brand-link">
+        <img src="assets/Logo1.png" alt="ASTRA Logo" class="logo-icon">
+        <h1 class="site-name">ASTRA</h1>
+      </a>
+    </div>
+    <nav class="nav" id="navBar">
+      <ul class="nav-links" id="navList">
+        <li><a href="home.html">Home</a></li>
         <li><a href="profile.html" class="active">Profile</a></li>
-        <li><a href="edit_profile.html">Edit Profile</a></li> 
-        <li><button id="logoutBtn">Logout</button></li>
+        <li><button type="button" id="logoutBtn">Logout</button></li>
       </ul>
     </nav>
   </header>
@@ -111,8 +37,9 @@ article img {
         <h3 id="profileName"></h3>
         <p id="profileBio"></p>
       </article>
-        <button id="editBtn" href="edit_profile.html">Edit Profile</button>
-
+        <a href="edit_profile.html">
+        <button id="editBtn">Edit Profile</button>
+        </a>
     </section>
 
     <section class="profile-info">
@@ -134,7 +61,14 @@ article img {
 
   </main>
 
-  <footer> <p>&copy; 2026 SocialApp. All rights reserved.</p> </footer>
+  <footer>
+    <div class="social-links">
+      <a href="#" target="_blank">Twitter</a>
+      <a href="#" target="_blank">Instagram</a>
+      <a href="#" target="_blank">TikTok</a>
+    </div>
+    <p>&copy; 2026 ASTRA. All rights reserved.</p>
+  </footer>
 
 
 <script type="module" src="JavaScript/profile.js"></script>

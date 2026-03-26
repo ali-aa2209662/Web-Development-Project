@@ -24,6 +24,7 @@ class Interaction{
 
     ToggleLike(){ 
         const data = getData();
+        if (data == null) return;
         const currentUser = data["currentUser"]
         let interactor;
 
@@ -42,9 +43,9 @@ class Interaction{
         }
 
         // is it already liked?
-        const index = interactor.likes.indexOf(currentUser.userid)
+        const index = interactor.likes.indexOf(currentUser)
         if (index === -1) { // if not add like
-            interactor.likes.push(currentUser.userid);
+            interactor.likes.push(currentUser);
             
         }
         else { // if so remove loke
@@ -71,7 +72,10 @@ class Comment extends Interaction {
 
     addComment(){
         const data = getData();
-        data["posts"].find(p => p.id === this.postID).comments.push(this);
+        if (data == null) return;
+        const post = data["posts"].find(p => p.id === this.postID);
+        if (!post) return;
+        post.comments.push(this);
         saveData(data);
         
     }
@@ -107,6 +111,7 @@ class Post extends Interaction{
 
     addPost(){
         const data = getData();
+        if (data == null) return;
         data["posts"].push(this);
         saveData(data);
     }
@@ -123,7 +128,9 @@ class Post extends Interaction{
 }
 
 export function getPosts(){
-    return getData()["posts"].map(Post.fromData);
+    const data = getData();
+    if (data == null || !Array.isArray(data.posts)) return [];
+    return data.posts.map(Post.fromData);
 }
 
 export function getPostsByUserID(userid){
@@ -136,10 +143,14 @@ export function getPostByID(postID){
 }
 
 export function createPost(authorID, content){
+    const data = getData();
+    if (data == null) return;
     new Post(authorID, content)
 }
 
 export function createComment(authorID, postID, content){
+    const data = getData();
+    if (data == null) return;
     new Comment(authorID, postID, content);
 }
 

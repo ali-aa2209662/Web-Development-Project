@@ -3,29 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile – SocialApp</title>
+    <title>Edit Profile – ASTRA</title>
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
 
-<header class="edit-profile-header">
-    <h1>Edit Profile</h1>
-    <nav id="navBar">
-        <ul id="navList" class="nav-list">
-            <li><a href="home.html">Main</a></li>
+<header class="navbar">
+    <div class="brand">
+        <a href="home.html" class="brand-link">
+            <img src="assets/Logo1.png" alt="ASTRA Logo" class="logo-icon">
+            <h1 class="site-name">ASTRA</h1>
+        </a>
+    </div>
+    <nav class="nav" id="navBar">
+        <ul class="nav-links" id="navList">
+            <li><a href="home.html">Home</a></li>
             <li><a href="profile.html">Profile</a></li>
-            <li><a href="edit_profile.html" class="active">Edit Profile</a></li>
-            <li><button id="logoutBtn">Logout</button></li>
+            <li><button type="button" id="logoutBtn">Logout</button></li>
         </ul>
     </nav>
 </header>
 
 <main>
+    <h2>Update Your Profile Information:</h2><br>
     <form id="editProfileForm" enctype="multipart/form-data">
 
         <label>Profile Image:</label><br>
         <img id="preview" src="assets/Avatar-01.svg" width="120"><br>
-        <p id="imageuploadStatus">Upload Image</p>
+        <p id="imageuploadStatus">Upload Image</p><br>
         <input type="file" id="imageInput" accept="image/*"><br><br>
         
 
@@ -48,12 +53,17 @@
 
         <button type="submit">Save Changes</button>
     </form>
-
-    <button id="cancelBtn">Cancel</button>
+    <a href="profile.html">
+    <button type="button" id="cancelBtn">Cancel</button> </a>
 </main>
 
 <footer>
-    <p>&copy; 2026 SocialApp. All rights reserved.</p>
+    <div class="social-links">
+        <a href="#" target="_blank">Twitter</a>
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">TikTok</a>
+    </div>
+    <p>&copy; 2026 ASTRA. All rights reserved.</p>
 </footer>
 
 <script type="module" src="JavaScript/edit_profile.js"></script>
