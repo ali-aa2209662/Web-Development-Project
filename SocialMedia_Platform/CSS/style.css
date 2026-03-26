@@ -202,7 +202,14 @@ header h1 {
     cursor: pointer;
     text-align: left;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    justify-content: ;
+    position: fixed;   
+    top: 0;            
+    left: 0;
+    padding: 5px 20px;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    
 
 }
 
@@ -210,7 +217,8 @@ nav ul {
     list-style: none;
     padding: 0;
     display: flex;
-    gap: 15px;
+    gap: 20px;
+
     align-items: center;
     justify-content: space-around;
     color: var(--primary-color);
