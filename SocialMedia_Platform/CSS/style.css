@@ -1,7 +1,9 @@
 :root{
     --primary-color: rgb(26, 136, 90);
     --secondary-color: rgb(100, 255, 190);
+    
     --bg-color: rgb(250, 250, 250);
+    --border-color: rgb(152, 255, 219);
 
     --warning-color: rgb(255, 67, 67);
 
