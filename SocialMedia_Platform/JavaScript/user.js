@@ -20,6 +20,7 @@ export class User{
         const tempdate = new Date()
         this.date = tempdate.toString().slice(4,15).split(" ").join("/") + " " + tempdate.toString().slice(16,21);
         this.addUser();
+        console.log(this);
     }
 
     addUser(){

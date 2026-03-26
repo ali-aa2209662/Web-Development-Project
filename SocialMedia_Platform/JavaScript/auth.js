@@ -1,8 +1,8 @@
 import { getData, saveData} from "./storage.js"
 import { getUsers, createUser, setCurrentUser, getCurrentUser } from "./user.js";
 
-console.log("loaded auth");
-console.log(getCurrentUser())
+// console.log("loaded auth");
+// console.log(getCurrentUser())
 
 export function checkLogin(){// might make in phase 2
 
