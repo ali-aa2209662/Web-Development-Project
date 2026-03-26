@@ -144,3 +144,1269 @@ h1{
     cursor: pointer;
     font-size: 16px;
 }
+
+
+
+
+
+
+
+/*suggested code from AI, not in final version: */
+
+
+/* ============================================================
+   SocialApp – style.css
+   Covers: login.html, signup.html, home.html, profile.html,
+           edit_profile.html
+   Only uses IDs and classes that exist in the HTML files.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+/* ── Variables ─────────────────────────────────────────────── */
+
+:root {
+    --bg:           #f0f2f5;
+    --surface:      #ffffff;
+    --surface-2:    #f7f8fa;
+    --border:       #e4e6ea;
+    --text:         #1c1e21;
+    --text-muted:   #65676b;
+    --accent:       #1877f2;
+    --accent-hover: #1558b0;
+    --accent-light: #e7f0fd;
+    --danger:       #e53935;
+    --radius:       12px;
+    --radius-sm:    8px;
+    --radius-lg:    20px;
+    --shadow-sm:    0 1px 3px rgba(0,0,0,0.08);
+    --shadow:       0 4px 16px rgba(0,0,0,0.10);
+    --shadow-lg:    0 8px 32px rgba(0,0,0,0.14);
+    --nav-h:        62px;
+    --font:         'Plus Jakarta Sans', sans-serif;
+    --transition:   0.18s ease;
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img { display: block; max-width: 100%; }
+
+ul { list-style: none; }
+
+button { font-family: var(--font); cursor: pointer; }
+
+input, textarea { font-family: var(--font); }
+
+textarea { resize: vertical; }
+
+/* ============================================================
+   SHARED – HEADER / NAV
+   home.html    → <header class="navbar">  +  <nav> inside
+   profile.html → <header>  +  <nav id="navBar">
+   edit_profile → <header>  +  <nav id="navBar">
+   ============================================================ */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+}
+
+/* home.html puts class="navbar" on the <header> */
+.navbar {
+    padding: 0 24px;
+}
+
+/* profile.html / edit_profile.html put id="navBar" on <nav> */
+#navBar {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    gap: 16px;
+}
+
+/* .brand – home.html wrapper around logo + site name */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* .brand-link – the <a> wrapping brand in home.html */
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.brand-link:hover { text-decoration: none; }
+
+/* .logo-icon – home.html brand image */
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+/* .nav-logo – profile.html / edit_profile.html brand image */
+.nav-logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+/* .site-name – home.html brand text */
+.site-name {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+/* .brand-name – profile.html / edit_profile.html brand text */
+.brand-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+}
+
+/* nav ul in home.html */
+nav ul,
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    list-style: none;
+}
+
+/* nav links */
+nav ul a,
+.nav-links a {
+    padding: 7px 14px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    transition: all var(--transition);
+    display: block;
+    text-decoration: none;
+}
+
+nav ul a:hover,
+.nav-links a:hover {
+    background: var(--bg);
+    color: var(--text);
+    text-decoration: none;
+}
+
+nav ul a.active,
+.nav-links a.active {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+/* #logoutBtn – button inside nav, all pages */
+#logoutBtn {
+    padding: 7px 16px;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all var(--transition);
+}
+
+#logoutBtn:hover {
+    background: var(--danger);
+    color: white;
+    border-color: var(--danger);
+}
+
+/* ============================================================
+   SHARED – FOOTER
+   ============================================================ */
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    margin-top: 48px;
+}
+
+/* .social-links – home.html footer */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.social-links a {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.social-links a:hover { color: var(--accent); }
+
+/* ============================================================
+   LOGIN PAGE  –  login.html
+   ============================================================ */
+
+/* .Login-Card – full page centered column */
+.Login-Card {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: var(--bg);
+}
+
+/* .logo-wrapper – centers the logo */
+.logo-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo-wrapper img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+}
+
+.Login-Card h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+/* .welcome-message */
+.welcome-message {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    text-align: center;
+    max-width: 380px;
+}
+
+/* #error-message */
+#error-message {
+    background: #fdecea;
+    color: var(--danger);
+    border: 1px solid #f5c6cb;
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+/* #LoginForm */
+#LoginForm {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* .form-group – login.html and signup.html */
+.form-group {
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 0.9375rem;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-group input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+    background: var(--surface);
+}
+
+/* .Password-wrapper – login.html password field wrapper */
+.Password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.Password-wrapper input {
+    width: 100%;
+    padding: 11px 44px 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    font-size: 0.9375rem;
+    outline: none;
+    color: var(--text);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.Password-wrapper input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+    background: var(--surface);
+}
+
+/* .TogglePassword – eye icon button (login.html) */
+.TogglePassword {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.TogglePassword:hover { color: var(--accent); }
+
+/* #login-button */
+#login-button {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition);
+    margin-top: 4px;
+}
+
+#login-button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
+
+/* .divider – "or" separator */
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 400px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: 14px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+/* #SignupButton */
+#SignupButton {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 100px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+#SignupButton:hover { background: var(--accent-light); }
+
+/* ============================================================
+   SIGNUP PAGE  –  signup.html
+   ============================================================ */
+
+/* .Signup-card */
+.Signup-card {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: var(--bg);
+}
+
+.Signup-card h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+/* .tagline */
+.tagline {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+/* #signup-form */
+#signup-form {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* .form-row – wraps all form fields in signup */
+.form-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .field-error – per-field validation message */
+.field-error {
+    font-size: 0.8rem;
+    color: var(--danger);
+    font-weight: 500;
+    margin-top: 4px;
+    display: none;
+}
+
+/* #username-error, #email-error, #dob-error, #password-error, #confirm-error */
+#username-error,
+#email-error,
+#dob-error,
+#password-error,
+#confirm-error {
+    font-size: 0.8rem;
+    color: var(--danger);
+    font-weight: 500;
+    margin-top: 4px;
+    display: none;
+}
+
+/* .password-wrapper (lowercase) – signup.html */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding: 11px 70px 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    font-size: 0.9375rem;
+    outline: none;
+    color: var(--text);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.password-wrapper input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+    background: var(--surface);
+}
+
+/* .TogglePassword inside .password-wrapper (signup) */
+.password-wrapper .TogglePassword {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    padding: 0;
+}
+
+/* .password-strength bar container */
+.password-strength {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 6px;
+    overflow: hidden;
+}
+
+/* #strength-bar */
+#strength-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 2px;
+    background: var(--danger);
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+/* #strength-label */
+#strength-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 3px;
+}
+
+/* .terms row */
+.terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    max-width: 420px;
+    margin-bottom: 16px;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.terms input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    accent-color: var(--accent);
+}
+
+/* .btn-signup */
+.btn-signup {
+    width: 100%;
+    max-width: 420px;
+    padding: 12px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 12px;
+    transition: all var(--transition);
+    font-family: var(--font);
+}
+
+.btn-signup:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
+
+/* .btn-login */
+.btn-login {
+    width: 100%;
+    max-width: 420px;
+    padding: 12px;
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 100px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: var(--font);
+}
+
+.btn-login:hover { background: var(--accent-light); }
+
+/* ============================================================
+   HOME PAGE  –  home.html
+   ============================================================ */
+
+/* .feed-container */
+.feed-container {
+    max-width: 680px;
+    margin: 28px auto;
+    padding: 0 16px;
+}
+
+/* .create-post section */
+.create-post {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.create-post h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+/* #createPostForm */
+#createPostForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* #postContent */
+#postContent {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.9375rem;
+    background: var(--surface-2);
+    color: var(--text);
+    outline: none;
+    line-height: 1.5;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+#postContent:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+    background: var(--surface);
+}
+
+#postContent::placeholder { color: var(--text-muted); }
+
+/* #submitPostBtn */
+#submitPostBtn {
+    align-self: flex-end;
+    padding: 9px 24px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: var(--font);
+}
+
+#submitPostBtn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
+
+/* #createPostMessage */
+#createPostMessage {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* .posts-container */
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* .post – card used in home.html and profile.html */
+.post {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition);
+    animation: fadeUp 0.25s ease;
+}
+
+.post:hover { box-shadow: var(--shadow); }
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* .post-header */
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+/* .post-avatar */
+.post-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+}
+
+/* .post-meta */
+.post-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+/* .post-author */
+.post-author {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text);
+}
+
+/* .post-date */
+.post-date {
+    font-size: 0.775rem;
+    color: var(--text-muted);
+}
+
+/* .post-content */
+.post-content p {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--text);
+    margin-bottom: 14px;
+}
+
+/* .post-actions */
+.post-actions {
+    display: flex;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+}
+
+/* .like-btn */
+.like-btn {
+    padding: 7px 16px;
+    border-radius: 100px;
+    border: 1.5px solid var(--border);
+    background: var(--surface-2);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: all var(--transition);
+}
+
+.like-btn:hover {
+    background: #fdecea;
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+/* .comment-btn */
+.comment-btn {
+    padding: 7px 16px;
+    border-radius: 100px;
+    border: 1.5px solid var(--border);
+    background: var(--surface-2);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: all var(--transition);
+}
+
+.comment-btn:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* .comment-form */
+.comment-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+/* .comment-input */
+.comment-input {
+    flex: 1;
+    padding: 8px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.875rem;
+    background: var(--surface-2);
+    color: var(--text);
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.comment-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+    background: var(--surface);
+}
+
+.comment-form button[type="submit"] {
+    padding: 8px 18px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: all var(--transition);
+    font-family: var(--font);
+}
+
+.comment-form button[type="submit"]:hover { background: var(--accent-hover); }
+
+/* .comments-section */
+.comments-section {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* .comment */
+.comment {
+    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 0.875rem;
+    border: 1px solid var(--border);
+}
+
+/* .comment-author */
+.comment-author {
+    font-weight: 700;
+    color: var(--text);
+    display: block;
+    margin-bottom: 3px;
+}
+
+/* .comment-text */
+.comment-text {
+    color: var(--text);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ============================================================
+   PROFILE PAGE  –  profile.html
+   ============================================================ */
+
+main {
+    width: 80%;
+    max-width: 860px;
+    margin: 28px auto;
+    padding: 0 12px;
+}
+
+/* every <section> on profile page */
+section {
+    background: var(--surface);
+    padding: 24px;
+    margin-bottom: 18px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+/* <article> – avatar + name row */
+article {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* the big avatar in article */
+article img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border);
+    flex-shrink: 0;
+}
+
+/* #profileImg – set dynamically by profile.js */
+#profileImg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border);
+    flex-shrink: 0;
+}
+
+/* #profileName */
+#profileName {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text);
+    margin: 0;
+}
+
+/* #profileBio */
+#profileBio {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 4px 0 0;
+}
+
+/* .profile-info section */
+.profile-info {
+    line-height: 1.9;
+}
+
+.profile-info p {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+}
+
+/* #username */
+#username {
+    font-size: 1.25rem;
+    font-weight: 800;
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* #bio */
+#bio {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* #followInfo – followers / following / posts stats block */
+#followInfo {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+}
+
+#followInfo p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* #followersCount, #followingCount, #postsCount */
+#followersCount,
+#followingCount,
+#postsCount {
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* #followBtn */
+#followBtn {
+    padding: 9px 24px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition);
+    margin-right: 10px;
+    font-family: var(--font);
+}
+
+#followBtn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
+
+/* #editBtn */
+#editBtn {
+    padding: 9px 24px;
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: var(--font);
+}
+
+#editBtn:hover { background: var(--accent-light); }
+
+/* .user-posts section */
+.user-posts h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+}
+
+/* #postsContainer on profile page */
+#postsContainer .post {
+    border-radius: var(--radius-sm);
+    margin-bottom: 10px;
+}
+
+/* ============================================================
+   EDIT PROFILE PAGE  –  edit_profile.html
+   ============================================================ */
+
+/* header h1 on edit_profile.html */
+header h1 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-left: 4px;
+}
+
+/* #editProfileForm */
+#editProfileForm {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+    max-width: 560px;
+    margin: 28px auto 0;
+}
+
+#editProfileForm label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+#editProfileForm input[type="text"],
+#editProfileForm input[type="email"],
+#editProfileForm input[type="password"],
+#editProfileForm textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 0.9375rem;
+    outline: none;
+    margin-bottom: 18px;
+    display: block;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+#editProfileForm input:focus,
+#editProfileForm textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+    background: var(--surface);
+}
+
+/* #preview – profile picture preview image */
+#preview {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border);
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* #imageuploadStatus */
+#imageuploadStatus {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+/* #imageInput – hidden, triggered by #uploadBtn */
+#imageInput {
+    display: none;
+}
+
+/* #uploadBtn */
+#uploadBtn {
+    padding: 8px 18px;
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition);
+    margin-bottom: 20px;
+    display: inline-block;
+    font-family: var(--font);
+}
+
+#uploadBtn:hover { background: var(--accent-light); }
+
+/* Save Changes button inside form */
+#editProfileForm button[type="submit"] {
+    padding: 11px 28px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition);
+    margin-right: 10px;
+    font-family: var(--font);
+}
+
+#editProfileForm button[type="submit"]:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
+
+/* #cancelBtn – sits outside the form */
+#cancelBtn {
+    padding: 11px 28px;
+    background: transparent;
+    color: var(--text-muted);
+    border: 2px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition);
+    display: inline-block;
+    margin: 16px auto 28px;
+    font-family: var(--font);
+}
+
+#cancelBtn:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    main { width: 100%; padding: 0 12px; }
+
+    #navBar  { padding: 0 14px; }
+    .navbar  { padding: 0 14px; }
+
+    .brand-name,
+    .site-name { display: none; }
+
+    nav ul a,
+    .nav-links a { padding: 6px 10px; font-size: 0.8rem; }
+
+    .feed-container { padding: 0 10px; margin-top: 16px; }
+
+    article { flex-direction: column; align-items: flex-start; }
+
+    #followInfo { gap: 14px; padding: 12px; }
+
+    #editProfileForm { padding: 20px 16px; margin: 16px auto; }
+
+    .post { padding: 14px; }
+}
+
+@media (max-width: 480px) {
+
+    .Login-Card,
+    .Signup-card {
+        padding: 28px 16px;
+        justify-content: flex-start;
+        padding-top: 40px;
+    }
+
+    .Login-Card h1,
+    .Signup-card h1 { font-size: 1.5rem; }
+
+    #followBtn,
+    #editBtn { padding: 8px 16px; font-size: 0.85rem; }
+
+    .post-actions { flex-wrap: wrap; }
+
+    section { padding: 16px; }
+} 
