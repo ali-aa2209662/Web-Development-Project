@@ -1,24 +1,33 @@
-// import { getData, saveData} from "./storage.js"
-import { getUsers, createUser } from "./user.js";
+import { getData, saveData} from "./storage.js"
+import { getUsers, createUser, setCurrentUser, getCurrentUser } from "./user.js";
 
 console.log("loaded auth");
+console.log(getCurrentUser())
 
-function login(username, password) {
+export function checkLogin(){// might make in phase 2
+
+}
+
+export function login(username, password) {
+  console.log(username)
+  console.log(password)
   const users = getUsers(); // better to call it here (fresh data)
 
   const user = users.find(
     u => u.username === username && u.password === password
   );
-
+  console.log(user)
   if (!user) {
     return { success: false, message: "Invalid username or password" };
   }
+  console.log("PPPPPPPPPPPPPPPHHHH")
+  setCurrentUser(user.userid)
+  window.location.href = "home.html";
 
-  return { success: true, message: "Login successful", user };
-}
-export { login };
 
-function signup(username, email, password) {
+  }
+
+export function signup(username, email, password) {
 
     const users = getUsers();
 
@@ -38,6 +47,11 @@ function signup(username, email, password) {
     createUser(username, email, password);
 
     };
+
+export function logout(){
+  setCurrentUser(null);
+  window.location.href = "login.html";
+}
 
 // add an event listener for the sumbit button for sign up
 // and make sure if all the information is correct to take 

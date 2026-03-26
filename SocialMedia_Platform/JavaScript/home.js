@@ -1,11 +1,12 @@
 import { getPosts, createPost, createComment } from "./post.js";
 import { getUserByID, getCurrentUser } from "./user.js";
+import { logout } from "./auth.js";
 
 console.log(getPosts());
 
 addEventListener("DOMContentLoaded", () => {
     const createPostForm = document.getElementById("createPostForm");
-
+    initLogoutButton()
     createPostForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const content = document.getElementById("postContent").value;
@@ -126,6 +127,13 @@ function formatComments(comments) {
                         </div>
                     </div>`
     }).join("");
+}
+
+function initLogoutButton() {
+    const logoutBtn = document.getElementById("logoutBtn");
+    logoutBtn.addEventListener("click", () => {
+        logout();
+    });
 }
 
 displayPosts();

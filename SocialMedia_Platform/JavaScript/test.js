@@ -82,15 +82,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 // Handle form submit
-form.addEventListener("submit", function (e) {
-    e.preventDefault(); // stop page reload
+form.addEventListener("submit", () => {
 
     const file = imageInput.files[0];
     if (!file) return;
 
     const reader = new FileReader();
 
-    reader.onload = function () {
+    reader.onload = () => {
         picture = reader.result;
 
         // Save to localStorage

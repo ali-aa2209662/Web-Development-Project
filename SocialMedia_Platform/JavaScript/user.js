@@ -42,11 +42,6 @@ export class User{
     
 
 }
-export function getProfileUser(){
-    const urlParams = new URLSearchParams(window.location.search);
-    const userID = urlParams.get("id");
-    return getUserByID(userID);
-}
 
 export function createUser(username, email, password){
     new User(username, email, password)
@@ -71,9 +66,16 @@ export function saveUser(updateUser){
 }
 
 export function getCurrentUser(){
-    return getUserByID(getData()['currentUser']) || null;
+    return getData()['currentUser'];
 }
 
+export function setCurrentUser(userid){
+    const data = getData();
+
+    data["currentUser"] = userid;
+
+    saveData(data)
+}
 
 
 export function setProfileUser(userid){
@@ -96,23 +98,19 @@ export function goToProfile(userid){
 
 export function edit_profile(username,email,password,PFP_Base64,bio){
     const data = getData();
-    const user = data["user"].find(u => u.userid === data["currentUser"])
+    
+    const user = data["users"].find(u => u.userid === data["currentUser"])
 
     user.profilePicture = PFP_Base64;
     user.username = username;
     user.email = email;
     user.password = password;
     user.bio = bio;
-
+    console.log(user);
     saveData(data);
 }
 
-export function logout(){
-    const data = getData();
-    data.currentUser = null;
-    saveData(data);
-    window.location.href = "login.html";
-}
+
 
 
 
@@ -123,7 +121,7 @@ export function logout(){
 
 
 // TESTING...
-const u1 = new User("Ali","ali@gmail.com","123");
+// const u1 = new User("Ali","ali@gmail.com","123");
 // console.log(user.getUserByID(1));
 
 // const u2 = new user("Ahmed","gmail",'222')
