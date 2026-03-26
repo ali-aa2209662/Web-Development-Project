@@ -3,7 +3,7 @@ const data = {
     "userid": "u1",
     "username": "Ali",
     "email": "a@gmail.com",
-    "password": "Aa123123",
+    "password": "123Aa123",
     "profilePicture": "",
     "bio": "",
     "followers": [],
