@@ -515,6 +515,17 @@ body {
     font-size: 0.85rem;
 }
 
+.comment-author {
+    font-size: 0.98rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 0.15rem;
+}
+
+.comment-text {
+    font-size: 0.75rem;
+}
+
 .add-comment {
     display: flex;
     gap: 0.5rem;
