@@ -93,10 +93,10 @@ article img {
   <header>
     <h1>SocialApp</h1>
     <nav id="navBar">
-      <ul>
+      <ul id="navList" class="nav-list">
         <li><a href="home.html">Main</a></li>
         <li><a href="profile.html" class="active">Profile</a></li>
-        <li><a href="edit_profile.html">Edit Profile</a></li>
+        <li><a href="edit_profile.html">Edit Profile</a></li> 
         <li><button id="logoutBtn">Logout</button></li>
       </ul>
     </nav>
@@ -104,27 +104,27 @@ article img {
 
   <main>
 
-    <section>
+    <section class="profile-header">
       <h2>Profile</h2>
-      <article>
+      <article id="profileHeader">
         <img src="assets/Avatar-01.svg" alt="Profile Avatar" height="200" width="200" />
         <h3 id="profileName"></h3>
         <p id="profileBio"></p>
       </article>
-      <label>Profile Image URL:</label>
-        <input type="text" id="editImage">  
         <button id="editBtn" href="edit_profile.html">Edit Profile</button>
 
     </section>
 
     <section class="profile-info">
         <h2 id="username"></h2>
-    <section>
+    <section id="followInfo">
         <p>Followers: <span id="followersCount"></span></p>
-        <p>Following: <span id="followingCount"></span></p> <br> </section>
+        <p>Following: <span id="followingCount"></span></p> 
+        <p>Total Posts: <span id="postsCount"></span></p><br>
+     </section>
+        
         <p>Bio: <span id="bio"></span></p> <br> <br>
-        <p>Posts: <span id="postsCount"></span></p>
-        <button id="followBtn"></button>
+        <button id="followBtn">Follow</button>
     </section>
 
     <section class="user-posts">
@@ -147,3 +147,4 @@ article img {
 
 </body>
 </html>
+

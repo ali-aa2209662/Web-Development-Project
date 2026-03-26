@@ -7,15 +7,18 @@ export class User{
     email;
     password;
     profilePicture = "assets/PFP_Blank.jpg";
+    bio = "";
     followers = [];
     following = [];
     date = null;
     
-    constructor(username,email,password){ // creates an instance of user and saves it to data
+    constructor(username,email,password,profilePicture,bio){ // creates an instance of user and saves it to data
         this.userid = this.generateID();
         this.username = username;
         this.email = email;
         this.password = password;
+        this.profilePicture = profilePicture;
+        this.bio = bio;
         const tempdate = new Date()
         this.date = tempdate.toString().slice(4,15).split(" ").join("/") + " " + tempdate.toString().slice(16,21);
         this.addUser();
@@ -40,6 +43,11 @@ export class User{
 
     
 
+}
+export function getProfileUser(){
+    const urlParams = new URLSearchParams(window.location.search);
+    const userID = urlParams.get("id");
+    return getUserByID(userID);
 }
 
 export function createUser(username, email, password){

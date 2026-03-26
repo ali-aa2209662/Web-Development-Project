@@ -1,4 +1,4 @@
-import { getUserByID, getCurrentUser, saveUser } from "./user.js";
+import { getUserByID, getCurrentUser, saveUser, } from "./user.js";
 import { getPosts } from "./post.js";
 import { checkLogin, logout } from "./auth.js";
 import { getData } from "./storage.js";
@@ -13,6 +13,7 @@ addEventListener("DOMContentLoaded", () => {
     initFollowButton();
     initEditButton();
     initLogoutButton();
+
 });
 
 // ── Display profile info ────────────────────────────────────
@@ -86,19 +87,26 @@ function initFollowButton() {
 function initEditButton() {
     const currentUser = getCurrentUser();
     const profileUser = getProfileUser();
+    if (!currentUser || !profileUser) return;
 
-    document.getElementById("editBtn").addEventListener("click", () => {
-        if (currentUser?.userid === profileUser?.userid) {
-            window.location.href = "edit_profile.html";
-        } else {
-            alert("You can only edit your own profile.");
-        }
+    const editBtn = document.getElementById("editBtn");
+
+    // Only show edit button on own profile
+    if (currentUser.userid !== profileUser.userid) {
+        editBtn.style.display = "none";
+        return;
+    }
+
+    editBtn.addEventListener("click", () => {
+        window.location.href = "edit_profile.html";
     });
+
 }
 
 // ── Logout button ───────────────────────────────────────────
 function initLogoutButton() {
-    document.getElementById("logoutBtn").addEventListener("click", logout);
+    document.getElementById("logoutBtn").addEventListener("click", logout); 
+
 }
 
 // ── Helper: get the user whose profile is being viewed ──────
@@ -108,6 +116,7 @@ function getProfileUser() {
     const data          = getData();
     const currentUser   = data?.currentUser;
     const profileUserId = data?.profileUserId ?? currentUser?.userid;
+
 
     const user = data?.users?.find(u => u.userid === profileUserId);
     if (!user) {

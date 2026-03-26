@@ -12,6 +12,8 @@ addEventListener("DOMContentLoaded", () => {
     initLogoutButton();
     initEditProfileButton();
     initEditPictureButton();
+    setupImageUpload();
+
 });
 
 // ── Pre-fill form with current user data ────────────────────
@@ -19,12 +21,36 @@ function fillForm() {
     const currentUser = getCurrentUser();
     if (!currentUser) return;
 
-    document.getElementById("editUsername").value = currentUser.username  || "";
-    document.getElementById("editEmail").value    = currentUser.email     || "";
-    document.getElementById("editBio").value      = currentUser.bio       || "";
-    document.getElementById("editPassword").value = currentUser.password  || "";
+    document.getElementById("editUsername").value = currentUser.username || "";
+    document.getElementById("editEmail").value    = currentUser.email || "";
+    document.getElementById("editBio").value      = currentUser.bio || "";
+    document.getElementById("editPassword").value = currentUser.password || "";
+
+    // ✅ Set profile image preview
+    const preview = document.getElementById("preview");
+    preview.src = currentUser.profilePicture || "assets/Avatar-01.svg";
 }
 
+function setupImageUpload() {
+    const imageInput = document.getElementById("imageInput");
+    const preview = document.getElementById("preview");
+    const uploadBtn = document.getElementById("uploadBtn");
+
+    // Click button triggers hidden file input
+        uploadBtn.addEventListener("click", function() {
+            imageInput.click();
+        });
+    imageInput.addEventListener("change", function () {
+        const file = imageInput.files[0];
+
+        if (file) {
+            preview.src = URL.createObjectURL(file);
+        } else {
+            preview.src = "assets/Avatar-01.svg";
+        }
+
+    });
+}
 // ── Save changes ─────────────────────────────────────────────
 function initSaveForm() {
     document.getElementById("editProfileForm").addEventListener("submit", (e) => {
@@ -51,32 +77,13 @@ function initCancelButton() {
         window.location.href = "profile.html";
     });
 }
+  
 
-function editProfileInfobtn() { 
-    const currentUser = getCurrentUser();
-    if (!currentUser) return;
-
-    const newUsername = document.getElementById("editUsername").value.trim();
-    const newBio      = document.getElementById("editBio").value.trim();
-
-    if (newUsername) currentUser.username = newUsername;
-    if (newBio)      currentUser.bio = newBio;
-
-    saveUser(currentUser);
-    displayProfileInfo();
+function initLogoutButton() {
+    const logoutBtn = document.getElementById("logoutBtn");
+    logoutBtn.addEventListener("click", () => {
+        logout();
+    });
 }
 
-function editProfilePicturebtn() {
-    const currentUser = getCurrentUser();
-    if (!currentUser) return;
-
-    const imageUrl = document.getElementById("editImage").value.trim();
-    if (!imageUrl) {
-        alert("Please enter a valid image URL.");
-        return;
-    }
-
-    currentUser.profilePicture = imageUrl;
-    saveUser(currentUser);
-    document.getElementById("profilePicture").src = imageUrl;
-}
+ 

@@ -5,7 +5,9 @@ const data = {
     "email": "a@gmail.com",
     "password": "123",
     "profilePicture": "",
-    "followed": [],
+    "bio": "",
+    "followers": [],
+    "following": [],
     "date": "Mar/25/2026 14:54"
     }],
     posts: [],

@@ -8,10 +8,10 @@
 </head>
 <body>
 
-<header>
+<header class="edit-profile-header">
     <h1>Edit Profile</h1>
     <nav id="navBar">
-        <ul>
+        <ul id="navList" class="nav-list">
             <li><a href="home.html">Main</a></li>
             <li><a href="profile.html">Profile</a></li>
             <li><a href="edit_profile.html" class="active">Edit Profile</a></li>
@@ -21,21 +21,34 @@
 </header>
 
 <main>
-    <form id="editProfileForm">
+    <form id="editProfileForm" enctype="multipart/form-data">
+
+        <label>Profile Image:</label><br>
+        <img id="preview" src="assets/Avatar-01.svg" width="120"><br>
+        <p id="imageuploadStatus">Upload Image</p>
+        <input type="file" id="imageInput" accept="image/*"><br><br>
+        
+
         <label>Username:</label>
         <input type="text" id="editUsername"><br><br>
 
         <label>Email:</label>
         <input type="email" id="editEmail"><br><br>
+        
+        <label>Password:</label>
+        <input type="password" id="editPassword"><br><br>
+
+        <label>Confirm Password:</label>
+        <input type="password" id="confirmPassword"><br><br>
 
         <label>Bio:</label>
         <textarea id="editBio"></textarea><br><br>
 
-        <label>Password:</label>
-        <input type="password" id="editPassword"><br><br>
+       
 
         <button type="submit">Save Changes</button>
     </form>
+
     <button id="cancelBtn">Cancel</button>
 </main>
 
