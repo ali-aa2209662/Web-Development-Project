@@ -1,7 +1,6 @@
-import { getUserByID, getCurrentUser, saveUser, } from "./user.js";
-import { getPosts } from "./post.js";
+import { getUserByID, getCurrentUser, saveUser, getProfileUser, edit_profile } from "./user.js";
+import { getPostsByUserID } from "./post.js";
 import { checkLogin, logout } from "./auth.js";
-import { getData } from "./storage.js";
 
 // ── Auth guard ──────────────────────────────────────────────
 checkLogin();
@@ -18,7 +17,7 @@ addEventListener("DOMContentLoaded", () => {
 
 // ── Display profile info ────────────────────────────────────
 function displayProfileInfo() {
-    const profileUser = getProfileUser();
+    const profileUser = getUserByID(getProfileUser());
     if (!profileUser) return;
 
     document.getElementById("username").textContent       = profileUser.username;
@@ -29,27 +28,44 @@ function displayProfileInfo() {
 
 // ── Display profile posts ───────────────────────────────────
 function displayProfilePosts() {
-    const profileUser    = getProfileUser();
+    const profileUser    = getUserByID(getProfileUser());
     if (!profileUser) return;
 
     const postsContainer = document.getElementById("postsContainer");
-    const allPosts       = getPosts();
-    const userPosts      = allPosts.filter(p => p.authorID === profileUser.userid);
+    const userPosts      = getPostsByUserID(getProfileUser())
 
     document.getElementById("postsCount").textContent = userPosts.length;
 
-    postsContainer.innerHTML = userPosts.map(post => `
-        <div class="post">
-            <p>${post.content}</p>
-            <small>${post.date}</small>
-        </div>
-    `).join("");
+    postsContainer.innerHTML = userPosts.map(post => formatPost(post) ).join("");
 }
+
+function formatPost(post) {
+    const author = getUserByID(post.authorID);
+
+    return ` <section class="post" data-id="${post.id}">
+                <div class="post-header">
+                    
+                    <div class="post-meta">
+                        <span class="post-author">${author.username}</span>
+                        <span class="post-date">${post.date}</span>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>${post.content}</p>
+                </div>
+                <div class="post-actions">
+                    <button class="like-btn" data-id="${post.id}">❤️ ${post.likeNum}</button>
+                </div>
+                
+            </section>`;
+
+}
+
 
 // ── Follow / Unfollow ───────────────────────────────────────
 function initFollowButton() {
-    const currentUser = getCurrentUser();
-    const profileUser = getProfileUser();
+    const currentUser = getUserByID(getCurrentUser());
+    const profileUser = getUserByID(getProfileUser());
     if (!currentUser || !profileUser) return;
 
     const followBtn = document.getElementById("followBtn");
@@ -66,7 +82,7 @@ function initFollowButton() {
 
     followBtn.addEventListener("click", () => {
         // Re-fetch fresh data each click
-        const fresh        = getCurrentUser();
+        const fresh        = getUserByID(getCurrentUser());
         fresh.followed     = fresh.followed || [];
         const alreadyFollowing = fresh.followed.includes(profileUser.userid);
 
@@ -85,8 +101,8 @@ function initFollowButton() {
 
 // ── Edit profile button ─────────────────────────────────────
 function initEditButton() {
-    const currentUser = getCurrentUser();
-    const profileUser = getProfileUser();
+    const currentUser = getUserByID(getCurrentUser());
+    const profileUser = getUserByID(getProfileUser());
     if (!currentUser || !profileUser) return;
 
     const editBtn = document.getElementById("editBtn");
@@ -109,20 +125,3 @@ function initLogoutButton() {
 
 }
 
-// ── Helper: get the user whose profile is being viewed ──────
-// profileUserId is saved in WebData when navigating to someone's profile.
-// Falls back to the currently logged-in user (own profile).
-function getProfileUser() {
-    const data          = getData();
-    const currentUser   = data?.currentUser;
-    const profileUserId = data?.profileUserId ?? currentUser?.userid;
-
-
-    const user = data?.users?.find(u => u.userid === profileUserId);
-    if (!user) {
-        alert("User not found.");
-        window.location.href = "home.html";
-        return null;
-    }
-    return user;
-}

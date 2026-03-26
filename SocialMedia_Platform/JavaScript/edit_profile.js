@@ -1,4 +1,4 @@
-import { getCurrentUser, saveUser } from "./user.js";
+import { getCurrentUser, saveUser, edit_profile, getUserByID } from "./user.js";
 import { checkLogin, logout } from "./auth.js";
 
 // ── Auth guard ──────────────────────────────────────────────
@@ -10,15 +10,13 @@ addEventListener("DOMContentLoaded", () => {
     initSaveForm();
     initCancelButton();
     initLogoutButton();
-    initEditProfileButton();
-    initEditPictureButton();
     setupImageUpload();
 
 });
 
 // ── Pre-fill form with current user data ────────────────────
 function fillForm() {
-    const currentUser = getCurrentUser();
+    const currentUser = getUserByID(getCurrentUser());
     if (!currentUser) return;
 
     document.getElementById("editUsername").value = currentUser.username || "";
@@ -56,15 +54,13 @@ function initSaveForm() {
     document.getElementById("editProfileForm").addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const currentUser = getCurrentUser();
-        if (!currentUser) return;
+        const username = document.getElementById("editUsername").value.trim();
+        const email    = document.getElementById("editEmail").value.trim();
+        const bio      = document.getElementById("editBio").value.trim();
+        const password = document.getElementById("editPassword").value;
+        
 
-        currentUser.username = document.getElementById("editUsername").value.trim();
-        currentUser.email    = document.getElementById("editEmail").value.trim();
-        currentUser.bio      = document.getElementById("editBio").value.trim();
-        currentUser.password = document.getElementById("editPassword").value;
-
-        saveUser(currentUser);   // persist via user.js — no direct localStorage here
+        edit_profile(username,email,password,PFP_Base64,bio);   // persist via user.js — no direct localStorage here
 
         alert("Profile updated successfully!");
         window.location.href = "profile.html";

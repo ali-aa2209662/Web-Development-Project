@@ -12,13 +12,11 @@ export class User{
     following = [];
     date = null;
     
-    constructor(username,email,password,profilePicture,bio){ // creates an instance of user and saves it to data
+    constructor(username,email,password){ // creates an instance of user and saves it to data
         this.userid = this.generateID();
         this.username = username;
         this.email = email;
         this.password = password;
-        this.profilePicture = profilePicture;
-        this.bio = bio;
         const tempdate = new Date()
         this.date = tempdate.toString().slice(4,15).split(" ").join("/") + " " + tempdate.toString().slice(16,21);
         this.addUser();
@@ -76,9 +74,7 @@ export function getCurrentUser(){
     return getUserByID(getData()['currentUser']) || null;
 }
 
-export function savePFP(PFP_Base64){
-    getUserByID(getCurrentUser()).profilePicture = PFP_Base64;
-}
+
 
 export function setProfileUser(userid){
     const data = getData();
@@ -88,7 +84,7 @@ export function setProfileUser(userid){
 }
 
 export function getProfileUser(){
-    return getData()["profileUser"]
+    return getData()["profileUser"];
 }
 
 export function goToProfile(userid){
@@ -96,6 +92,19 @@ export function goToProfile(userid){
     data.profileUser = userid;
     saveData(data);
     window.location.href = "profile.html";
+}
+
+export function edit_profile(username,email,password,PFP_Base64,bio){
+    const data = getData();
+    const user = data["user"].find(u => u.userid === data["currentUser"])
+
+    user.profilePicture = PFP_Base64;
+    user.username = username;
+    user.email = email;
+    user.password = password;
+    user.bio = bio;
+
+    saveData(data);
 }
 
 export function logout(){

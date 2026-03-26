@@ -130,6 +130,11 @@ export function getPostsByUserID(userid){
     return getPosts().filter(p => p.authorID == userid);
 }
 
+export function getPostByID(postID){
+    
+    return getPosts().find(p => p.id === postID);
+}
+
 export function createPost(authorID, content){
     new Post(authorID, content)
 }

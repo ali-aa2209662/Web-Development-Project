@@ -3,7 +3,7 @@ const data = {
     "userid": "u1",
     "username": "Ali",
     "email": "a@gmail.com",
-    "password": "123",
+    "password": "Aa123123",
     "profilePicture": "",
     "bio": "",
     "followers": [],
@@ -12,7 +12,7 @@ const data = {
     }],
     posts: [],
     currentUser: "u1",
-    profileUser: null
+    profileUser: "u1"
 }
 
 export function saveData(thisData){
