@@ -1,18 +1,8 @@
 const data = {
-    users: [{
-    "userid": "u1",
-    "username": "Ali",
-    "email": "a@gmail.com",
-    "password": "Aa123123",
-    "profilePicture": "",
-    "bio": "",
-    "followers": [],
-    "following": [],
-    "date": "Mar/25/2026 14:54"
-    }],
+    users: [],
     posts: [],
-    currentUser: "u1",
-    profileUser: "u1"
+    currentUser: null,
+    profileUser: null
 }
 
 export function saveData(thisData){
