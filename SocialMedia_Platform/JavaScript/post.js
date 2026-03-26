@@ -123,7 +123,9 @@ class Post extends Interaction{
 }
 
 export function getPosts(){
-    return getData()["posts"].map(Post.fromData);
+    const data = getData();
+    if (data == null || !Array.isArray(data.posts)) return [];
+    return data.posts.map(Post.fromData);
 }
 
 export function getPostsByUserID(userid){
@@ -136,20 +138,24 @@ export function getPostByID(postID){
 }
 
 export function createPost(authorID, content){
+    const data = getData();
+    if (data == null) return;
     new Post(authorID, content)
 }
 
 export function createComment(authorID, postID, content){
+    const data = getData();
+    if (data == null) return;
     new Comment(authorID, postID, content);
 }
 
 
 
 
-// TESTING...
-const u1 = new User("Ali","a@gmail.com","123")
-const p1 = new Post(u1.userid,"Hello, I am Ali.")
-const c1 = new Comment(u1.userid,p1.id,"Hi me :)!") 
+// TESTING... (disabled)
+// const u1 = new User("Ali","a@gmail.com","123")
+// const p1 = new Post(u1.userid,"Hello, I am Ali.")
+// const c1 = new Comment(u1.userid,p1.id,"Hi me :)!") 
 
 
 //
