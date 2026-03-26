@@ -591,12 +591,12 @@ footer p {
 }
 
 .social-links a {
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
 .social-links a:hover {
-    color: var(--secondary-color);
+    color: black;
 }
 
 /* Responsive: medium screens */
