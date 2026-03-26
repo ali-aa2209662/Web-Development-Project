@@ -8,16 +8,18 @@
 </head>
 <body>
 
-<header class="edit-profile-header">
-    <h1>
-        <img src="assets/Logo1.png" width="80" alt="ASTRA Logo" class="logo-icon">
-        ASTRA
-    </h1><br>
-    <nav id="navBar">
-        <ul id="navList" class="nav-list">
+<header class="navbar">
+    <div class="brand">
+        <a href="home.html" class="brand-link">
+            <img src="assets/Logo1.png" alt="ASTRA Logo" class="logo-icon">
+            <h1 class="site-name">ASTRA</h1>
+        </a>
+    </div>
+    <nav class="nav" id="navBar">
+        <ul class="nav-links" id="navList">
             <li><a href="home.html">Home</a></li>
             <li><a href="profile.html">Profile</a></li>
-            <li><button id="logoutBtn">Logout</button></li>
+            <li><button type="button" id="logoutBtn">Logout</button></li>
         </ul>
     </nav>
 </header>
@@ -52,10 +54,15 @@
         <button type="submit">Save Changes</button>
     </form>
     <a href="profile.html">
-    <button id="cancelBtn">Cancel</button> </a>
+    <button type="button" id="cancelBtn">Cancel</button> </a>
 </main>
 
 <footer>
+    <div class="social-links">
+        <a href="#" target="_blank">Twitter</a>
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">TikTok</a>
+    </div>
     <p>&copy; 2026 ASTRA. All rights reserved.</p>
 </footer>
 
