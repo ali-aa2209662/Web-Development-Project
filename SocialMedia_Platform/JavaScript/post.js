@@ -15,7 +15,8 @@ class Interaction{
         
         this.authorID = authorID;
         this.content = content;
-        this.date = new Date(); 
+        const tempdate = new Date()
+        this.date = tempdate.toString().slice(4,15).split(" ").join("/") + " " + tempdate.toString().slice(16,21); 
     }
 
     get likeNum(){

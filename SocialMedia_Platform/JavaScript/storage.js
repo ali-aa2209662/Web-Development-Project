@@ -31,7 +31,7 @@ export function getData(){
 }
 
 
-// saveData(data);
+saveData(data);
 
 if (getData()==null) {
     saveData(data);
@@ -39,4 +39,4 @@ if (getData()==null) {
 
 
 // TESTING...
-console.log(getData());
+// console.log(getData());

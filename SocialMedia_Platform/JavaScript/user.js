@@ -20,7 +20,7 @@ export class User{
         const tempdate = new Date()
         this.date = tempdate.toString().slice(4,15).split(" ").join("/") + " " + tempdate.toString().slice(16,21);
         this.addUser();
-        console.log(this);
+    
     }
 
     addUser(){
@@ -114,7 +114,7 @@ export function edit_profile(username,email,password,PFP_Base64,bio){
     user.email = email;
     user.password = password;
     user.bio = bio;
-    console.log(user);
+    // console.log(user);
     saveData(data);
 }
 

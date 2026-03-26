@@ -2,7 +2,7 @@ import { getPosts, createPost, createComment } from "./post.js";
 import { getUserByID, getCurrentUser } from "./user.js";
 import { logout } from "./auth.js";
 
-console.log(getPosts());
+// console.log(getPosts());
 
 addEventListener("DOMContentLoaded", () => {
     const createPostForm = document.getElementById("createPostForm");
@@ -67,7 +67,7 @@ addEventListener("submit", (e) => {
 });
 
 function createNewComment(postID, content) {
-    const currentUser = getCurrentUser();
+    const currentUser = getUserByID(getCurrentUser());
     if (currentUser == null) return;
     createComment(currentUser.userid, postID, content);
     displayPosts();
@@ -84,7 +84,7 @@ function handleLike(id, postID) {
 }
 //edit it from Abdullah:
 function createNewPost(content) {
-    const currentUser = getCurrentUser();
+    const currentUser = getUserByID(getCurrentUser());
     if (currentUser == null) {
         const msg = document.getElementById("createPostMessage");
         if (msg) msg.textContent = "Please login first.";
@@ -114,7 +114,7 @@ function formatPost(post) {
                 <div class="post-header">
                     
                     <div class="post-meta">
-                        <span class="post-author">${author.username}</span>
+                        <a class="post-author" href="profile.html?user=${post.authorID}">${author.username}</a>
                         <span class="post-date">${post.date}</span>
                     </div>
                 </div>

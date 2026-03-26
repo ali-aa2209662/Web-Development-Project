@@ -1,12 +1,16 @@
-import { getUserByID, getCurrentUser, saveUser, getProfileUser, edit_profile } from "./user.js";
+import { getUserByID, getCurrentUser, saveUser, getProfileUser, edit_profile, setProfileUser } from "./user.js";
 import { getPostsByUserID } from "./post.js";
 import { checkLogin, logout } from "./auth.js";
 
 // ── Auth guard ──────────────────────────────────────────────
 checkLogin();
+const params = new URLSearchParams(window.location.search);
+const authorID = params.get("user");
+setProfileUser(authorID);
 
 // ── Run after DOM is ready ──────────────────────────────────
 addEventListener("DOMContentLoaded", () => {
+    
     displayProfileInfo();
     displayProfilePosts();
     initFollowButton();

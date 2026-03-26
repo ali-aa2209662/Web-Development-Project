@@ -9,18 +9,18 @@ export function checkLogin(){// might make in phase 2
 }
 
 export function login(username, password) {
-  console.log(username)
-  console.log(password)
+  // console.log(username)
+  // console.log(password)
   const users = getUsers(); // better to call it here (fresh data)
 
   const user = users.find(
     u => u.username === username && u.password === password
   );
-  console.log(user)
+  // console.log(user)
   if (!user) {
     return { success: false, message: "Invalid username or password" };
   }
-  console.log("PPPPPPPPPPPPPPPHHHH")
+  // console.log("PPPPPPPPPPPPPPPHHHH")
   setCurrentUser(user.userid)
   window.location.href = "home.html";
 

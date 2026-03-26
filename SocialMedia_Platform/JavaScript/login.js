@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     signupForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        console.log("AHHHHHHHHHHHHHHHH");
+        // console.log("AHHHHHHHHHHHHHHHH");
 
         const username = document.querySelector("#username").value;
         const email = document.querySelector("#email").value;

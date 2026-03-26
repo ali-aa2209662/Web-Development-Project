@@ -51,7 +51,7 @@ function initSaveForm() {
             return
         }
         const reader = new FileReader();
-        console.log(getUserByID(getCurrentUser()))
+        // console.log(getUserByID(getCurrentUser()))
         reader.onload = () => {
             const picture = reader.result;
 
