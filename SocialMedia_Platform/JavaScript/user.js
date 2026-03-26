@@ -23,8 +23,8 @@ export class User{
     }
 
     addUser(){
-        // console.log(getData());
         const data = getData();
+        if (data == null) return;
         data["users"].push(this);
         saveData(data);
         // console.log(getData());
@@ -42,18 +42,20 @@ export class User{
     
 
 }
-export function getProfileUser(){
-    const urlParams = new URLSearchParams(window.location.search);
-    const userID = urlParams.get("id");
-    return getUserByID(userID);
-}
+// export function getProfileUser(){
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const userID = urlParams.get("id");
+//     return getUserByID(userID);
+// }
 
 export function createUser(username, email, password){
     new User(username, email, password)
 }
-
+//Edit it from Abdullah:
 export function getUsers(){
-    return getData()["users"].map(User.fromData);
+    const data = getData();
+    if (data == null || !Array.isArray(data.users)) return [];
+    return data.users.map(User.fromData);
 }
 
 export function getUserByID(id){ // returns user from 'id' (if 'id' is not found it returns null)
@@ -63,32 +65,39 @@ export function getUserByID(id){ // returns user from 'id' (if 'id' is not found
 
 export function saveUser(updateUser){
     const data = getData();
+    if (data == null) return;
     const user = data["users"].find(u => u.userid === updateUser.userid);
     if (user !== undefined) {// if user is found then save data
-        user = updateUser;
+        Object.assign(user, updateUser);
         saveData(data);
     }
 }
-
+//Edit it from Abdullah:
 export function getCurrentUser(){
-    return getUserByID(getData()['currentUser']) || null;
+    const data = getData();
+    if (data == null) return null;
+    return getUserByID(data.currentUser) || null;
 }
 
 
 
 export function setProfileUser(userid){
     const data = getData();
+    if (data == null) return;
     data["profileUser"] = userid;
     saveData(data);
 
 }
-
+//edit it from Abdullah:
 export function getProfileUser(){
-    return getData()["profileUser"];
+    const data = getData();
+    if (data == null) return null;
+    return data.profileUser;
 }
 
 export function goToProfile(userid){
     const data = getData();
+    if (data == null) return;
     data.profileUser = userid;
     saveData(data);
     window.location.href = "profile.html";
@@ -96,7 +105,9 @@ export function goToProfile(userid){
 
 export function edit_profile(username,email,password,PFP_Base64,bio){
     const data = getData();
-    const user = data["user"].find(u => u.userid === data["currentUser"])
+    if (data == null) return;
+    const user = data["users"].find(u => u.userid === data["currentUser"])
+    if (!user) return;
 
     user.profilePicture = PFP_Base64;
     user.username = username;
@@ -109,6 +120,7 @@ export function edit_profile(username,email,password,PFP_Base64,bio){
 
 export function logout(){
     const data = getData();
+    if (data == null) return;
     data.currentUser = null;
     saveData(data);
     window.location.href = "login.html";
@@ -122,8 +134,8 @@ export function logout(){
 // console.log(getCurrentUser());
 
 
-// TESTING...
-const u1 = new User("Ali","ali@gmail.com","123");
+// TESTING... (disabled)
+// const u1 = new User("Ali","ali@gmail.com","123");
 // console.log(user.getUserByID(1));
 
 // const u2 = new user("Ahmed","gmail",'222')
