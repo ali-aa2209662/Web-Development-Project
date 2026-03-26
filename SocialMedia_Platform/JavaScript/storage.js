@@ -31,7 +31,7 @@ export function getData(){
 }
 
 
-saveData(data);
+// saveData(data);
 
 if (getData()==null) {
     saveData(data);
