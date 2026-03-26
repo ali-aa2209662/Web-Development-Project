@@ -1,7 +1,7 @@
-:root{
+:root {
     --primary-color: rgb(26, 136, 90);
     --secondary-color: rgb(100, 255, 190);
-    
+
     --bg-color: rgb(250, 250, 250);
     --border-color: rgb(152, 255, 219);
 
@@ -11,7 +11,7 @@
     --text-muted: #7f8c8d;
 
     --font-family: 'Segoe UI', Tahoma, 'Geneva', Verdana, sans-serif;
-    
+
 
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -20,7 +20,7 @@
 }
 
 
-*{
+* {
     font-family: 'Segoe UI', Tahoma, 'Geneva', Verdana, sans-serif;
     box-sizing: border-box;
     padding: 0;
@@ -30,7 +30,7 @@
     border-color: var(--border-color);
 }
 
-fieldset{
+fieldset {
     background-color: aquamarine;
     border-radius: 15px;
     padding: 50px 0;
@@ -38,30 +38,37 @@ fieldset{
     border: 1px none gold;
     transition: 1s ease;
 }
-fieldset:hover{transform: translateY(-10px);}
-legend{
+
+fieldset:hover {
+    transform: translateY(-10px);
+}
+
+legend {
     padding: 0;
 
-  
+
 }
-body{
+
+body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 /* LOGIN PAGE */
 
-.logo-wrapper{
+.logo-wrapper {
     /* background-color: tomato; */
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 1rem;
 }
-.logo-wrapper img{
+
+.logo-wrapper img {
     width: 100px;
     height: 100px;
 }
 
-.Login-Card{
+.Login-Card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -74,36 +81,41 @@ body{
 
 }
 
-h1{
-    
+h1 {
+
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 0.25rem;
 }
-.welcome-message{
+
+.welcome-message {
     font-size: 0.9rem;
     color: #666;
     margin-bottom: 1.5rem;
 }
-.form-group{
+
+.form-group {
     margin-bottom: 1rem;
     width: 100%;
     max-width: 400px;
 }
-.form-group label{
+
+.form-group label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
-}   
-.form-group input{
+}
+
+.form-group input {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
 }
-#login-button{
-    
+
+#login-button {
+
     width: 100%;
     max-width: 400px;
     padding: 0.75rem;
@@ -116,49 +128,51 @@ h1{
 }
 
 .divider {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            margin: 1rem 0;
-            color: #aaa;
-            font-size: 0.8rem;
-        }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1rem 0;
+    color: #aaa;
+    font-size: 0.8rem;
+}
 
 .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background-color: #e5e5e5;
-        }
-        
-#SignupButton {
-            width: 100%;
-            padding: 0.7rem;
-            background-color: transparent;
-            color: #4f7ef8;
-            border: 1.5px solid #4f7ef8;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s, color 0.2s;
-        }
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: #e5e5e5;
+}
 
-.Password-wrapper{
+#SignupButton {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: transparent;
+    color: #4f7ef8;
+    border: 1.5px solid #4f7ef8;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.Password-wrapper {
     position: relative;
     width: 250px;
 
 }
-.Password-wrapper input{
-    
+
+.Password-wrapper input {
+
     width: 100%;
     padding: 10px 40px 10px 10px;
     box-sizing: border-box;
 
 }
-.Password-wrapper .TogglePassword{
+
+.Password-wrapper .TogglePassword {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -174,12 +188,12 @@ h1{
 
 
 a {
-  text-decoration: none;
-  color: var(--primary-color);
+    text-decoration: none;
+    color: var(--primary-color);
 }
 
 a:hover {
-  color: var(--secondary-color);
+    color: var(--secondary-color);
 }
 
 body {
@@ -211,6 +225,7 @@ header h1 {
     gap: 0.75rem;
     font-size: 1.6rem;
 }
+
 /* edit it from Abdullah */
 header .logo-icon {
     width: 96px;
@@ -258,6 +273,7 @@ section {
     margin-bottom: 20px;
     border-radius: 8px;
 }
+
 main input {
     padding: 8px;
     border: 1px solid var(--border-color);
@@ -266,6 +282,7 @@ main input {
     max-width: 400px;
 
 }
+
 /* Profile top */
 article {
     display: flex;
@@ -288,12 +305,14 @@ article img {
     margin-right: 10px;
     padding: 8px 12px;
 }
+
 #imageInput {
     padding: 8px;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     width: 200px;
 }
+
 /* Posts */
 .user-posts .post {
     background: #eee;
@@ -310,9 +329,11 @@ main button {
     border-radius: 4px;
     cursor: pointer;
 }
+
 #followBtn {
     content: 'Follow';
 }
+
 #imageuploadStatus {
     margin-top: 10px;
     color: var(--text-muted);
@@ -431,7 +452,7 @@ body {
 }
 
 /* Feed heading */
-.feed-container > h2 {
+.feed-container>h2 {
     margin: 1rem 0;
 }
 
@@ -490,7 +511,8 @@ body {
     border-top: 1px solid var(--border-color);
 }
 
-.like-btn, .comment-btn {
+.like-btn,
+.comment-btn {
     background: none;
     border: none;
     cursor: pointer;
@@ -557,6 +579,10 @@ footer {
     margin-top: 2rem;
 }
 
+footer p {
+    color: white;
+}
+
 .social-links {
     display: flex;
     justify-content: center;
@@ -578,9 +604,11 @@ footer {
     .navbar {
         flex-wrap: nowrap;
     }
+
     .feed-container {
         padding: 0 2rem;
     }
+
     .post-avatar {
         width: 48px;
         height: 48px;
@@ -596,4 +624,3 @@ footer {
 
 /* The CSS of the home.html page (( ends )) here.
    ----------------------------------------------- */
-
