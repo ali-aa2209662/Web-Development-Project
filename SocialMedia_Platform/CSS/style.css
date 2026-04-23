@@ -441,7 +441,7 @@ input.error {
     border-color: #e74c3c;
 }
  
-.field-error {
+.field-error-password {
     display: none;
     font-size: 0.75rem;
     color: #e74c3c;

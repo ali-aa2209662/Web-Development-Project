@@ -81,6 +81,12 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("New Account Created!");
             window.location.href = "login.html";
         }
+        else {
+            const errorMessage = document.querySelector(".field-error-password");
+            errorMessage.textContent = "Passwords do not match.";
+            errorMessage.style.display = "block";
+            errorMessage.style.color = "red";
+        }
     });
     function toggleInfo() {
     const infoText = document.getElementById("password-info");
