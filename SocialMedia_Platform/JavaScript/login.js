@@ -54,6 +54,10 @@ if (loginForm) {
 }
 
 
+    
+
+
+
 // console.log(togglePasswordButton);
 //SIGN-UP_____________________________________
 
@@ -78,4 +82,11 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "login.html";
         }
     });
+    function toggleInfo() {
+    const infoText = document.getElementById("password-info");
+    infoText.classList.toggle("hidden");}
+
+    document.querySelector(".info-icon").addEventListener("click", toggleInfo);
+
+
 });
