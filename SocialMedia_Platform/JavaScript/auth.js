@@ -18,7 +18,7 @@ export function login(username, password) {
   );
   // console.log(user)
   if (!user) {
-    return { success: false, message: "Invalid username or password" };
+    return false; // login failed
   }
   // console.log("PPPPPPPPPPPPPPPHHHH")
   setCurrentUser(user.userid)

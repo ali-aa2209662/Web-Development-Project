@@ -3,7 +3,7 @@ import { signup, login } from "./auth.js"
 const loginForm = document.querySelector('#LoginForm');
 const togglePasswordButton = document.querySelectorAll('.TogglePassword');
 const PasswordInput = document.querySelector('#Password');
-const errorMessage = document.querySelector("#error-message") || null;
+
 
 
 // Toggle password visibility
@@ -27,6 +27,7 @@ if (loginForm) {
 
         const usernameInput = document.querySelector("#Username") || document.querySelector("#username");
         const passwordInput = document.querySelector('#Password') || document.querySelector("#password");
+        const errorMessage = document.getElementById("error-message");
 
         if (!usernameInput || !passwordInput) return;
 
@@ -34,19 +35,22 @@ if (loginForm) {
         const password = passwordInput.value;
 
         if (!username || !password) {
-            if (errorMessage) {
-                errorMessage.style.display = 'block';
-                errorMessage.textContent = 'Please fill in all fields.';
-            }
+            errorMessage.textContent = "Please enter both username and password.";
+            errorMessage.style.display = "block";
             return;
         }
 
-        if (errorMessage) {
-            errorMessage.style.display = 'none';
-        }
+        if (login(username, password)) {
+            alert("Login successful!");
+            window.location.href = "home.html";
+        } else {
+            errorMessage.textContent = "Invalid username or password.";
+            errorMessage.style.display = "block";
+            errorMessage.style.color = "red";
+            
+            
 
-        login(username, password);
-    });
+        }} );
 }
 
 
