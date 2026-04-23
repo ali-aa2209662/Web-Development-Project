@@ -1,5 +1,5 @@
 import { saveData, getData } from "./storage.js"; //importing functions from storage.js
-import {User} from "./user.js";
+import {User, getCurrentUser, getUserByID, saveUser} from "./user.js";
 
 class Interaction{
     content = "";
@@ -67,7 +67,7 @@ class Comment extends Interaction {
     constructor(authorID, postID, content){
         super(authorID, content);
         this.postID = postID;
-        this.id = this.generateID();
+        this.id = this.generateID();   
         this.addComment();
     }
 
@@ -76,6 +76,8 @@ class Comment extends Interaction {
         if (data == null) return;
         const post = data["posts"].find(p => p.id === this.postID);
         if (!post) return;
+
+
         post.comments.push(this);
         saveData(data);
         
@@ -149,10 +151,25 @@ export function createPost(authorID, content){
     new Post(authorID, content)
 }
 
+export function deletePost(PostID){
+    const data = getData();
+    
+    // console.log(data.posts.filter(p => p.id !== PostID));
+    data.posts = data.posts.filter(p => p.id !== PostID);
+
+    saveData(data);
+}
+
 export function createComment(authorID, postID, content){
     const data = getData();
     if (data == null) return;
     new Comment(authorID, postID, content);
+}
+
+export function deleteComment(PostID, CommentID){
+    const data = getData();
+    data.posts.filter(p => p.id === PostID)[0].comments = data.posts.filter(p => p.id === PostID)[0].comments.filter(c => c.id !== CommentID);
+    saveData(data);
 }
 
 

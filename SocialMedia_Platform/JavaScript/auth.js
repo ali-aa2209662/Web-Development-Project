@@ -5,7 +5,7 @@ import { getUsers, createUser, setCurrentUser, getCurrentUser } from "./user.js"
 // console.log(getCurrentUser())
 
 export function checkLogin(){// might make in phase 2
-
+  if (getCurrentUser()===null) logout(); //checks if user is logged in
 }
 
 export function login(username, password) {

@@ -4,9 +4,13 @@ import { checkLogin, logout } from "./auth.js";
 
 // ── Auth guard ──────────────────────────────────────────────
 checkLogin();
+setProfileUser(getCurrentUser());
 const params = new URLSearchParams(window.location.search);
-const authorID = params.get("user");
-setProfileUser(authorID);
+if (params.get("user")!==null) {
+    const authorID = params.get("user");
+    setProfileUser(authorID);}
+
+
 
 // ── Run after DOM is ready ──────────────────────────────────
 addEventListener("DOMContentLoaded", () => {
@@ -23,10 +27,11 @@ addEventListener("DOMContentLoaded", () => {
 function displayProfileInfo() {
     const profileUser = getUserByID(getProfileUser());
     if (!profileUser) return;
-
+    // console.log(profileUser);
     document.getElementById("username").textContent       = profileUser.username;
+    document.querySelector("#profileHeader").querySelector("img").src = profileUser.profilePicture;
     document.getElementById("bio").textContent            = profileUser.bio || "";
-    document.getElementById("followersCount").textContent = (profileUser.followed?.length ?? 0);
+    document.getElementById("followersCount").textContent = (profileUser.followers?.length ?? 0);
     document.getElementById("followingCount").textContent = (profileUser.following?.length ?? 0);
 }
 
@@ -40,7 +45,7 @@ function displayProfilePosts() {
 
     document.getElementById("postsCount").textContent = userPosts.length;
 
-    postsContainer.innerHTML = userPosts.map(post => formatPost(post) ).join("");
+    postsContainer.innerHTML = userPosts.reverse().map(post => formatPost(post) ).join("");
 }
 
 function formatPost(post) {
@@ -58,7 +63,7 @@ function formatPost(post) {
                     <p>${post.content}</p>
                 </div>
                 <div class="post-actions">
-                    <button class="like-btn" data-id="${post.id}">❤️ ${post.likeNum}</button>
+                    <button class="like-btn" onclick="" data-id="${post.id}">❤️ ${post.likeNum}</button>
                 </div>
                 
             </section>`;
@@ -81,25 +86,33 @@ function initFollowButton() {
     }
 
     // Set initial button label
-    const isFollowing = currentUser.followed?.includes(profileUser.userid);
+    let isFollowing = profileUser.followers?.includes(currentUser.userid);
     followBtn.textContent = isFollowing ? "Unfollow" : "Follow";
-
+    
     followBtn.addEventListener("click", () => {
-        // Re-fetch fresh data each click
-        const fresh        = getUserByID(getCurrentUser());
-        fresh.followed     = fresh.followed || [];
-        const alreadyFollowing = fresh.followed.includes(profileUser.userid);
+        followBtn.textContent = isFollowing ? "Follow" : "Unfollow";
+        // console.log(profileUser.followers)
+        if(isFollowing){
+            
+            profileUser.followers = profileUser.followers.filter(id => id !== currentUser.userid);
+            currentUser.following = currentUser.following.filter(id => id !== profileUser.userid);
+            isFollowing = false;
 
-        if (alreadyFollowing) {
-            fresh.followed = fresh.followed.filter(id => id !== profileUser.userid);
-            followBtn.textContent = "Follow";
-        } else {
-            fresh.followed.push(profileUser.userid);
-            followBtn.textContent = "Unfollow";
+            
+        }else{
+            // console.log("AA");
+            profileUser.followers.push(currentUser.userid);
+            currentUser.following.push(profileUser.userid);
+            isFollowing = true;
+
+            
         }
+        
+        // console.log(profileUser,currentUser)
 
-        saveUser(fresh);
-        displayProfileInfo(); // refresh follower count
+        saveUser(profileUser);
+        saveUser(currentUser);
+        displayProfileInfo(); // reprofileUser follower count
     });
 }
 

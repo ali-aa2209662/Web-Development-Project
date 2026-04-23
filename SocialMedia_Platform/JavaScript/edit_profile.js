@@ -1,4 +1,4 @@
-import { getCurrentUser, getProfileUser , edit_profile, getUserByID } from "./user.js";
+import { getCurrentUser, setProfileUser, getProfileUser , edit_profile, getUserByID } from "./user.js";
 import { checkLogin, logout } from "./auth.js";
 
 // ── Auth guard ──────────────────────────────────────────────
@@ -6,6 +6,8 @@ checkLogin();
 
 // ── Run after DOM is ready ──────────────────────────────────
 addEventListener("DOMContentLoaded", () => {
+
+    
     fillForm();
     initSaveForm();
     initCancelButton();
@@ -34,8 +36,9 @@ function fillForm() {
 function initSaveForm() {
     document.getElementById("editProfileForm").addEventListener("submit", (e) => {
         e.preventDefault();
-
+        
         const imageInput = document.getElementById("imageInput");
+        // console.log(imageInput);
         const preview = document.getElementById("preview");
         const username = document.getElementById("editUsername").value.trim();
         const email    = document.getElementById("editEmail").value.trim();
@@ -46,25 +49,31 @@ function initSaveForm() {
         const password = (newpassword===cnfrmpassword)? newpassword : getUserByID(getCurrentUser()).password ;
 
         const file = imageInput.files[0];
+        
         if (!file ) {
             edit_profile(username,email,password,"assets/PFP_Blank.jpg",bio);
-            return
+        }else{
+            const reader = new FileReader();
+            
+            // console.log(getUserByID(getCurrentUser()))
+            reader.onload = () => {
+                const picture = reader.result;
+
+                edit_profile(username,email,password,picture,bio);
+                // Display image
+                preview.src = picture;
+                // console.log(preview.src);
+            };
+            
+            reader.readAsDataURL(file);
         }
-        const reader = new FileReader();
-        // console.log(getUserByID(getCurrentUser()))
-        reader.onload = () => {
-            const picture = reader.result;
-
-            edit_profile(username,email,password,picture,bio);
-            // Display image
-            preview.src = picture;
-            // console.log(preview.src);
-        };
-
-        reader.readAsDataURL(file);
+        
+        
         // fillForm();
-        // alert("Profile updated successfully!");
-        // window.location.href = "profile.html";
+        
+        alert("Profile updated successfully!");
+        setProfileUser(getCurrentUser());
+        window.location.href = "profile.html";
     });
 }
 
