@@ -6,6 +6,8 @@ import { logout } from "./auth.js";
 // checkLogin();
 
 addEventListener("DOMContentLoaded", () => {
+
+    if (getCurrentUser()==null) document.querySelector("#logoutBtn").innerHTML = "Login";
     
     const createPostForm = document.getElementById("createPostForm");
     initLogoutButton()
@@ -106,6 +108,7 @@ function handleLike(id, postID) {
 }
 //edit it from Abdullah:
 function createNewPost(content) {
+    if (!content) return;
     const currentUser = getUserByID(getCurrentUser());
     if (currentUser == null) {
         const msg = document.getElementById("createPostMessage");
@@ -115,7 +118,6 @@ function createNewPost(content) {
     createPost(currentUser.userid, content);
      displayPosts();
 }
-
 
 function displayPosts() {
     const postsContainer = document.getElementById("postsContainer");

@@ -154,6 +154,9 @@ export function createPost(authorID, content){
 export function deletePost(PostID){
     const data = getData();
     
+    if (getCurrentUser()!==getPostByID(PostID).authorID) {
+        alert("you thought you was tough huh??");
+        return};
     // console.log(data.posts.filter(p => p.id !== PostID));
     data.posts = data.posts.filter(p => p.id !== PostID);
 
@@ -168,6 +171,11 @@ export function createComment(authorID, postID, content){
 
 export function deleteComment(PostID, CommentID){
     const data = getData();
+
+    if (getCurrentUser()!==getPostByID(PostID).comments.filter(c => c.id === CommentID)[0].authorID) { 
+        alert("you thought you was tough huh??");
+        return};
+
     data.posts.filter(p => p.id === PostID)[0].comments = data.posts.filter(p => p.id === PostID)[0].comments.filter(c => c.id !== CommentID);
     saveData(data);
 }

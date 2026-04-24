@@ -71,10 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // console.log("AHHHHHHHHHHHHHHHH");
 
-        const username = document.querySelector("#username").value;
-        const email = document.querySelector("#email").value;
-        const newpassword = document.querySelector("#Password").value;
-        const cnfrmpassword = document.querySelector("#Confirm-password").value;
+        const username = document.querySelector("#username").value.trimEnd();
+        const email = document.querySelector("#email").value.trimEnd();
+        const newpassword = document.querySelector("#Password").value.trimEnd();
+        const cnfrmpassword = document.querySelector("#Confirm-password").value.trimEnd();
 
         if (newpassword === cnfrmpassword) {
             signup(username, email, newpassword);
