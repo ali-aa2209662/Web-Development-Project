@@ -19,8 +19,8 @@
         </div>
         <nav class="nav" id="navBar">
             <ul class="nav-links" id="navList">
-                <li><a href="home.html" class="active">Home</a></li>
-                <li><a href="profile.html" id="profilebtn">Profile</a></li>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="profile.html" onclick="setProfileUser(getCurrentUser());" id="profilebtn">Profile</a></li>
                 <li><button type="button" id="logoutBtn">Logout</button></li>
             </ul>
         </nav>
@@ -28,6 +28,24 @@
 
     <!-- The Main -->
     <main class="feed-container">
+        <section class="search-user">
+            <h2>Search Users</h2>
+            <div class="search-container">
+                <p>🔎</p>
+                <input type="search" name="search-bar" id="search-bar" placeholder="Follow someone new!">
+                
+            </div>
+            <ul id="search-users">
+                <li>
+                    <img src="" alt="">
+                    <a id="search-username" >Username</a>
+                    <p id="search-bio" >Bio</p>
+                    <p id="search-followers" >Followers: </p>
+                    <button id="search-btn" data-id="" >Follow</button>
+                </li>
+            </ul>
+        </section>
+
         <!-- Create posts -->
         <section class="create-post">
             <h2>Create a New Post</h2>

@@ -327,6 +327,13 @@ article img {
 }
 
 /* Posts */
+
+#pfp_post{
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    width: 4rem;
+}
+
 .user-posts .post {
     background: #eee;
     padding: 10px;
@@ -681,6 +688,82 @@ body {
     cursor: pointer;
 }
 
+
+/* Search user */
+.search-user{
+   margin: 2rem auto;
+   border: 1px solid var(--border-color);
+}
+.search-container{
+    font-size: larger;   
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+#search-bar{
+    /* width: 100%;   */
+    max-width: 100%;
+}
+
+#search-users{
+    list-style: none;
+    text-align: center;
+    padding-top: 1rem;
+}
+
+#search-users hr{
+    display: block;      
+    border: 0;            
+    height: 1px;          
+    background: var(--text-muted);  
+    width: 100%;          
+    opacity: 1;  
+    margin: 1rem auto;
+}
+
+#search-users li{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    /* background-color: green; */
+    
+}
+
+#search-users li > *{
+    /* background-color: #e74c3c; */
+    flex: 1;
+    padding-left: 0;
+}
+
+#search-users li #author_name{
+    max-width: 20%;
+    text-align: left;
+    padding-left: 1rem;
+}
+
+#search-users li img{
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    width: 100%;
+    max-width: 30px;
+    height: auto;
+}
+
+#search-bio{
+    font-style: italic;
+}
+
+#search-users li button, #search-followers{
+    padding: .2rem .5rem;
+    max-width: 10%;
+}
+#search-followers{
+    max-width: 15%;
+}
+
 /* Feed heading */
 .feed-container>h2 {
     margin: 1rem 0;
@@ -761,6 +844,12 @@ body {
 }
 
 /* Comments */
+#pfp_cmnt{
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    width: 2rem;
+}
+
 .comments-section {
     margin-top: 0.8rem;
 }

@@ -51,7 +51,7 @@ export function createUser(username, email, password){
 export function getUsers(){
     const data = getData();
     if (data == null || !Array.isArray(data.users)) return [];
-    return data.users.map(User.fromData);
+    return data.users;
 }
 
 export function getUserByID(id){ // returns user from 'id' (if 'id' is not found it returns null)

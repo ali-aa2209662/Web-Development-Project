@@ -4,7 +4,7 @@ import { checkLogin, logout } from "./auth.js";
 
 // ── Auth guard ──────────────────────────────────────────────
 checkLogin();
-setProfileUser(getCurrentUser());
+
 const params = new URLSearchParams(window.location.search);
 if (params.get("user")!==null) {
     const authorID = params.get("user");
@@ -93,19 +93,15 @@ function initFollowButton() {
         followBtn.textContent = isFollowing ? "Follow" : "Unfollow";
         // console.log(profileUser.followers)
         if(isFollowing){
-            
             profileUser.followers = profileUser.followers.filter(id => id !== currentUser.userid);
             currentUser.following = currentUser.following.filter(id => id !== profileUser.userid);
             isFollowing = false;
-
             
         }else{
             // console.log("AA");
             profileUser.followers.push(currentUser.userid);
             currentUser.following.push(profileUser.userid);
-            isFollowing = true;
-
-            
+            isFollowing = true; 
         }
         
         // console.log(profileUser,currentUser)
