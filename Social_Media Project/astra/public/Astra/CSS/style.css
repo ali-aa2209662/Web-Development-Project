@@ -30,8 +30,8 @@
     border-color: var(--border-color);
 }
 
-fieldset{
-    
+fieldset {
+
     background-color: aquamarine;
     border-radius: 15px;
     padding: 50px 0;
@@ -49,8 +49,9 @@ legend {
 
 
 }
-body{
-    
+
+body {
+
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -64,23 +65,29 @@ body{
     flex: 1;
 }
 
+img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
 /* LOGIN PAGE */
 
-.logo-wrapper{
-    
+.logo-wrapper {
+
     /* background-color: tomato; */
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 1rem;
 }
-.logo-wrapper img{
-    
+
+.logo-wrapper img {
+
     width: 140px;
     height: 100px;
 }
 
-.Login-Card{
+.Login-Card {
     background-color: var(--bg-color);
     display: flex;
     flex-direction: column;
@@ -159,17 +166,17 @@ h1 {
 }
 
 #SignupButton {
-            width: 100%;
-            padding: 0.7rem;
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 1.5px solid var(--primary-color);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s, color 0.2s;
-        }
+    width: 100%;
+    padding: 0.7rem;
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1.5px solid var(--primary-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
 
 .Password-wrapper {
     position: relative;
@@ -328,7 +335,7 @@ article img {
 
 /* Posts */
 
-#pfp_post{
+#pfp_post {
     border-radius: 50%;
     border: 2px solid var(--border-color);
     width: 4rem;
@@ -395,19 +402,19 @@ input[type="date"] {
     max-width: 400px;
     box-shadow: var(--shadow-md);
 }
- 
+
 .logo-wrapper {
     display: flex;
     justify-content: center;
     margin-bottom: 1.25rem;
 }
- 
+
 .logo-wrapper img {
     width: 140px;
     height: 100px;
     object-fit: contain;
 }
- 
+
 h1 {
     text-align: center;
     font-size: 1.5rem;
@@ -415,24 +422,24 @@ h1 {
     color: var(--text-color);
     margin-bottom: 0.25rem;
 }
- 
+
 .tagline {
     text-align: center;
     font-size: 0.875rem;
     color: var(--text-muted);
     margin-bottom: 1.75rem;
 }
- 
+
 .form-row {
     display: flex;
     flex-direction: column;
     gap: 0;
 }
- 
+
 .form-group {
     margin-bottom: 1rem;
 }
- 
+
 label {
     display: block;
     font-size: 0.875rem;
@@ -443,26 +450,26 @@ label {
 
 
 
- 
+
 input.error {
     border-color: #e74c3c;
 }
- 
+
 .field-error-password {
     display: none;
     font-size: 0.75rem;
     color: #e74c3c;
     margin-top: 0.3rem;
 }
- 
+
 .password-wrapper {
     position: relative;
 }
- 
+
 .password-wrapper input {
     padding-right: 2.75rem;
 }
- 
+
 .TogglePassword {
     position: absolute;
     right: 0.75rem;
@@ -475,18 +482,18 @@ input.error {
     font-size: 0.85rem;
     padding: 0;
 }
- 
 
- 
 
- 
+
+
+
 .strength-label {
     font-size: 0.73rem;
     color: var(--text-muted);
     margin-top: 0.25rem;
     display: block;
 }
- 
+
 .terms {
     display: flex;
     align-items: flex-start;
@@ -496,21 +503,21 @@ input.error {
     margin-bottom: 1.25rem;
     line-height: 1.4;
 }
- 
+
 .terms input[type="checkbox"] {
     margin-top: 2px;
     flex-shrink: 0;
     width: auto;
 }
- 
+
 .terms label {
     font-weight: 400;
     margin: 0;
     font-size: 0.82rem;
     color: var(--text-muted);
 }
- 
- 
+
+
 .btn-signup {
     width: 100%;
     padding: 0.7rem;
@@ -524,11 +531,11 @@ input.error {
     transition: background-color 0.2s;
     margin-bottom: 0.75rem;
 }
- 
+
 .btn-signup:hover {
     background-color: var(--secondary-color);
 }
- 
+
 .divider {
     display: flex;
     align-items: center;
@@ -537,7 +544,7 @@ input.error {
     color: var(--text-muted);
     font-size: 0.8rem;
 }
- 
+
 .divider::before,
 .divider::after {
     content: '';
@@ -545,23 +552,24 @@ input.error {
     height: 1px;
     background-color: #e5e5e5;
 }
- 
+
 .btn-login {
     width: 100%;
     padding: 0.7rem;
     background-color: transparent;
     color: var(--primary-color);
-    border: 1.5px solid var(--primary-color)    ;
+    border: 1.5px solid var(--primary-color);
     border-radius: 8px;
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s;
 }
- 
+
 .btn-login:hover {
     background-color: var(--primary-color-light);
 }
+
 .Login-Card,
 .Signup-card {
     margin-left: auto;
@@ -690,77 +698,94 @@ body {
 
 
 /* Search user */
-.search-user{
-   margin: 2rem auto;
-   border: 1px solid var(--border-color);
+.search-user {
+    margin: 2rem auto;
+    border: 1px solid var(--border-color);
 }
-.search-container{
-    font-size: larger;   
+
+#search-container {
+    font-size: larger;
     display: flex;
     flex-direction: row;
     align-content: center;
 }
 
-#search-bar{
+#search-bar {
     /* width: 100%;   */
     max-width: 100%;
 }
 
-#search-users{
+#search-users {
     list-style: none;
     text-align: center;
     padding-top: 1rem;
 }
 
-#search-users hr{
-    display: block;      
-    border: 0;            
-    height: 1px;          
-    background: var(--text-muted);  
-    width: 100%;          
-    opacity: 1;  
+#search-users hr {
+    display: block;
+    border: 0;
+    height: 1px;
+    background: var(--text-muted);
+    width: 100%;
+    opacity: 1;
     margin: 1rem auto;
+    opacity: 15%;
 }
 
-#search-users li{
+#search-users li {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    
+
     /* background-color: green; */
-    
+
 }
 
-#search-users li > *{
+.author_name {
+    display: flex;
+    flex-direction: row;
+    /* background-color: #e74c3c; */
+    /* justify-content: space-between; */
+    align-items: center;
+    gap: 1rem;
+    max-width: 100%;
+}
+
+#search-users .author_name {
+    max-width: 25%;
+}
+
+
+#search-users li>* {
     /* background-color: #e74c3c; */
     flex: 1;
     padding-left: 0;
 }
 
-#search-users li #author_name{
-    max-width: 20%;
-    text-align: left;
-    padding-left: 1rem;
-}
 
-#search-users li img{
+#search-users li img {
     border-radius: 50%;
     border: 2px solid var(--border-color);
     width: 100%;
     max-width: 30px;
     height: auto;
+    object-fit: cover;
 }
 
-#search-bio{
+.search-bio {
     font-style: italic;
+    color: var(--text-muted);
+    opacity: 80%;
 }
 
-#search-users li button, #search-followers{
+#search-users li button,
+.search-followers {
     padding: .2rem .5rem;
     max-width: 10%;
 }
-#search-followers{
+
+.search-followers {
     max-width: 15%;
 }
 
@@ -825,16 +850,20 @@ body {
 }
 
 .like-btn,
-.comment-btn,.delete-btn {
+.comment-btn,
+.delete-btn {
     background: none;
     border: none;
     cursor: pointer;
     font-size: 0.9rem;
     color: var(--text-muted);
 }
-.like-btn:hover, .comment-btn:hover{
+
+.like-btn:hover,
+.comment-btn:hover {
     color: var(--secondary-color);
 }
+
 .delete-btn:hover {
     color: var(--warning-color);
 }
@@ -844,7 +873,7 @@ body {
 }
 
 /* Comments */
-#pfp_cmnt{
+#pfp_cmnt {
     border-radius: 50%;
     border: 2px solid var(--border-color);
     width: 2rem;
@@ -949,37 +978,38 @@ footer p {
 
 /* The CSS of the home.html page (( ends )) here.
    ----------------------------------------------- */
-  .password-info {
-  font-size: 12px;
-  color: #666;
-  margin-top: 6px;
+.password-info {
+    font-size: 12px;
+    color: #666;
+    margin-top: 6px;
 }
 
 .hidden {
-  display: none;
+    display: none;
 }
 
 .input-box {
-  position: relative;
-  display: flex;
-  align-items: center;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .info-icon {
-  margin-left: 8px;
-  cursor: pointer;
-  font-size: 16px;
+    margin-left: 8px;
+    cursor: pointer;
+    font-size: 16px;
 }
+
 .info-icon {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 16px;
-  height: 16px;
-  border: 1px solid #999;
-  border-radius: 50%;
-  font-size: 11px;
-  font-weight: bold;
-  color: #666;
-  margin-right: 6px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #999;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: bold;
+    color: #666;
+    margin-right: 6px;
 }

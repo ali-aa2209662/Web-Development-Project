@@ -1,5 +1,5 @@
 import { getPosts, createPost, createComment, deleteComment, deletePost } from "./post.js";
-import { getUserByID, getCurrentUser, setProfileUser, getUsers } from "./user.js";
+import { getUserByID, getCurrentUser, setProfileUser, getUsers, saveUser } from "./user.js";
 import { logout } from "./auth.js";
 
 // console.log(getPosts());
@@ -82,42 +82,55 @@ addEventListener("click", (e) => {
 
 addEventListener("click", (e) => {
     let authorName = null;
-    if (e.target && e.target.id == "author_name") {
+    if (e.target.classList && e.target.classList.contains("author_name")) {
         authorName = e.target;
+    } else if (e.target.parentElement && e.target.parentElement.classList && e.target.parentElement.classList.contains("author_name")) {
+        authorName = e.target.parentElement;
     }
     if (authorName !== null) {
-        setProfileUser(e.target.dataset.id);
+        setProfileUser(authorName.dataset.id);
     }
 });
 
 document.querySelector('#search-bar').addEventListener("keyup", (e) => {
     const searchbar = e.target.value.trim()
-
+    // console.log(searchbar)
     if (!!searchbar) {
         initSearchBar(searchbar);
-        initFollowButton();
     } else {
         document.querySelector('#search-users').innerHTML = ""
     }
 });
 
-document.querySelector('#search-btn').addEventListener('click', (e) => {
+addEventListener('click', (e) => {
+    let followBtn = null;
     const currentUser = getUserByID(getCurrentUser());
-    const profileUser = getUserByID(e.target.getAttribute('data-id'));
-    console.log("CLICK")
-    let isFollowing = (profileUser.followers.find(u => u.userid === currentUser.userid) != undefined);
-    e.target.textContent = isFollowing ? "Follow" : "Unfollow";
-    // console.log(profileUser.followers)
-    if (isFollowing) {
-        profileUser.followers = profileUser.followers.filter(id => id !== currentUser.userid);
-        currentUser.following = currentUser.following.filter(id => id !== profileUser.userid);
-        isFollowing = false;
+    const profileUser = getUserByID(e.target.dataset.id);
+    if (e.target.classList && e.target.classList.contains("search-btn")) {
+        followBtn = e.target;
+    }
+    if (followBtn !== null) {
+        // console.log("Click " + `${e.target.dataset.id}`)
+        let isFollowing = profileUser.followers.some(id => id === getCurrentUser());
+        // console.log(isFollowing)
+        if (isFollowing) {
+            profileUser.followers = profileUser.followers.filter(id => id !== currentUser.userid);
+            currentUser.following = currentUser.following.filter(id => id !== profileUser.userid);
+            isFollowing = false;
+            e.target.textContent = "Follow";
+            // console.log("Unfollowed")
 
-    } else {
-        // console.log("AA");
-        profileUser.followers.push(currentUser.userid);
-        currentUser.following.push(profileUser.userid);
-        isFollowing = true;
+        } else {
+            profileUser.followers.push(currentUser.userid);
+            currentUser.following.push(profileUser.userid);
+            isFollowing = true;
+            e.target.textContent = "Unfollow";
+            // console.log("Followed")
+        }
+        // console.log(profileUser.followers, currentUser.following)
+        saveUser(profileUser);
+        saveUser(currentUser);
+        initSearchBar(document.querySelector('#search-bar').value);
     }
 });
 
@@ -186,8 +199,11 @@ function formatPost(post) {
                 <div class="post-header">
                     
                     <div class="post-meta">
+                        
+                        <a class="post-author author_name" data-id="${post.authorID}" href="profile.html" >
                         <img id="pfp_post" src="${author.profilePicture}" alt="${author.username}'s Profile Picture">
-                        <a class="post-author" id="author_name" data-id="${post.authorID}" href="profile.html" >${author.username}</a> 
+                        ${author.username}
+                        </a> 
                         <span class="post-date">${post.date}</span>
                     </div>
                 </div>
@@ -218,8 +234,10 @@ function formatComments(comments) {
     return comments.map(c => {
         const author = getUserByID(c.authorID);
         return `<div class="comment">
+                        <a class="post-author author_name" data-id="${c.authorID}" href="profile.html" >
                         <img id="pfp_cmnt" src="${author.profilePicture}" alt="${author.username}'s Profile Picture">
-                        <a class="post-author" id="author_name" data-id="${c.authorID}" href="profile.html" >${author.username}</a>
+                        ${author.username}
+                        </a>
                         <p class="comment-text">${c.content}</p>
                         <div class="post-actions">
                               <button class="like-btn" data-id="${c.id}" data-postID="${c.postID}">❤️ ${c.likeNum}</button>
@@ -245,7 +263,7 @@ function initProfileButton() {
 function initSearchBar(Query) {
     const userlist = document.querySelector('#search-users');
     const users = getUsers().filter(u => u.username.toLowerCase().includes(Query.toLowerCase()));
-    userlist.innerHTML = formatUsers(users);
+    userlist.innerHTML = formatUsers(users.filter(u => u.userid != getCurrentUser()));
 
 }
 
@@ -255,24 +273,17 @@ function formatUsers(users) {
     return users.map(u => `
     <hr>
     <li>
+        <a class="author_name" data-id="${u.userid}" href="profile.html" >
         <img src="${u.profilePicture}" alt="${u.username}'s Profile Picture">
-        <a id="author_name" data-id="${u.userid}" href="profile.html" >${u.username}</a>
-        ${(u.bio.length === 0) ? "<p></p>" : `<p id="search-bio" ><q>${(u.bio.length > 40) ? u.bio.slice(0, 40) + "..." : u.bio}</q></p>`}
-        <p id="search-followers" >Followers: ${u.followers.length}</p>
-        <button id="search-btn" data-id="${u.userid}" >Follow</button>
+        ${u.username}
+        </a>
+        ${(u.bio.length === 0) ? "<p></p>" : `<p class="search-bio" ><q>${(u.bio.length > 40) ? u.bio.slice(0, 40) + "..." : u.bio}</q></p>`}
+        <p class="search-followers" >Followers: ${u.followers.length}</p>
+        <button class="search-btn" data-id="${u.userid}" >${(u.followers.some(id => id === getCurrentUser())) ? "Unfollow" : "Follow"}</button>
     </li>
     `).join("");
 }
 
-function initFollowButton() {
-
-    const searchbtn = document.querySelector('#search-btn');
-    console.log(searchbtn)
-    const currentUser = getUserByID(getCurrentUser());
-    const profileUser = getUserByID(searchbtn.dataset.id);
-    let isFollowing = (profileUser.followers.find(u => u.userid === currentUser.userid) != undefined);
-    searchbtn.textContent = isFollowing ? "Follow" : "Unfollow";
-}
 
 displayPosts();
 
