@@ -1,5 +1,4 @@
-import { getPosts, createPost, createComment, deleteComment, deletePost } from "./post.js";
-import { getUserByID, getCurrentUser, setProfileUser, getUsers, saveUser } from "./user.js";
+import { getCurrentUser, setProfileUser } from "./user.js";
 import { logout } from "./auth.js";
 
 // console.log(getPosts());
@@ -7,7 +6,7 @@ import { logout } from "./auth.js";
 
 
 
-addEventListener("DOMContentLoaded", () => {
+addEventListener("DOMContentLoaded", async () => {
 
     // makes searchbar empty
     document.querySelector('#search-users').innerHTML = ""
@@ -17,15 +16,17 @@ addEventListener("DOMContentLoaded", () => {
     const createPostForm = document.getElementById("createPostForm");
     initProfileButton()
     initLogoutButton()
-    createPostForm.addEventListener("submit", (e) => {
+    createPostForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const content = document.getElementById("postContent").value;
-        createNewPost(content);
+        await createNewPost(content);
         createPostForm.reset();
     });
+
+    await displayPosts();
 });
 
-addEventListener("click", (e) => {
+addEventListener("click", async (e) => {
     let likeBtn = null;
     if (e.target.classList && e.target.classList.contains("like-btn")) {
         likeBtn = e.target;
@@ -36,12 +37,12 @@ addEventListener("click", (e) => {
         const id = likeBtn.getAttribute("data-id");
         const postID = likeBtn.getAttribute("data-postID");
         if (!id) return;
-        handleLike(id, postID);
-        displayPosts();
+        await handleLike(id, postID);
+        await displayPosts();
     }
 });
 
-addEventListener("click", (e) => {
+addEventListener("click", async (e) => {
     let DeleteBtn = null;
     if (e.target.classList && e.target.classList.contains("delete-btn")) {
         DeleteBtn = e.target;
@@ -53,10 +54,10 @@ addEventListener("click", (e) => {
         const postID = DeleteBtn.getAttribute("data-postID");
         if (!id) return;
         if (confirm(`Are you sure you want to delete this ${(!!postID) ? "comment" : "post"}`)) {
-            if (!!postID) deleteComment(postID, id);
-            else deletePost(id);
+            if (!!postID) await fetch(`/api/comments/${id}`, { method: 'DELETE' });
+            else await fetch(`/api/posts/${id}`, { method: 'DELETE' });
         }
-        displayPosts();
+        await displayPosts();
     }
 });
 
@@ -92,16 +93,17 @@ addEventListener("click", (e) => {
     }
 });
 
-document.querySelector('#search-bar').addEventListener("keyup", (e) => {
+document.querySelector('#search-bar').addEventListener("keyup", async (e) => {
     const searchbar = e.target.value.trim()
     // console.log(searchbar)
     if (!!searchbar) {
-        initSearchBar(searchbar);
+        await initSearchBar(searchbar);
     } else {
         document.querySelector('#search-users').innerHTML = ""
     }
 });
 
+//Not finished..
 addEventListener('click', (e) => {
     let followBtn = null;
     const currentUser = getUserByID(getCurrentUser());
@@ -134,7 +136,7 @@ addEventListener('click', (e) => {
     }
 });
 
-addEventListener("submit", (e) => {
+addEventListener("submit", async (e) => {
     if (!e.target.classList || !e.target.classList.contains("comment-form")) return;
     e.preventDefault();
 
@@ -146,11 +148,24 @@ addEventListener("submit", (e) => {
     const content = commentInput.value.trim();
     if (!content) return;
 
-    createNewComment(postID, content);
+    await createNewComment(postID, content);
     commentInput.value = "";
 });
 
 
+async function createNewComment(postID, content) {
+    const currentUser = getCurrentUser();
+    if (currentUser == null) return;
+    await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ authorId: currentUser, postId: postID, content })
+    });
+    // console.log('createNewComment done');
+    await displayPosts();
+}
+
+// Not finished..
 function createNewComment(postID, content) {
     const currentUser = getUserByID(getCurrentUser());
     if (currentUser == null) return;
@@ -167,43 +182,50 @@ function handleLike(id, postID) {
     }
 
 }
+
 //edit it from Abdullah:
-function createNewPost(content) {
+async function createNewPost(content) {
     if (!content) return;
-    const currentUser = getUserByID(getCurrentUser());
+    const currentUser = getCurrentUser();
     if (currentUser == null) {
         const msg = document.getElementById("createPostMessage");
         if (msg) msg.textContent = "Please login first.";
         return;
     }
-    createPost(currentUser.userid, content);
-    displayPosts();
+    await fetch('/api/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ authorId: currentUser, content })
+    });
+    // console.log('createNewPost done');
+    await displayPosts();
 }
 
-function displayPosts() {
+async function displayPosts() {
     const postsContainer = document.getElementById("postsContainer");
-    const posts = getPosts();
+    const response = await fetch('/api/posts');
+    const posts = await response.json();
+    // console.log(posts);
     if (!posts || posts.length === 0) {
         postsContainer.innerHTML = "<p>No posts yet. Create the first post.</p>";
         return;
     }
-    postsContainer.innerHTML = posts.reverse().map(formatPost).join("");
-
+    postsContainer.innerHTML = posts.map(formatPost).join("");
 }
 
 
 function formatPost(post) {
-    const author = getUserByID(post.authorID);
+    const author = post.author;
 
     return ` <section class="post" data-id="${post.id}">
                 <div class="post-header">
-                    
+
                     <div class="post-meta">
-                        
+
                         <a class="post-author author_name" data-id="${post.authorID}" href="profile.html" >
                         <img id="pfp_post" src="${author.profilePicture}" alt="${author.username}'s Profile Picture">
                         ${author.username}
-                        </a> 
+                        </a>
                         <span class="post-date">${post.date}</span>
                     </div>
                 </div>
@@ -232,7 +254,7 @@ function formatPost(post) {
 function formatComments(comments) {
 
     return comments.map(c => {
-        const author = getUserByID(c.authorID);
+        const author = c.author;
         return `<div class="comment">
                         <a class="post-author author_name" data-id="${c.authorID}" href="profile.html" >
                         <img id="pfp_cmnt" src="${author.profilePicture}" alt="${author.username}'s Profile Picture">
@@ -260,11 +282,13 @@ function initProfileButton() {
     });
 }
 
-function initSearchBar(Query) {
+// Check with it ..
+async function initSearchBar(Query) {
     const userlist = document.querySelector('#search-users');
-    const users = getUsers().filter(u => u.username.toLowerCase().includes(Query.toLowerCase()));
-    userlist.innerHTML = formatUsers(users.filter(u => u.userid != getCurrentUser()));
-
+    const response = await fetch(`/api/users?search=${Query}`);
+    const users = await response.json();
+    // console.log(users);
+    userlist.innerHTML = formatUsers(users);
 }
 
 
@@ -286,4 +310,3 @@ function formatUsers(users) {
 
 
 displayPosts();
-
