@@ -1,8 +1,13 @@
 import { NextResponse } from "next/server";
-import { authEmail } from "@/Repos/UserRepo";
+import userRepo from "@/Repos/UserRepo";
 
 export async function POST(request) {
-  const { email } = await request.json();
-  const exists = await authEmail(email);
-  return NextResponse.json({ exists });
+  try {
+    const { email } = await request.json();
+    const exists = await userRepo.authEmail(email);
+    return NextResponse.json({ exists });
+  } catch (error) {
+    console.error("Auth API failed:", error);
+    return NextResponse.json({ error: "Could not check email." }, { status: 500 });
+  }
 }

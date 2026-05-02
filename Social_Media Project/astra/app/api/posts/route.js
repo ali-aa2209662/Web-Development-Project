@@ -1,25 +1,23 @@
 import { NextResponse } from "next/server";
-import { getAll, create } from "@/Repos/PostRepo";
+import postRepo from "@/Repos/PostRepo";
 
-export async function GET(request) {
+export async function GET() {
   try {
-  
-  const posts = await getAll();
-
-    return NextResponse.json({ messages });
+    const posts = await postRepo.getAll();
+    return NextResponse.json(posts);
   } catch (error) {
-    console.error("Messages API failed:", error);
-    return NextResponse.json({ error: "Could not load messages." }, { status: 500 });
+    console.error("Get posts API failed:", error);
+    return NextResponse.json({ error: "Could not load posts." }, { status: 500 });
   }
 }
 
 export async function POST(request) {
   try {
-   const { authorId, content } = await request.json();
-  const post = await create(authorId, content);
-    return NextResponse.json({ message }, { status: 201 });
+    const { authorId, content } = await request.json();
+    const post = await postRepo.create(authorId, content);
+    return NextResponse.json(post, { status: 201 });
   } catch (error) {
-    console.error("Create message API failed:", error);
-    return NextResponse.json({ error: "Could not create message." }, { status: 500 });
+    console.error("Create post API failed:", error);
+    return NextResponse.json({ error: "Could not create post." }, { status: 500 });
   }
 }

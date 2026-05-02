@@ -1,24 +1,25 @@
 import { NextResponse } from "next/server";
-import { getAll, create , search } from "@/Repos/UserRepo";
+import userRepo from "@/Repos/UserRepo";
 
-export async function GET() {
+export async function GET(request) {
   try {
-  const { searchParams } = new URL(request.url);
-  const query = searchParams.get("search");
-  const users = query ? await search(query) : await getAll();
-  return NextResponse.json(users);
+    const { searchParams } = new URL(request.url);
+    const query = searchParams.get("search");
+    const users = query ? await userRepo.search(query) : await userRepo.getAll();
+    return NextResponse.json(users);
   } catch (error) {
-    console.error("Get user API failed:", error);
-    return NextResponse.json({ error: "Could not load user." }, { status: 500 });
+    console.error("Get users API failed:", error);
+    return NextResponse.json({ error: "Could not load users." }, { status: 500 });
   }
 }
 
 export async function POST(request) {
   try {
-    const body = await request.json()
-    const user = await create(body)
-    return NextResponse.json(user, { status: 201 })
+    const body = await request.json();
+    const user = await userRepo.create(body);
+    return NextResponse.json(user, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    console.error("Create user API failed:", error);
+    return NextResponse.json({ error: "Could not create user." }, { status: 500 });
   }
 }
