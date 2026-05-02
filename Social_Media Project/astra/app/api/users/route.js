@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
-import { getAll, create } from "@/Repos/UserRepo";
+import { getAll, create , search } from "@/Repos/UserRepo";
 
 export async function GET() {
   try {
-    const users = await getAll()
-    return NextResponse.json(users)
+  const { searchParams } = new URL(request.url);
+  const query = searchParams.get("search");
+  const users = query ? await search(query) : await getAll();
+  return NextResponse.json(users);
   } catch (error) {
     console.error("Get user API failed:", error);
     return NextResponse.json({ error: "Could not load user." }, { status: 500 });

@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
-import { createMessage, getFeedMessages, getMessagesByUserId } from "@/data-repository";
+import { getAll, create } from "@/Repos/PostRepo";
 
 export async function GET(request) {
   try {
   
+  const posts = await getAll();
 
     return NextResponse.json({ messages });
   } catch (error) {
@@ -14,7 +15,8 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-   
+   const { authorId, content } = await request.json();
+  const post = await create(authorId, content);
     return NextResponse.json({ message }, { status: 201 });
   } catch (error) {
     console.error("Create message API failed:", error);
