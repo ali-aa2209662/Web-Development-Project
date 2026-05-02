@@ -5,8 +5,11 @@ const prisma = new PrismaClient();
 class PostRepo {
     async getAll() {
         return await prisma.post.findMany({
+            orderBy: { date: 'desc' },
             include: {
-                comments: true
+                comments: {
+                    orderBy: { date: 'desc' }
+                }
             }
         });
     }
@@ -14,8 +17,11 @@ class PostRepo {
     async getByAuthorId(id) {
         return await prisma.post.findMany({
             where: { authorId: id },
+            orderBy: { date: 'desc' },
             include: {
-                comments: true
+                comments: {
+                    orderBy: { date: 'desc' }
+                }
             }
 
         });
@@ -25,7 +31,9 @@ class PostRepo {
         return await prisma.post.findUnique({
             where: { id },
             include: {
-                comments: true
+                comments: {
+                    orderBy: { date: 'desc' }
+                }
             }
         });
     }
