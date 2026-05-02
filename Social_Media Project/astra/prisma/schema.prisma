@@ -35,8 +35,8 @@ model Follow {
   followerId  String
   followingId String
 
-  follower  User @relation("Following", fields: [followerId], references: [id])
-  following User @relation("Followers", fields: [followingId], references: [id])
+  follower  User @relation("Following", fields: [followerId], references: [id], onDelete: Cascade)
+  following User @relation("Followers", fields: [followingId], references: [id], onDelete: Cascade)
 
   @@unique([followerId, followingId]) //each user can only follow, or be followed by, someone else once
 }
@@ -47,7 +47,7 @@ model Post {
   date    DateTime @default(now())
 
   authorId String
-  author   User   @relation(fields: [authorId], references: [id])
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   comments Comment[]
   likes    PostLike[]
@@ -59,8 +59,8 @@ model PostLike {
   userId String
   postId String
 
-  user User @relation(fields: [userId], references: [id])
-  post Post @relation(fields: [postId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@unique([userId, postId]) // each user can be related to the same post once
 }
@@ -71,10 +71,10 @@ model Comment {
   date    DateTime @default(now())
 
   authorId String
-  author   User   @relation(fields: [authorId], references: [id])
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   postId String
-  post   Post   @relation(fields: [postId], references: [id])
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   likes CommentLike[]
 }
@@ -85,8 +85,8 @@ model CommentLike {
   userId    String
   commentId String
 
-  user    User    @relation(fields: [userId], references: [id])
-  comment Comment @relation(fields: [commentId], references: [id])
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
 
   @@unique([userId, commentId]) // each user can be related to the same comment once
 }
