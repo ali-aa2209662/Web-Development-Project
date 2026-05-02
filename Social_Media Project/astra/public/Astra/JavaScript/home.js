@@ -165,14 +165,6 @@ async function createNewComment(postID, content) {
     await displayPosts();
 }
 
-// Not finished..
-function createNewComment(postID, content) {
-    const currentUser = getUserByID(getCurrentUser());
-    if (currentUser == null) return;
-    createComment(currentUser.userid, postID, content);
-    displayPosts();
-}
-
 function handleLike(id, postID) {
     if (postID == null) {
         getPosts().find(p => p.id === id).ToggleLike();
@@ -309,4 +301,4 @@ function formatUsers(users) {
 }
 
 
-displayPosts();
+await displayPosts();
