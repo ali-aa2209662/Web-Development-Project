@@ -13,12 +13,11 @@ class PostRepo {
 
     async getByAuthorId(id) {
         return await prisma.post.findMany({
-            where: {
-                authorId: id,
+            where: {authorId: id},
                 include: {
                     comments: true
                 }
-            }
+        
         });
     }
 

@@ -14,7 +14,7 @@ export async function GET() {
 export async function POST(request) {
   try {
     const { authorId, content } = await request.json();
-    const post = await postRepo.create(authorId, content);
+    const post = await postRepo.createPost(authorId, content);
     return NextResponse.json(post, { status: 201 });
   } catch (error) {
     console.error("Create post API failed:", error);

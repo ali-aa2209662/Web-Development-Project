@@ -15,7 +15,7 @@ export async function GET(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
-    await postRepo.delete(params.id);
+    await postRepo.deletePost(params.id);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Delete post API failed:", error);
