@@ -3,13 +3,14 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 class UserRepo {
+
     async getAll() {
-        return await prisma.user.findMany({ orderBy: { id: "asc" } })
+        return await prisma.user.findMany({ orderBy: { username: "asc" } })
     }
 
     async getById(id) {
         return await prisma.user.findUnique({
-            id: Number(id)
+            where: { id }
         })
     }
 
@@ -17,18 +18,46 @@ class UserRepo {
         const newUser = {
             username: data.username,
             email: data.email,
-            password: data.password,
-            bio: data.bio,
+            password: data.password
         };
-        return await prisma.user.create({ data: newItem });
+        return await prisma.user.create({ data: newUser });
     }
 
     async update(id, data) {
-        return await prisma.user.update({ data: data, where: { id: Number(id) } })
+        const updUser = {
+            username: data.username,
+            email: data.email,
+            password: data.password,
+            profilePicture: data.profilePicture,
+            bio: data.bio
+        };
+        return await prisma.user.update({ data: updUser, where: { id } })
     }
+
+    async delete(id) {
+        return await prisma.user.delete({ where: { id } })
+    }
+
+    async search(query) {
+        return await prisma.user.findMany({
+            orderBy: { username: "asc" },
+            where: {
+                OR: [
+                    { id: { not: query } },
+                    { username: { contains: query } },
+                    { password: { contains: query } },
+                    { email: { contains: query } },
+                    { bio: { contains: query } }
+                ]
+            }
+        });
+    }
+
+
 
 }
 
-console.log(await new UserRepo().getAll())
+//tester
+console.log(await new UserRepo().search(""))
 
 export default new UserRepo();
