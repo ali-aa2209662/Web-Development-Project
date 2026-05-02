@@ -44,7 +44,11 @@ class PostRepo {
     // }
 
     async createComment(authorId, postId, content) {
-        return await prisma.comment.create({ data: { authorId, postId, content } })
+        return await prisma.comment.create({ data: { authorId, postId, content } });
+    }
+
+    async deleteComment(id) {
+        return await prisma.comment.delete({ where: { id } });
     }
 }
 

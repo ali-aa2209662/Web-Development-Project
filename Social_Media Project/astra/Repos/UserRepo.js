@@ -73,6 +73,6 @@ class UserRepo {
 }
 
 //tester
-console.log(await new UserRepo().search("Ali"))
+console.log(await new UserRepo().delete("cmoom0la20000urtke5w8z6gd"))
 
 export default new UserRepo();
