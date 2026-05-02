@@ -36,6 +36,16 @@ class StatsRepo {
             },
         });
     }
+    async getMostLikedPost() {
+        return await prisma.post.findFirst({
+            orderBy: { likes: { _count: "desc" } },
+            select: {
+                id: true,
+                content: true,
+                _count: { select: { likes: true } },
+            },
+        });
+    }
 }
 
 export default new StatsRepo();
