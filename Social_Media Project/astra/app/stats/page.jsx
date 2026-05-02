@@ -1,6 +1,7 @@
 import StatsRepo from "@/Repos/StatsRepo";
 import StatsCard from "@/app/components/StatsCard";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 export default async function StatsPage() {
   const avgFollowers       = await StatsRepo.getAvgFollowersPerUser();
@@ -76,6 +77,7 @@ export default async function StatsPage() {
 
       </div>
     </div>
+  <Footer />
   </>
   );
 }
