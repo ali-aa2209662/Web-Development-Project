@@ -46,6 +46,37 @@ class StatsRepo {
             },
         });
     }
+    async getMostCommentedPost(){
+        return await prisma.post.findFirst({
+            orderBy: { comments: { _count: "desc" } },
+            select: {
+                id: true,
+                content: true,
+                _count: { select: { comments: true } },
+            },
+        });
+    }
+    async getMostActiveCommenter() {
+        return await prisma.user.findFirst({
+            orderBy: { comments: { _count: "desc" } },
+            select: {
+                id: true,
+                username: true,
+                _count: { select: { comments: true } },
+            },
+        });
+}
+    async getMostActiveLiker() {
+        return await prisma.user.findFirst({
+        orderBy: { postLikes: { _count: "desc" } },
+        select: {
+            id: true,
+            username: true,
+            _count: { select: { postLikes: true, commentLikes: true } },
+        },
+    });
+
+}
 }
 
 export default new StatsRepo();

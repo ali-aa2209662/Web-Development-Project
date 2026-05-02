@@ -1,48 +1,81 @@
 import StatsRepo from "@/Repos/StatsRepo";
+import StatsCard from "@/app/components/StatsCard";
+import NavBar from "../components/NavBar";
 
 export default async function StatsPage() {
-  const avgFollowers = await StatsRepo.getAvgFollowersPerUser();
-  const mostFollowedUser = await StatsRepo.getMostFollowedUser();
-  const totalLikes = await StatsRepo.getTotalLikes();
-  const mostActiveUser = await StatsRepo.getMostActiveUser();
-  const mostLikedPost = await StatsRepo.getMostLikedPost();
-
+  const avgFollowers       = await StatsRepo.getAvgFollowersPerUser();
+  const mostFollowedUser   = await StatsRepo.getMostFollowedUser();
+  const totalLikes         = await StatsRepo.getTotalLikes();
+  const mostActiveUser     = await StatsRepo.getMostActiveUser();
+  const mostLikedPost      = await StatsRepo.getMostLikedPost();
+  const mostCommentedPost  = await StatsRepo.getMostCommentedPost();
+  const mostActiveCommenter = await StatsRepo.getMostActiveCommenter();
+  const mostActiveLiker    = await StatsRepo.getMostActiveLiker();
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+    <>
+    <NavBar />
+    <div style={{ padding: "2rem" }}>
       <h1>Site Statistics</h1>
+      <div className="StatsGrid">
 
-      <section style={{ marginBottom: "2rem" }}>
-        <h2>Query 1: Average Followers Per User</h2>
-        <p>{avgFollowers}</p>
-      </section>
+        <StatsCard
+          title="Avg Followers Per User"
+          value={avgFollowers}
+          icon="👥"
+        />
 
-      <section style={{ marginBottom: "2rem" }}>
-        <h2>Query 2: Most Followed User</h2>
-        {mostFollowedUser ? (
-          <p>
-            {mostFollowedUser.username} &mdash; {mostFollowedUser._count.followers} followers
-          </p>
-        ) : (
-          <p>No users found.</p>
-        )}
-      </section>
+        <StatsCard
+          title="Most Followed User"
+          value={mostFollowedUser?.username}
+          subtitle={`${mostFollowedUser?._count?.followers ?? 0} followers`}
+          icon="⭐"
+        />
 
-      <section style={{ marginBottom: "2rem" }}>
-        <h2>Query 3: Total Likes (Posts + Comments)</h2>
-        <p>{totalLikes}</p>
-      </section>
+        <StatsCard
+          title="Total Likes"
+          value={totalLikes}
+          icon="👍"
+        />
 
-      <section style={{ marginBottom: "2rem" }}>
-        <h2>Query 4: Most Active User (Most Posts)</h2>
-        {mostActiveUser ? (
-          <p>
-            {mostActiveUser.username} &mdash; {mostActiveUser._count.posts} posts
-          </p>
-        ) : (
-          <p>No users found.</p>
-        )}
-      </section>
+        <StatsCard
+          title="Most Active User"
+          value={mostActiveUser?.username}
+          subtitle={`${mostActiveUser?._count?.posts ?? 0} posts`}
+          icon="✍️"
+        />
+        
+
+        <StatsCard
+          title="Most Liked Post"
+          value={mostLikedPost?.content?.slice(0, 60) + "..."}
+          subtitle={`${mostLikedPost?._count?.likes ?? 0} likes`}
+          icon = "❤️"
+        />
+
+        <StatsCard
+          title="Most Commented Post"
+          value={mostCommentedPost?.content?.slice(0, 60) + "..."}
+          subtitle={`${mostCommentedPost?._count?.comments ?? 0} comments`}
+          icon = "💬"
+        />
+
+        <StatsCard
+          title="Most Active Commenter"
+          value={mostActiveCommenter?.username}
+          subtitle={`${mostActiveCommenter?._count?.comments ?? 0} comments`}
+          icon="🔥"
+        />
+
+        <StatsCard
+          title="Most Active Liker"
+          value={mostActiveLiker?.username}
+          subtitle={`${mostActiveLiker?._count?.postLikes ?? 0} post likes`}
+          icon="🤝"
+        />
+
+      </div>
     </div>
+  </>
   );
 }
