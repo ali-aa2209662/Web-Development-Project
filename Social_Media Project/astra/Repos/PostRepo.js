@@ -31,11 +31,11 @@ class PostRepo {
         });
     }
 
-    async create(authorId, content) {
+    async createPost(authorId, content) {
         return await prisma.post.create({ data: { content, authorId } });
     }
 
-    async delete(id) {
+    async deletePost(id) {
         return await prisma.post.delete({ where: { id } });
     }
 
