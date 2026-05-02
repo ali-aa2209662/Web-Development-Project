@@ -44,11 +44,12 @@ class PostRepo {
     // }
 
     async createComment(authorId, postId, content) {
-        return prisma.comment.create({ data: { authorId, postId, content } })
+        return await prisma.comment.create({ data: { authorId, postId, content } })
     }
 }
 
 //tester
-console.log(await new PostRepo().getById("cmoodkvj80001ur447kocwbux"))
+console.log(await new PostRepo().createComment("cmoom0la20000urtke5w8z6gd", "cmoom41q00001ur2w1s0waj9v", "Hi"))
+// console.log(process.env.DATABASE_URL);
 
 export default new PostRepo();
