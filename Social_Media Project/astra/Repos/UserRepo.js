@@ -8,9 +8,21 @@ class UserRepo {
         return await prisma.user.findMany({ orderBy: { username: "asc" } })
     }
 
+    async getAllButId(id) {
+        return await prisma.user.findMany({
+            orderBy: { username: "asc" },
+            where: {
+                id: { not: id },
+            }
+        });
+    }
+
     async getById(id) {
         return await prisma.user.findUnique({
-            where: { id }
+            where: { id },
+            include: {
+                posts: true
+            }
         })
     }
 
@@ -43,21 +55,24 @@ class UserRepo {
             orderBy: { username: "asc" },
             where: {
                 OR: [
-                    { id: { not: query } },
+                    // { id: { not: query } },
                     { username: { contains: query } },
                     { password: { contains: query } },
-                    { email: { contains: query } },
                     { bio: { contains: query } }
                 ]
             }
         });
     }
 
-
+    async authEmail(email) { //returns true if email already exist and false otherwise
+        return (await prisma.user.findUnique(
+            { where: { email } }
+        ) !== null)
+    }
 
 }
 
 //tester
-console.log(await new UserRepo().search(""))
+console.log(await new UserRepo().search("Ali"))
 
 export default new UserRepo();
