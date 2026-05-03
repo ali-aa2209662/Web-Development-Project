@@ -195,7 +195,7 @@ function formatPost(post) {
 
                     <div class="post-meta">
 
-                        <a class="post-author author_name" data-id="${post.authorID}" href="profile.html" >
+                        <a class="post-author author_name" data-id="${post.authorId}" href="profile.html" >
                         <img id="pfp_post" src="${author.profilePicture}" alt="${author.username}'s Profile Picture">
                         ${author.username}
                         </a>
@@ -210,7 +210,7 @@ function formatPost(post) {
                 <div class="post-actions">
                     <button class="like-btn" data-id="${post.id}">❤️ ${post.likeNum}</button>
                     <button class="comment-btn" data-id="${post.id}">💬 Comment </button>
-                    <button class="delete-btn" data-id="${post.id}" style="${(post.authorID === getCurrentUser()) ? "" : "display:none;"}">❌ Delete </button>
+                    <button class="delete-btn" data-id="${post.id}" style="${(post.authorId === getCurrentUser()) ? "" : "display:none;"}">❌ Delete </button>
                 </div>
 
                 <form class="comment-form" data-id="${post.id}" style="display:none;">
@@ -229,14 +229,14 @@ function formatComments(comments) {
     return comments.map(c => {
         const author = c.author;
         return `<div class="comment">
-                        <a class="post-author author_name" data-id="${c.authorID}" href="profile.html" >
+                        <a class="post-author author_name" data-id="${c.authorId}" href="profile.html" >
                         <img id="pfp_cmnt" src="${author.profilePicture}" alt="${author.username}'s Profile Picture">
                         ${author.username}
                         </a>
                         <p class="comment-text">${c.content}</p>
                         <div class="post-actions">
                               <button class="like-btn" data-id="${c.id}" data-postID="${c.postID}">❤️ ${c.likeNum}</button>
-                              <button class="delete-btn" data-id="${c.id}" data-postID="${c.postID}" style="${(c.authorID === getCurrentUser()) ? "" : "display:none;"}">❌ Delete </button>
+                              <button class="delete-btn" data-id="${c.id}" data-postID="${c.postID}" style="${(c.authorId === getCurrentUser()) ? "" : "display:none;"}">❌ Delete </button>
                         </div>
                     </div>`
     }).join("");
