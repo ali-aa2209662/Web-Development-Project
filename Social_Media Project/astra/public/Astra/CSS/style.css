@@ -742,8 +742,7 @@ body {
     display: block;
     width: 100%;
     padding: 0.5rem 0.75rem;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.08);
+     border-radius: 6px
 }
 
 #logoutBtn {
@@ -1083,6 +1082,7 @@ footer p {
     }
 
     .nav-links {
+        
         flex-direction: row;
         width: auto;
         gap: 1.5rem;
@@ -1090,15 +1090,20 @@ footer p {
     }
 
     .nav-links li {
+        
         width: auto;
         text-align: left;
     }
 
+    
+
+
     .nav-links a,
     #logoutBtn {
-        width: auto;
-        padding: 0;
-        background: transparent;
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border-radius: 6px;
+        border: 1px solid transparent;
     }
 
     .feed-container {
@@ -1200,4 +1205,18 @@ footer p {
     font-weight: bold;
     color: #666;
     margin-right: 6px;
+}
+#logoutBtn {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border-radius: 6px;
+        border: 1px solid transparent;
+}
+
+@media (max-width: 768px) {
+    .nav-links a
+     {
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.08);
+    }
 }

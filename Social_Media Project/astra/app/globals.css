@@ -1197,7 +1197,8 @@ footer p {
 
 /* The css for the stats cards */
 .StatsCard {
-  background: rgb(100, 255, 190);;
+ background: rgb(100, 255, 190);;
+
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
