@@ -1,73 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile – ASTRA</title>
     <link rel="stylesheet" href="CSS/style.css">
 </head>
+
 <body>
 
-<header class="navbar">
-    <div class="brand">
-        <div class="brand-link">
-            <img src="assets/Logo1.png" alt="ASTRA Logo" class="logo-icon">
-            <h1 class="site-name">ASTRA</h1>
+    <header class="navbar">
+        <div class="brand">
+            <div class="brand-link">
+                <img src="assets/Logo1.png" alt="ASTRA Logo" class="logo-icon">
+                <h1 class="site-name">ASTRA</h1>
+            </div>
         </div>
-    </div>
-    <nav class="nav" id="navBar">
-        <ul class="nav-links" id="navList">
-            <li><a href="home.html">Home</a></li>
-            <li><a href="profile.html" onclick="setProfileUser(getCurrentUser());" id="profilebtn">Profile</a></li>
-            <li><a href="/stats">Stats</a></li>
-            <li><button type="button" id="logoutBtn">Logout</button></li>
-        </ul>
-    </nav>
-</header>
+        <nav class="nav" id="navBar">
+            <ul class="nav-links" id="navList">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="profile.html" onclick="setProfileUser(getCurrentUser());" id="profilebtn">Profile</a></li>
+                <li><a href="/stats">Stats</a></li>
+                <li><button type="button" id="logoutBtn">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
 
-<main>
-    <h2>Update Your Profile Information:</h2><br>
-    <form id="editProfileForm" enctype="multipart/form-data">
+    <main>
+        <h2>Update Your Profile Information:</h2><br>
+        <form id="editProfileForm" enctype="multipart/form-data">
 
-        <label>Profile Image:</label><br>
-        <img id="preview" src="assets/PFP_Blank.jpg" width="120"><br>
-        <p id="imageuploadStatus">Upload Image</p><br>
-        <input type="file" id="imageInput" accept="image/*"><br><br>
-        
+            <label>Profile Image:</label><br>
+            <img id="preview" src="assets/PFP_Blank.jpg" width="120"><br>
+            <p id="imageuploadStatus">Upload Image</p><br>
+            <input type="file" id="imageInput" accept="image/*"><br><br>
 
-        <label>Username:</label>
-        <input type="text" id="editUsername"><br><br>
 
-        <label>Email:</label>
-        <input type="email" id="editEmail"><br><br>
-        
-        <label>Password:</label>
-        <input type="text" id="editPassword" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^'$,;:]).{8,}"><br><br>
+            <label>Username:</label>
+            <input type="text" id="editUsername"><br><br>
 
-        <label>Confirm Password:</label>
-        <input type="text" id="confirmPassword" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^'$,;:]).{8,}"><br><br>
+            <label>Email:</label>
+            <input type="email" id="editEmail"><br><br>
 
-        <label>Bio:</label>
-        <textarea id="editBio"></textarea><br><br>
+            <label>Password:</label>
+            <input type="text" id="editPassword" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^'$,;:]).{8,}"><br><br>
 
-       
+            <label>Confirm Password:</label>
+            <input type="text" id="confirmPassword"
+                pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^'$,;:]).{8,}"><br><br>
 
-        <button type="submit">Save Changes</button>
-    </form>
-    <a href="profile.html">
-    <button type="button" id="cancelBtn">Cancel</button> </a>
-</main>
+            <label>Bio:</label>
+            <textarea id="editBio"></textarea><br><br>
 
-<footer>
-    <div class="social-links">
-        <a href="#" target="_blank">Twitter</a>
-        <a href="#" target="_blank">Instagram</a>
-        <a href="#" target="_blank">TikTok</a>
-    </div>
-    <p>&copy; 2026 ASTRA. All rights reserved.</p>
-</footer>
 
-<script type="module" src="JavaScript/edit_profile.js"></script>
+
+            <button type="submit">Save Changes</button>
+        </form>
+        <a href="profile.html">
+            <button type="button" id="cancelBtn">Cancel</button> </a>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="#" target="_blank">Twitter</a>
+            <a href="#" target="_blank">Instagram</a>
+            <a href="#" target="_blank">TikTok</a>
+        </div>
+        <p>&copy; 2026 ASTRA. All rights reserved.</p>
+    </footer>
+
+    <script type="module" defer src="JavaScript/edit_profile.js"></script>
 
 </body>
+
 </html>

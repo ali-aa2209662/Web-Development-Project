@@ -34,15 +34,15 @@
             <div class="search-container">
                 <p>🔎</p>
                 <input type="search" name="search-bar" id="search-bar" placeholder="Follow someone new!">
-                
+
             </div>
             <ul id="search-users">
                 <li>
                     <img src="" alt="">
-                    <a id="search-username" >Username</a>
-                    <p id="search-bio" >Bio</p>
-                    <p id="search-followers" >Followers: </p>
-                    <button id="search-btn" data-id="" >Follow</button>
+                    <a id="search-username">Username</a>
+                    <p id="search-bio">Bio</p>
+                    <p id="search-followers">Followers: </p>
+                    <button id="search-btn" data-id="">Follow</button>
                 </li>
             </ul>
         </section>
@@ -59,8 +59,9 @@
 
         <h2>New Posts</h2>
         <div class="posts-container" id="postsContainer">
+            <p>Loading...</p>
             <!-- Example post template (will be replaced by JavaScript when runs it.. -->
-            <section class="post">
+            <!-- <section class="post">
                 <div class="post-header">
                     <img src="assets/PFP_Blank.jpg" width="25" alt="User avatar" class="post-avatar">
                     <div class="post-meta">
@@ -82,7 +83,7 @@
                         <p class="comment-text">Great post!</p>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <!-- More posts will be addedd here.. -->
         </div>
     </main>
@@ -96,7 +97,7 @@
         <p>&copy; 2026 ASTRA. All rights reserved.</p>
     </footer>
 
-    <script type="module" src="JavaScript/home.js"></script>
+    <script type="module" defer src="JavaScript/home.js"></script>
 </body>
 
 </html>

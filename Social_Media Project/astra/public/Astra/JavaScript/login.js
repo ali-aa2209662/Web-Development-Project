@@ -22,7 +22,7 @@ togglePasswordButton.forEach(button => {
 
 // loginForm submission
 if (loginForm) {
-    loginForm.addEventListener('submit', function(e){
+    loginForm.addEventListener('submit', async function(e){
         e.preventDefault();
 
         const usernameInput = document.querySelector("#Username") || document.querySelector("#username");
@@ -40,15 +40,15 @@ if (loginForm) {
             return;
         }
 
-        if (login(username, password)) {
+        if (await login(username, password)) {
             alert("Login successful!");
             window.location.href = "home.html";
         } else {
             errorMessage.textContent = "Invalid username or password.";
             errorMessage.style.display = "block";
             errorMessage.style.color = "red";
-            
-            
+
+
 
         }} );
 }
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!signupForm) return;
 
-    signupForm.addEventListener("submit", (e) => {
+    signupForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         // console.log("AHHHHHHHHHHHHHHHH");
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const cnfrmpassword = document.querySelector("#Confirm-password").value.trimEnd();
 
         if (newpassword === cnfrmpassword) {
-            signup(username, email, newpassword);
+            await signup(username, email, newpassword);
             alert("New Account Created!");
             window.location.href = "login.html";
         }

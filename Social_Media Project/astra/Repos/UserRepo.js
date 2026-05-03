@@ -5,25 +5,40 @@ const prisma = new PrismaClient();
 class UserRepo {
 
     async getAll() {
-        return await prisma.user.findMany({ orderBy: { username: "asc" } })
+        const users = await prisma.user.findMany({
+            orderBy: { username: "asc" },
+            include: {
+                followers: { select: { followerId: true } },
+                following: { select: { followingId: true } }
+            }
+        });
+        return users.map(this.mapFollowIds);
     }
 
     async getAllButId(id) {
-        return await prisma.user.findMany({
+        const users = await prisma.user.findMany({
             orderBy: { username: "asc" },
             where: {
                 id: { not: id },
+            },
+            include: {
+                followers: { select: { followerId: true } },
+                following: { select: { followingId: true } }
             }
         });
+        return users.map(this.mapFollowIds);
     }
 
     async getById(id) {
-        return await prisma.user.findUnique({
+        const user = await prisma.user.findUnique({
             where: { id },
             include: {
-                posts: true
+                posts: true,
+                followers: { select: { followerId: true } },
+                following: { select: { followingId: true } }
             }
-        })
+        });
+        return user ? this.mapFollowIds(user) : null;
     }
 
     async create(data) {
@@ -51,17 +66,21 @@ class UserRepo {
     }
 
     async search(query) {
-        return await prisma.user.findMany({
+        const users = await prisma.user.findMany({
             orderBy: { username: "asc" },
             where: {
                 OR: [
-                    // { id: { not: query } },
                     { username: { contains: query } },
                     { password: { contains: query } },
                     { bio: { contains: query } }
                 ]
+            },
+            include: {
+                followers: { select: { followerId: true } },
+                following: { select: { followingId: true } }
             }
         });
+        return users.map(this.mapFollowIds);
     }
 
     async authEmail(email) { //returns true if email already exist and false otherwise
@@ -104,9 +123,19 @@ class UserRepo {
         return true;
     }
 
+    mapFollowIds(user) {
+        return {
+            ...user,
+            followers: user.followers?.map(f => f.followerId) ?? [],
+            following: user.following?.map(f => f.followingId) ?? []
+        };
+    }
+
 }
 
 //tester
-console.log(await new UserRepo().search("A"));
+(async () => {
+    console.log(await new UserRepo().search('user1'));
+})();
 
 export default new UserRepo();

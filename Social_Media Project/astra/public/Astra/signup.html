@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,47 +8,36 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-    
+
     <div class="Signup-card">
- 
+
         <div class="logo-wrapper">
-            <img src="assets/Logo1.png" alt="App Logo" >
+            <img src="assets/Logo1.png" alt="App Logo">
         </div>
- 
+
         <h1>Create account</h1>
         <p class="tagline">Join and connect with people around you</p>
- 
-        <form id="signup-form" >
- 
+
+        <form id="signup-form">
+
             <div class="form-row">
                 <div class="form-group">
-                <label for="username">Username</label>
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    placeholder="@mohammad"
-                    autocomplete="username"
-                    required
-                >
-                <span class="field-error" id="username-error">Username is required</span>
-            </div>
- 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Moe@example.com"
-                    autocomplete="email"
-                    required
-                >
-                <span class="field-error" id="email-error">Enter a valid email</span>
-            </div>
- 
-            <!-- <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="@mohammad" autocomplete="username"
+                        required>
+                    <span class="field-error" id="username-error">Username is required</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Moe@example.com" autocomplete="email"
+                        required>
+                    <span class="field-error" id="email-error">Enter a valid email</span>
+                </div>
+
+                <!-- <div class="form-group">
                 <label for="dob">Date of birth</label>
                 <input
                     type="date"
@@ -57,73 +47,67 @@
                 >
                 <span class="field-error" id="dob-error">You must be at least 16 years old</span>
             </div> -->
- 
-            <div class="form-group">
-    <label for="Password">Password</label>
 
-    <div class="password-wrapper">
-        <input
-            type="password"
-            id="Password"
-            name="Password"
-            placeholder="Create a password"
-            pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^'$,;:]).{8,}"
-            required
-        >
+                <div class="form-group">
+                    <label for="Password">Password</label>
 
-        <button type="button" class="TogglePassword" id="TogglePassword" aria-label="Show password">
-            Show
-        </button>
-    </div>
-        
-    
+                    <div class="password-wrapper">
+                        <input type="password" id="Password" name="Password" placeholder="Create a password"
+                            pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^'$,;:]).{8,}" required>
 
-    <div class="password-info-wrapper">
-        <i class="info-icon">i</i>
-        <span style="font-size: 12px;" class="password-info hidden" id="password-info">
-            Password must be at least 8 characters long and include uppercase letters, lowercase letters, numbers, and at least one symbol. The following characters are not allowed: ' $ , ; :
-        </span>
-    </div>
-</div>
-                    
+                        <button type="button" class="TogglePassword" id="TogglePassword" aria-label="Show password">
+                            Show
+                        </button>
+                    </div>
+
+
+
+                    <div class="password-info-wrapper">
+                        <i class="info-icon">i</i>
+                        <span style="font-size: 12px;" class="password-info hidden" id="password-info">
+                            Password must be at least 8 characters long and include uppercase letters, lowercase
+                            letters, numbers, and at least one symbol. The following characters are not allowed: ' $ , ;
+                            :
+                        </span>
+                    </div>
+                </div>
+
                 <span class="strength-label" id="strength-label"></span>
-                <span class="field-error" id="password-error" style="display:none;">Password must be at least 8 characters</span>
+                <span class="field-error" id="password-error" style="display:none;">Password must be at least 8
+                    characters</span>
             </div>
- 
+
             <div class="form-group">
                 <label for="Confirm-password">Confirm password</label>
                 <div class="password-wrapper">
-                    <input
-                        type="password"
-                        id="Confirm-password"
-                        name="Confirm_password"
-                        placeholder="Repeat your password"
-                        autocomplete="new-password"
-                        requiredsw
-                    >
-                    <button type="button" class="TogglePassword" id="ConfirmPassword" aria-label="Show password">Show</button>
+                    <input type="password" id="Confirm-password" name="Confirm_password"
+                        placeholder="Repeat your password" autocomplete="new-password" requiredsw>
+                    <button type="button" class="TogglePassword" id="ConfirmPassword"
+                        aria-label="Show password">Show</button>
                 </div>
-                <span class="field-error-password" id="confirm-error" style="display:none;">Passwords do not match</span>
+                <span class="field-error-password" id="confirm-error" style="display:none;">Passwords do not
+                    match</span>
             </div>
- 
+
             <div class="terms">
                 <input type="checkbox" id="terms" name="terms" required>
                 <label for="terms" style="font-weight: 400; margin: 0;">
                     I agree to the Terms of Service and Privacy Policy
                 </label>
             </div>
- 
+
             <button type="submit" class="btn-signup">Create Account</button>
- 
+
             <div class="divider">already have an account?</div>
- 
+
         </form>
 
         <button type="button" class="btn-login" onclick="window.location.href='login.html'">
-                Log In
+            Log In
         </button>
 
     </div>
-    <script type="module" src="JavaScript/login.js"></script>
+    <script type="module" defer src="JavaScript/login.js"></script>
 </body>
+
 </html>

@@ -1,61 +1,67 @@
-import { getUserByID, getCurrentUser, saveUser, getProfileUser, edit_profile, setProfileUser } from "./user.js";
-import { getPostsByUserID } from "./post.js";
+import { getCurrentUser, getProfileUser, setProfileUser } from "./user.js";
 import { checkLogin, logout } from "./auth.js";
 
 // ── Auth guard ──────────────────────────────────────────────
 checkLogin();
 
 const params = new URLSearchParams(window.location.search);
-if (params.get("user")!==null) {
+if (params.get("user") !== null) {
     const authorID = params.get("user");
-    setProfileUser(authorID);}
+    setProfileUser(authorID);
+}
 
 
 
 // ── Run after DOM is ready ──────────────────────────────────
-addEventListener("DOMContentLoaded", () => {
-    
-    displayProfileInfo();
-    displayProfilePosts();
-    initFollowButton();
+addEventListener("DOMContentLoaded", async () => {
+
+    await displayProfileInfo();
+    await displayProfilePosts();
+    await initFollowButton();
     initEditButton();
     initLogoutButton();
 
 });
 
 // ── Display profile info ────────────────────────────────────
-function displayProfileInfo() {
-    const profileUser = getUserByID(getProfileUser());
-    if (!profileUser) return;
+async function displayProfileInfo() {
+    const profileUserId = getProfileUser();
+    if (!profileUserId) return;
+    const response = await fetch(`/api/users?id=${profileUserId}`);
+    const profileUser = await response.json();
     // console.log(profileUser);
-    document.getElementById("username").textContent       = profileUser.username;
+    document.getElementById("username").textContent = profileUser.username;
     document.querySelector("#profileHeader").querySelector("img").src = profileUser.profilePicture;
-    document.getElementById("bio").textContent            = profileUser.bio || "";
+    document.getElementById("bio").textContent = profileUser.bio || "";
     document.getElementById("followersCount").textContent = (profileUser.followers?.length ?? 0);
     document.getElementById("followingCount").textContent = (profileUser.following?.length ?? 0);
 }
 
 // ── Display profile posts ───────────────────────────────────
-function displayProfilePosts() {
-    const profileUser    = getUserByID(getProfileUser());
-    if (!profileUser) return;
+async function displayProfilePosts() {
+    const profileUserId = getProfileUser();
+    if (!profileUserId) return;
 
     const postsContainer = document.getElementById("postsContainer");
-    const userPosts      = getPostsByUserID(getProfileUser())
+    const response = await fetch(`/api/posts/${profileUserId}?authorId=${profileUserId}`);
+    const userPosts = await response.json();
 
-    document.getElementById("postsCount").textContent = userPosts.length;
+    document.getElementById("postsCount").textContent = userPosts?.length ?? 0;
 
-    postsContainer.innerHTML = userPosts.reverse().map(post => formatPost(post) ).join("");
+    if (!userPosts || userPosts.length === 0) {
+        postsContainer.innerHTML = "<p>No posts yet.</p>";
+        return;
+    }
+    postsContainer.innerHTML = userPosts.map(post => formatPost(post)).join("");
 }
 
 function formatPost(post) {
-    const author = getUserByID(post.authorID);
 
     return ` <section class="post" data-id="${post.id}">
                 <div class="post-header">
-                    
+
                     <div class="post-meta">
-                        <span class="post-author">${author.username}</span>
+                        <span class="post-author">${post.author?.username ?? ""}</span>
                         <span class="post-date">${post.date}</span>
                     </div>
                 </div>
@@ -65,63 +71,51 @@ function formatPost(post) {
                 <div class="post-actions">
                     <button class="like-btn" onclick="" data-id="${post.id}">❤️ ${post.likeNum}</button>
                 </div>
-                
+
             </section>`;
 
 }
 
 
 // ── Follow / Unfollow ───────────────────────────────────────
-function initFollowButton() {
-    const currentUser = getUserByID(getCurrentUser());
-    const profileUser = getUserByID(getProfileUser());
-    if (!currentUser || !profileUser) return;
+async function initFollowButton() {
+    const currentUserId = getCurrentUser();
+    const profileUserId = getProfileUser();
+    if (!currentUserId || !profileUserId) return;
+
+    const response = await fetch(`/api/users?id=${profileUserId}`);
+    const profileUser = await response.json();
 
     const followBtn = document.getElementById("followBtn");
 
     // Hide button if viewing own profile
-    if (currentUser.userid === profileUser.userid) {
+    if (currentUserId === profileUser.id) {
         followBtn.style.display = "none";
         return;
     }
 
-    // Set initial button label
-    let isFollowing = profileUser.followers?.includes(currentUser.userid);
-    followBtn.textContent = isFollowing ? "Unfollow" : "Follow";
-    
-    followBtn.addEventListener("click", () => {
-        followBtn.textContent = isFollowing ? "Follow" : "Unfollow";
-        // console.log(profileUser.followers)
-        if(isFollowing){
-            profileUser.followers = profileUser.followers.filter(id => id !== currentUser.userid);
-            currentUser.following = currentUser.following.filter(id => id !== profileUser.userid);
-            isFollowing = false;
-            
-        }else{
-            // console.log("AA");
-            profileUser.followers.push(currentUser.userid);
-            currentUser.following.push(profileUser.userid);
-            isFollowing = true; 
-        }
-        
-        // console.log(profileUser,currentUser)
+    followBtn.textContent = "Follow";
 
-        saveUser(profileUser);
-        saveUser(currentUser);
-        displayProfileInfo(); // reprofileUser follower count
+    followBtn.addEventListener("click", async () => {
+        await fetch('/api/follows', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ followerId: currentUserId, followingId: profileUser.id })
+        });
+        await displayProfileInfo(); // refresh follower count
     });
 }
 
 // ── Edit profile button ─────────────────────────────────────
 function initEditButton() {
-    const currentUser = getUserByID(getCurrentUser());
-    const profileUser = getUserByID(getProfileUser());
-    if (!currentUser || !profileUser) return;
+    const currentUserId = getCurrentUser();
+    const profileUserId = getProfileUser();
+    if (!currentUserId || !profileUserId) return;
 
     const editBtn = document.getElementById("editBtn");
 
     // Only show edit button on own profile
-    if (currentUser.userid !== profileUser.userid) {
+    if (currentUserId !== profileUserId) {
         editBtn.style.display = "none";
         return;
     }
@@ -134,7 +128,6 @@ function initEditButton() {
 
 // ── Logout button ───────────────────────────────────────────
 function initLogoutButton() {
-    document.getElementById("logoutBtn").addEventListener("click", logout); 
+    document.getElementById("logoutBtn").addEventListener("click", logout);
 
 }
-

@@ -183,13 +183,16 @@ async function displayPosts() {
         postsContainer.innerHTML = "<p>No posts yet. Create the first post.</p>";
         return;
     }
-    postsContainer.innerHTML = posts.map(formatPost).join("");
+    const htmlArray = await Promise.all(posts.map((p) => formatPost(p)));
+    postsContainer.innerHTML = htmlArray.join("");
 }
 
 
-function formatPost(post) {
-    const author = post.author;
-
+async function formatPost(post) {
+    const authorResponse = await fetch(`/api/users?id=${post.authorId}`);
+    const author = await authorResponse.json();
+    const commentsHtml = await formatComments(post.comments);
+    console.log(post.authorId);
     return ` <section class="post" data-id="${post.id}">
                 <div class="post-header">
 
@@ -218,16 +221,16 @@ function formatPost(post) {
                     <button type="submit">Submit</button>
                 </form>
                  <div class="comments-section">
-                    ${formatComments(post.comments)}
+                    ${commentsHtml}
                 </div>
             </section>`;
 
 }
 
-function formatComments(comments) {
-
-    return comments.map(c => {
-        const author = c.author;
+async function formatComments(comments) {
+    const commentHtml = await Promise.all(comments.map(async c => {
+        const authorResponse = await fetch(`/api/users?id=${c.authorId}`);
+        const author = await authorResponse.json();
         return `<div class="comment">
                         <a class="post-author author_name" data-id="${c.authorId}" href="profile.html" >
                         <img id="pfp_cmnt" src="${author.profilePicture}" alt="${author.username}'s Profile Picture">
@@ -238,8 +241,9 @@ function formatComments(comments) {
                               <button class="like-btn" data-id="${c.id}" data-postID="${c.postID}">❤️ ${c.likeNum}</button>
                               <button class="delete-btn" data-id="${c.id}" data-postID="${c.postID}" style="${(c.authorId === getCurrentUser()) ? "" : "display:none;"}">❌ Delete </button>
                         </div>
-                    </div>`
-    }).join("");
+                    </div>`;
+    }));
+    return commentHtml.join("");
 }
 
 function initLogoutButton() {
@@ -265,7 +269,7 @@ async function initSearchBar(Query) {
 
 
 function formatUsers(users) {
-
+    users[0].followers
     return users.map(u => `
     <hr>
     <li>
@@ -281,4 +285,3 @@ function formatUsers(users) {
 }
 
 
-await displayPosts();
