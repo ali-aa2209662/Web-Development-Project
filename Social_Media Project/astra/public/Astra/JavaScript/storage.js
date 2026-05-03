@@ -1,16 +1,14 @@
 const data = {
-    users: [],
-    posts: [],
     currentUser: null,
     profileUser: null
 }
 
-export function saveData(thisData){
+export function saveData(thisData) {
     localStorage.setItem("WebData", JSON.stringify(thisData));
 }
 
 
-export function getData(){
+export function getData() {
     const raw = localStorage.getItem("WebData");
     if (raw == null) return null;
     try {
@@ -23,7 +21,7 @@ export function getData(){
 
 // saveData(data);
 
-if (getData()==null) {
+if (getData() == null) {
     saveData(data);
 }
 

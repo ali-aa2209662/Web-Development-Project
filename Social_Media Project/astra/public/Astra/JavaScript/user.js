@@ -1,73 +1,74 @@
 import { saveData, getData } from "./storage.js"; //importing functions from storage.js
 
-export class User{
+// export class User{
     
-    userid;
-    username;
-    email;
-    password;
-    profilePicture = "assets/PFP_Blank.jpg";
-    bio = "";
-    followers = [];
-    following = [];
-    date = null;
+//     userid;
+//     username;
+//     email;
+//     password;
+//     profilePicture = "assets/PFP_Blank.jpg";
+//     bio = "";
+//     followers = [];
+//     following = [];
+//     date = null;
     
-    constructor(username,email,password){ // creates an instance of user and saves it to data
-        this.userid = this.generateID();
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        const tempdate = new Date()
-        this.date = tempdate.toString().slice(4,15).split(" ").join("/") + " " + tempdate.toString().slice(16,21);
-        this.addUser();
+//     constructor(username,email,password){ // creates an instance of user and saves it to data
+//         this.userid = this.generateID();
+//         this.username = username;
+//         this.email = email;
+//         this.password = password;
+//         const tempdate = new Date()
+//         this.date = tempdate.toString().slice(4,15).split(" ").join("/") + " " + tempdate.toString().slice(16,21);
+//         this.addUser();
     
-    }
+//     }
 
-    addUser(){
-        const data = getData();
-        if (data == null) return;
-        data["users"].push(this);
-        saveData(data);
-        // console.log(getData());
-    }
+//     addUser(){
+//         const data = getData();
+//         if (data == null) return;
+//         data["users"].push(this);
+//         saveData(data);
+//         // console.log(getData());
+//     }
 
-    generateID(){ //checks how many users are in data and assign an id
-        return `u${(getData()["users"].length + 1)}`;
-    }
+//     generateID(){ //checks how many users are in data and assign an id
+//         return `u${(getData()["users"].length + 1)}`;
+//     }
 
-    static fromData(data) {
-        const user = Object.create(User.prototype);
-        return Object.assign(user, data);
-        }
+//     static fromData(data) {
+//         const user = Object.create(User.prototype);
+//         return Object.assign(user, data);
+//         }
 
     
 
-}
+// }
 
-export function createUser(username, email, password){
-    new User(username, email, password)
-}
-//Edit it from Abdullah:
-export function getUsers(){
-    const data = getData();
-    if (data == null || !Array.isArray(data.users)) return [];
-    return data.users;
-}
+// export function createUser(username, email, password){
+//     new User(username, email, password)
+// }
+// //Edit it from Abdullah:
+// export function getUsers(){
+//     const data = getData();
+//     if (data == null || !Array.isArray(data.users)) return [];
+//     return data.users;
+// }
 
-export function getUserByID(id){ // returns user from 'id' (if 'id' is not found it returns null)
-    const u = getUsers().find(u => u.userid === id);
-    return (u === undefined)?null:u;
-}
+// export function getUserByID(id){ // returns user from 'id' (if 'id' is not found it returns null)
+//     const u = getUsers().find(u => u.userid === id);
+//     return (u === undefined)?null:u;
+// }
 
-export function saveUser(updateUser){
-    const data = getData();
-    if (data == null) return;
-    const user = data["users"].find(u => u.userid === updateUser.userid);
-    if (user !== undefined) {// if user is found then save data
-        Object.assign(user, updateUser);
-        saveData(data);
-    }
-}
+// export function saveUser(updateUser){
+//     const data = getData();
+//     if (data == null) return;
+//     const user = data["users"].find(u => u.userid === updateUser.userid);
+//     if (user !== undefined) {// if user is found then save data
+//         Object.assign(user, updateUser);
+//         saveData(data);
+//     }
+// }
+
 //Edit it from Abdullah:
 export function getCurrentUser(){
     return getData()['currentUser'];
@@ -104,19 +105,19 @@ export function goToProfile(userid){
     window.location.href = "profile.html";
 }
 
-export function edit_profile(username,email,password,PFP_Base64,bio){
-    const data = getData();
+// export function edit_profile(username,email,password,PFP_Base64,bio){
+//     const data = getData();
     
-    const user = data["users"].find(u => u.userid === data["currentUser"])
+//     const user = data["users"].find(u => u.userid === data["currentUser"])
 
-    user.profilePicture = PFP_Base64;
-    user.username = username;
-    user.email = email;
-    user.password = password;
-    user.bio = bio;
-    // console.log(user);
-    saveData(data);
-}
+//     user.profilePicture = PFP_Base64;
+//     user.username = username;
+//     user.email = email;
+//     user.password = password;
+//     user.bio = bio;
+//     // console.log(user);
+//     saveData(data);
+// }
 
 
 
