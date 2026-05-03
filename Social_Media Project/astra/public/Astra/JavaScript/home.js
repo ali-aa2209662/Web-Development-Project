@@ -281,3 +281,4 @@ function formatUsers(users) {
 }
 
 
+await displayPosts();
