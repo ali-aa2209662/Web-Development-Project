@@ -103,36 +103,17 @@ document.querySelector('#search-bar').addEventListener("keyup", async (e) => {
     }
 });
 
-//Not finished..
-addEventListener('click', (e) => {
-    let followBtn = null;
-    const currentUser = getUserByID(getCurrentUser());
-    const profileUser = getUserByID(e.target.dataset.id);
+//Here fot the follow fetching:--------------------------------
+addEventListener('click', async (e) => {
     if (e.target.classList && e.target.classList.contains("search-btn")) {
-        followBtn = e.target;
-    }
-    if (followBtn !== null) {
-        // console.log("Click " + `${e.target.dataset.id}`)
-        let isFollowing = profileUser.followers.some(id => id === getCurrentUser());
-        // console.log(isFollowing)
-        if (isFollowing) {
-            profileUser.followers = profileUser.followers.filter(id => id !== currentUser.userid);
-            currentUser.following = currentUser.following.filter(id => id !== profileUser.userid);
-            isFollowing = false;
-            e.target.textContent = "Follow";
-            // console.log("Unfollowed")
-
-        } else {
-            profileUser.followers.push(currentUser.userid);
-            currentUser.following.push(profileUser.userid);
-            isFollowing = true;
-            e.target.textContent = "Unfollow";
-            // console.log("Followed")
-        }
-        // console.log(profileUser.followers, currentUser.following)
-        saveUser(profileUser);
-        saveUser(currentUser);
-        initSearchBar(document.querySelector('#search-bar').value);
+        const profileUserId = e.target.dataset.id;
+        const currentUserId = getCurrentUser();
+        await fetch('/api/follows', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ followerId: currentUserId, followingId: profileUserId })
+        });
+        await initSearchBar(document.querySelector('#search-bar').value);
     }
 });
 
@@ -164,15 +145,15 @@ async function createNewComment(postID, content) {
     // console.log('createNewComment done');
     await displayPosts();
 }
-
-function handleLike(id, postID) {
-    if (postID == null) {
-        getPosts().find(p => p.id === id).ToggleLike();
-    }
-    else {
-        getPosts().find(p => p.id === postID).comments.find(c => c.id === id).ToggleLike();
-    }
-
+//Here for the like fetching:--------------------------------
+async function handleLike(id, postID) {
+    const currentUser = getCurrentUser();
+    if (currentUser == null) return;
+    await fetch('/api/likes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: currentUser, postId: postID ? null : id, commentId: postID ? id : null })
+    });
 }
 
 //edit it from Abdullah:
@@ -273,8 +254,7 @@ function initProfileButton() {
         setProfileUser(getCurrentUser());
     });
 }
-
-// Check with it ..
+//Check with it ..:--------------------
 async function initSearchBar(Query) {
     const userlist = document.querySelector('#search-users');
     const response = await fetch(`/api/users?search=${Query}`);
