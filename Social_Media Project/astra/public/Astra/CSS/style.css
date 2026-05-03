@@ -366,13 +366,9 @@ section {
     align-items: center;
 }
 
-.profile-stats p {
-    margin: 0;
-}
+.profile-stats p { margin: 0; }
 
-.bio-line {
-    margin-top: 0.8rem;
-}
+.bio-line { margin-top: 0.8rem; }
 
 main input {
     padding: 8px;
@@ -742,13 +738,13 @@ body {
     display: block;
     width: 100%;
     padding: 0.5rem 0.75rem;
-     border-radius: 6px
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.08);
 }
 
 #logoutBtn {
     width: 100%;
     padding: 0.5rem 0.75rem;
-    background-color: var(--primary-color);
     border-radius: 6px;
     border: 1px solid transparent;
 }
@@ -1082,7 +1078,6 @@ footer p {
     }
 
     .nav-links {
-        
         flex-direction: row;
         width: auto;
         gap: 1.5rem;
@@ -1090,20 +1085,15 @@ footer p {
     }
 
     .nav-links li {
-        
         width: auto;
         text-align: left;
     }
 
-    
-
-
     .nav-links a,
     #logoutBtn {
-        width: 100%;
-        padding: 0.5rem 0.75rem;
-        border-radius: 6px;
-        border: 1px solid transparent;
+        width: auto;
+        padding: 0;
+        background: transparent;
     }
 
     .feed-container {
@@ -1157,66 +1147,12 @@ footer p {
         align-items: center;
     }
 
-    .profile-stats p {
-        margin: 0;
-    }
+    .profile-stats p { margin: 0; }
 }
 
 /* Responsive: large screens */
 @media (min-width: 1024px) {
     .feed-container {
         max-width: 1000px;
-    }
-}
-
-/* The CSS of the home.html page (( ends )) here.
-   ----------------------------------------------- */
-.password-info {
-    font-size: 12px;
-    color: #666;
-    margin-top: 6px;
-}
-
-.hidden {
-    display: none;
-}
-
-.input-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.info-icon {
-    margin-left: 8px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.info-icon {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 16px;
-    height: 16px;
-    border: 1px solid #999;
-    border-radius: 50%;
-    font-size: 11px;
-    font-weight: bold;
-    color: #666;
-    margin-right: 6px;
-}
-#logoutBtn {
-        width: 100%;
-        padding: 0.5rem 0.75rem;
-        border-radius: 6px;
-        border: 1px solid transparent;
-}
-
-@media (max-width: 768px) {
-    .nav-links a
-     {
-        border-radius: 6px;
-        background: rgba(255, 255, 255, 0.08);
     }
 }
