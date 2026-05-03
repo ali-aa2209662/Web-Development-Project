@@ -127,7 +127,8 @@ class PostRepo {
 }
 
 //tester
-console.log(await new PostRepo().createComment("cmoom0la20000urtke5w8z6gd", "cmoom41q00001ur2w1s0waj9v", "Hi"))
-// console.log(process.env.DATABASE_URL);
+(async () => {
+    console.log(await new PostRepo().toggleCommentLike("cmop3qkfr0000ur9o1vr7xn27", 'cmop42cls0001urccam68gf8h'));
+})();
 
 export default new PostRepo();
