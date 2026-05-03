@@ -1,5 +1,4 @@
-import { getData, saveData } from "./storage.js"
-import { getUsers, createUser, setCurrentUser, getCurrentUser } from "./user.js";
+import { setCurrentUser, getCurrentUser } from "./user.js";
 
 // console.log("loaded auth");
 // console.log(getCurrentUser())
@@ -8,45 +7,33 @@ export function checkLogin() {// might make in phase 2
   if (getCurrentUser() === null) logout(); //checks if user is logged in
 }
 
-export function login(username, password) {
+export async function login(username, password) {
   // console.log(username)
   // console.log(password)
-  const users = getUsers(); // better to call it here (fresh data)
-
-  const user = users.find(
-    u => u.username === username && u.password === password
-  );
+  const response = await fetch('/api/users');
+  const users = await response.json();
+  const user = users.find(u => u.username === username && u.password === password);
   // console.log(user)
   if (!user) {
     return false; // login failed
   }
-
-  setCurrentUser(user.userid)
+  setCurrentUser(user.id);
   window.location.href = "home.html";
-
-
+  return true;
 }
-
-export function signup(username, email, password) {
-
-  const users = getUsers();
-
-  //Check if username already exists
-  const usernameTaken = users.some(u => u.username === username);
-  if (usernameTaken) {
-    return { success: false, message: "Username already exists" };
+//Here fetching for the signup: 
+export async function signup(username, email, password) {
+  const response = await fetch('/api/users', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, email, password })
+  });
+  const result = await response.json();
+  if (response.ok) {
+    return { success: true };
   }
-
-  // 🔍 Check if email already exists
-  const emailTaken = users.some(u => u.email === email);
-  if (emailTaken) {
-    return { success: false, message: "Email already in use" };
-  }
-
-  // adds new user to data
-  createUser(username, email, password);
-
-};
+  return { success: false, message: result.error };
+}
 
 export function logout() {
   setCurrentUser(null);
