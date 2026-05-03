@@ -5,8 +5,11 @@ const prisma = new PrismaClient();
 class PostRepo {
     async getAll() {
         return await prisma.post.findMany({
+            orderBy: { date: 'desc' },
             include: {
-                comments: true
+                comments: {
+                    orderBy: { date: 'desc' }
+                }
             }
         });
     }
@@ -14,8 +17,11 @@ class PostRepo {
     async getByAuthorId(id) {
         return await prisma.post.findMany({
             where: { authorId: id },
+            orderBy: { date: 'desc' },
             include: {
-                comments: true
+                comments: {
+                    orderBy: { date: 'desc' }
+                }
             }
 
         });
@@ -25,7 +31,9 @@ class PostRepo {
         return await prisma.post.findUnique({
             where: { id },
             include: {
-                comments: true
+                comments: {
+                    orderBy: { date: 'desc' }
+                }
             }
         });
     }
@@ -119,7 +127,8 @@ class PostRepo {
 }
 
 //tester
-console.log(await new PostRepo().createComment("cmoom0la20000urtke5w8z6gd", "cmoom41q00001ur2w1s0waj9v", "Hi"))
-// console.log(process.env.DATABASE_URL);
+(async () => {
+    console.log(await new PostRepo().toggleCommentLike("cmop3qkfr0000ur9o1vr7xn27", 'cmop42cls0001urccam68gf8h'));
+})();
 
 export default new PostRepo();
