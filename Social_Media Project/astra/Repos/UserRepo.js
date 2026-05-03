@@ -107,6 +107,6 @@ class UserRepo {
 }
 
 //tester
-console.log(await new UserRepo().toggleFollow('cmop3qkfr0000ur9o1vr7xn27', 'cmooc7f9y00000gu4s9baw01h'))
+console.log(await new UserRepo().search("A"));
 
 export default new UserRepo();

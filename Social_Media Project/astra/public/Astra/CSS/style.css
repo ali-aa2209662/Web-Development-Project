@@ -366,9 +366,13 @@ section {
     align-items: center;
 }
 
-.profile-stats p { margin: 0; }
+.profile-stats p {
+    margin: 0;
+}
 
-.bio-line { margin-top: 0.8rem; }
+.bio-line {
+    margin-top: 0.8rem;
+}
 
 main input {
     padding: 8px;
@@ -745,6 +749,7 @@ body {
 #logoutBtn {
     width: 100%;
     padding: 0.5rem 0.75rem;
+    background-color: var(--primary-color);
     border-radius: 6px;
     border: 1px solid transparent;
 }
@@ -1147,7 +1152,9 @@ footer p {
         align-items: center;
     }
 
-    .profile-stats p { margin: 0; }
+    .profile-stats p {
+        margin: 0;
+    }
 }
 
 /* Responsive: large screens */

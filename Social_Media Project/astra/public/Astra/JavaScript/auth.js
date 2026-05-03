@@ -10,9 +10,11 @@ export function checkLogin() {// might make in phase 2
 export async function login(username, password) {
   // console.log(username)
   // console.log(password)
-  const response = await fetch('/api/users');
-  const users = await response.json();
-  const user = users.find(u => u.username === username && u.password === password);
+  const response = await fetch(`/api/users?search=${username}`);
+  const user = await response.json();
+  if (user.password !== password) {
+    return false
+  }
   // console.log(user)
   if (!user) {
     return false; // login failed
